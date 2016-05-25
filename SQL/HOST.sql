@@ -2,9 +2,9 @@ DROP TABLE IF EXISTS `HOST`;
 
 CREATE TABLE `HOST` (
   `e_id` int(11) unsigned NOT NULL,
+  `c_id` int(11) unsigned NOT NULL,
   KEY `e_id`(`e_id`),
   CONSTRAINT `IDX_01` FOREIGN KEY (`e_id`) REFERENCES `EVENT`(`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  `c_id` int(11) unsigned NOT NULL,
   KEY `c_id`(`c_id`),
   CONSTRAINT `IDX_02` FOREIGN KEY (`c_id`) REFERENCES `CUSTOMER`(`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
