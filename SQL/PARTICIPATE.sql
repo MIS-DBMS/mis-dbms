@@ -1,3 +1,5 @@
+DROP TABLE IF EXISTS `PARTICIPATE`;
+
 CREATE TABLE `PARTICIPATE` (
   `e_id` int(11) unsigned NOT NULL,
   KEY `e_id`(`e_id`),
