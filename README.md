@@ -52,6 +52,7 @@
 ## Implementation
 
  * MySQL + Node.js (PostgreSQL prefferable?)
+ * Interface : ejs, html5, js
 
 ## Presentation
 
