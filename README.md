@@ -1,11 +1,11 @@
-frftft# NCCU MIS DBMS Course Project
+# NCCU MIS DBMS Course Project
 # 國立政治大學 資管系 資料庫管理 課堂專題
 
 ## Database Development Prject
 
  * Environment deployment
  
-  * install node.js (ver: 5.7.1, official docker image?)
+  * install node.js (ver: 5.7.1, official docker image)
   * install MySQL module via `npm install mysql**2**`
   * install task runner, Grunt `npm install grunt`
 
@@ -13,16 +13,16 @@ frftft# NCCU MIS DBMS Course Project
 
  * Due date: 30, Mar.
 
-### Stage I Report Requirement (20 points of the term project)
- 1. Baseline Project Plan (18 points)
-  * Introduction (6 points)
+### Stage I Report Requirement ( 20 points of the term project)
+ 1. Baseline Project Plan ( 18 points)
+  * Introduction ( 6 points)
    * Background (1point): A brief statement of the problem (1 point) and the motivation to implement this project ( 1 point). 
-   * Recommendation (4 points): Provide a summary of important findings from the information systems planning process (please see slides 21-26, focusing on function decomposition and planning matrix) (2points). Explain why you select this project (Slides 27-31) (2 points).   
+   * Recommendation ( 4 points): Provide a summary of important findings from the information systems planning process ( 2points). Explain why you select this project ( 2 points).   
   * System description (3 points)
    * Provides a description of the project, including the input information (1 point), tasks performed(1 point), and resultant information (1 point).
   * Feasibility assessment (4 points)
-   * Economic analysis - cost-benefit analysis (slides 36-41) (2 points)
-   * Risk assessment (slides 42-43) (1 piont)
+   * Economic analysis - cost-benefit analysis. (2 points)
+   * Risk assessment. (1 piont)
    * Schedule and timeline (slides 46-47) (1 point)
   * Management issues (3 points)
    * Team configuration - Provides a description of the team member roles (1 point)
