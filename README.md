@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # NCCU MIS DBMS Course Project
 # 國立政治大學 資管系 資料庫管理 課堂專題
 
@@ -57,3 +58,6 @@
 ## Presentation
 
  * Due date: 15, Jun.
+=======
+# mis-dbms
+>>>>>>> a71c2f0dca8c914ce1e39d67e45a81126f35d486
