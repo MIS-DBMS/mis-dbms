@@ -1,4 +1,4 @@
-# ************************************************************
+﻿# ************************************************************
 # Sequel Pro SQL dump
 # Version 4529
 #
@@ -47,7 +47,7 @@ DROP TABLE IF EXISTS `customerInterest`;
 
 CREATE TABLE `customerInterest` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `interest` ENUM('創業','品酒','簡報設計'),
+  `interest` ENUM('Monday不魯','Think Big','政大創立方講座','創業肥皂箱','創業計畫書撰寫','東協相關議題','創業','品酒','簡報設計'),//「Monday不魯」「Think Big」「政大創立方講座」「創業肥皂箱」「創業計畫書撰寫」「東協相關議題」
   `customer_id` int(11) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `customer_id` (customer_id),
@@ -81,7 +81,7 @@ DROP TABLE IF EXISTS `event`;
 CREATE TABLE `event` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(20) NOT NULL DEFAULT '',
-  `lacation` ENUM('B1包場','會議廳','1F包場'),
+  `location` ENUM('B1包場','會議廳','1F包場'),
   `date` DATE,
   `startTime` TIME,
   `endTime` TIME,
@@ -98,7 +98,7 @@ DROP TABLE IF EXISTS `eventTag`;
 CREATE TABLE `eventTag` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `eventId` int(11) unsigned NOT NULL,
-  `interest` ENUM('創業','品酒'),
+  `tag` ENUM('Monday不魯','Think Big','政大創立方講座','創業肥皂箱','創業計畫書撰寫','東協相關議題'),
   PRIMARY KEY (`id`),
   CONSTRAINT `tag_fk1` FOREIGN KEY (`eventId`) REFERENCES `event` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
