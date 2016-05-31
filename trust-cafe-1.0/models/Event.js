@@ -35,6 +35,29 @@ Event.get = function(eventId, cb) {
     })
 }
 
+Event.getAll = function(cb) {
+  db.select()
+    .from('event')
+    .map(function(row) {
+      return new Event({
+        id : row.id,
+        name : row.name,
+        location : row.location,
+        date : row.date,
+        date : row.date,
+        startTime : row.startTime,
+        endTime : row.endTime,
+        description : row.description
+      });
+    })
+    .then(function(eventList) {
+      cb(null, eventList);
+    })
+    .catch(function(err) {
+      cb(new GeneralErrors.Database());
+    });
+}
+
 // Get by name
 Event.getByName = function(itemName, cb) {
   db.select().from("Name").where({
