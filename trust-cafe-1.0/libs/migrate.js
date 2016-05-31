@@ -2,70 +2,50 @@ var db = require('./db');
 var bcrypt = require('bcryptjs');
 var async = require('async');
 
-var salt = "blog-password-salt-edu-nccu-soslab";
+var salt = "trust-cafe-password-salt";
 //上次我們使用了一般的方法直接連接DB
-var memberList = [{
+var customerList = [{
   name : "William1",
   password : "password1",
-  account : "account1"
+  account : "account1",
+  phone : "",
+  email : "",
+  jobTitle : "",
+  address : "",
+  birthday : ""
 },
 {
   name : "William2",
   password : "password2",
-  account : "account2"
+  account : "account2",
+  phone : "",
+  email : "",
+  jobTitle : "",
+  address : "",
+  birthday : ""
 },
 {
   name : "William3",
   password : "password3",
-  account : "account3"
+  account : "account3",
+  phone : "",
+  email : "",
+  jobTitle : "",
+  address : "",
+  birthday : ""
 }];
 
-//像是這樣直接下SQL指令透過nodejs來操作資料庫
-// db.query("DROP DATABASE blog", function(err) {
-//   if(err) {
-//     console.log(err);
-//   } else {
-//     console.log("CLEAR");
-//   }
-// });
-//
-// insertMember(memberList,function(err) {
-//   if(err) {
-//     console.log(err);
-//   } else {
-//     console.log("MEMBER INSERT DONE");
-//   }
-// });
 
-
-// function insertMember(memberList, cb) {
-//   async.each(memberList, function(member, callback) {
-//     db.query("INSERT INTO member (name, account, password) VALUES (?, ?, ?)",[
-//       member.name,
-//       member.account,
-//       bcrypt.hashSync(salt+member.password, 10)
-//     ], function(err, result) {
-//       if(err) {
-//         callback(err);
-//       } else {
-//         callback(null);
-//       }
-//     });
-//   }, function(err) {
-//     if(err) {
-//       cb(err);
-//     } else {
-//       cb(null);
-//     }
-//   })
-// };
-//這次要使用SQL builder來幫我們簡化這些動作
-
-db("member")
+db("customer")
   .insert({
       name: "Test-name1",
     account: "account1",
-    password: "password1"
+    password: "password1",
+    phone : "",
+    email : "",
+    jobTitle : "",
+    address : "",
+    birthday : ""
   })
   .then(function(result) {
     var insertedId = result[0];
