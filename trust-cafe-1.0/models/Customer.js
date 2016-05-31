@@ -2,7 +2,7 @@
 var db = require('../libs/db'); //引入我們的sql builder
 var GeneralErrors = require('../errors/GeneralErrors');
 
-var Customer = function(options) {// Original var Customer is Member
+var Customer = function(options) {
   this.id = options.id;
   this.name = options.name;
   this.password = options.password;

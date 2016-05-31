@@ -1,7 +1,7 @@
 var db = require('../libs/db');
 var GeneralErrors = require('../errors/GeneralErrors');
 
-var Item = function(options) {// Original var Item is Article
+var Item = function(options) {
   this.id = options.id;
   this.name = options.name;
   this.date = options.date;
