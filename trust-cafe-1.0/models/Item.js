@@ -75,7 +75,7 @@ Item.prototype.save = function (cb) {
         name : row.name,
         date : row.date,
         description : row.description,
-        value : row.value,
+        value : row.value
       })
       .where({
         id : this.id

@@ -19,7 +19,7 @@ Event.get = function(eventId, cb) {
       id : eventId
     })
     .map(function(row) {
-
+      //將select出來的資料轉換成Event物件
       return new Event(row);
     })
     .then(function(eventList) {

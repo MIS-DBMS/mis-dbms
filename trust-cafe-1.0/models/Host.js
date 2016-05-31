@@ -1,46 +1,46 @@
 var db = require('../libs/db');
 var GeneralErrors = require('../errors/GeneralErrors');
 
-var Participate = function(options) {
+var Host = function(options) {
   this.id = options.id;
   this.customerId = options.customerId;
   this.eventId = options.eventId;
 };
 
-Participate.getAll = function(cb) {
+Host.getAll = function(cb) {
   db.select()
-    .from('participate')
+    .from('host')
     .map(function(row) {
-      return new Participate({
+      return new Host({
         id : row.id,
         customerId : row.customerId,
-        eventId : row.eventId,
+        eventId : row.eventId
         });
     })
-    .then(function(participateList) {
-      cb(null, participateList);
+    .then(function(hostList) {
+      cb(null, hostList);
     })
     .catch(function(err) {
       cb(new GeneralErrors.Database());
     });
 }
 
-Participate.get = function(participateId, cb) {
+Host.get = function(hostId, cb) {
   db.select()
-    .from('participate')
+    .from('host')
     .where({
-      id : participateId
+      id : hostId
     })
     .map(function(row) {
-      return new Participate({
+      return new Host({
         id : row.id,
         customerId : row.customerId,
-        eventId : row.eventId,
+        eventId : row.eventId
       });
     })
-    .then(function(participateList) {
-      if(participateList.length) {
-        cb(null, participateList[0]);
+    .then(function(hostList) {
+      if(hostList.length) {
+        cb(null, hostList[0]);
       } else {
         cb(null, new GeneralErrors.NotFound());
       }
@@ -53,12 +53,12 @@ Participate.get = function(participateId, cb) {
 }
 
 //instance fnuction
-Participate.prototype.save = function (cb) {
+Host.prototype.save = function (cb) {
   if(this.id) {
-    db('participate')
+    db('host')
       .update({
         customerId : this.customerId,
-        eventId : this.eventId,
+        eventId : this.eventId
       })
       .where({
         id : this.id
@@ -71,10 +71,10 @@ Participate.prototype.save = function (cb) {
         cb(null, new GeneralErrors.Database());
       })
   } else {
-    db('participate')
+    db('host')
       .insert({
         customerId : this.customerId,
-        eventId : this.eventId,
+        eventId : this.eventId
       })
       .then(function(result) {
         this.id = result[0];
@@ -88,4 +88,4 @@ Participate.prototype.save = function (cb) {
 };
 
 
-module.exports = Participate;
+module.exports = Host;

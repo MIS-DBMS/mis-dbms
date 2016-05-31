@@ -1,46 +1,49 @@
 var db = require('../libs/db');
 var GeneralErrors = require('../errors/GeneralErrors');
 
-var Participate = function(options) {
+var Hold = function(options) {
   this.id = options.id;
-  this.customerId = options.customerId;
+  this.type = options.type;
+  this.organizationId = options.organizationId;
   this.eventId = options.eventId;
 };
 
-Participate.getAll = function(cb) {
+Hold.getAll = function(cb) {
   db.select()
-    .from('participate')
+    .from('hold')
     .map(function(row) {
-      return new Participate({
+      return new Hold({
         id : row.id,
-        customerId : row.customerId,
-        eventId : row.eventId,
+        type : row.type,
+        organizationId : row.organizationId,
+        eventId : row.eventId
         });
     })
-    .then(function(participateList) {
-      cb(null, participateList);
+    .then(function(holdList) {
+      cb(null, holdList);
     })
     .catch(function(err) {
       cb(new GeneralErrors.Database());
     });
 }
 
-Participate.get = function(participateId, cb) {
+Hold.get = function(holdId, cb) {
   db.select()
-    .from('participate')
+    .from('hold')
     .where({
-      id : participateId
+      id : holdId
     })
     .map(function(row) {
-      return new Participate({
+      return new Hold({
         id : row.id,
-        customerId : row.customerId,
+        type : row.type,
+        organizationId : row.organizationId,
         eventId : row.eventId
       });
     })
-    .then(function(participateList) {
-      if(participateList.length) {
-        cb(null, participateList[0]);
+    .then(function(holdList) {
+      if(holdList.length) {
+        cb(null, holdList[0]);
       } else {
         cb(null, new GeneralErrors.NotFound());
       }
@@ -53,11 +56,12 @@ Participate.get = function(participateId, cb) {
 }
 
 //instance fnuction
-Participate.prototype.save = function (cb) {
+Hold.prototype.save = function (cb) {
   if(this.id) {
-    db('participate')
+    db('hold')
       .update({
-        customerId : this.customerId,
+        type : this.type,
+        organizationId : this.organizationId,
         eventId : this.eventId
       })
       .where({
@@ -71,10 +75,11 @@ Participate.prototype.save = function (cb) {
         cb(null, new GeneralErrors.Database());
       })
   } else {
-    db('participate')
+    db('hold')
       .insert({
-        customerId : this.customerId,
-        eventId : this.eventId,
+        type : this.type,
+        organizationId : this.organizationId,
+        eventId : this.eventId
       })
       .then(function(result) {
         this.id = result[0];
@@ -88,4 +93,4 @@ Participate.prototype.save = function (cb) {
 };
 
 
-module.exports = Participate;
+module.exports = Hold;
