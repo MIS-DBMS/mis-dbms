@@ -37,8 +37,30 @@ router.get('/:eventId', function(req, res, next) {
   });
 });
 
-
-
+// router.post('/', function(req, res, next) {
+//
+//   //首先必須先產生出一個 Customer 的物件在進行save
+//   var newCustomer = new Customer({
+//     name : req.body.name,
+//     account : req.body.account,
+//     password : req.body.password,
+//     phone : req.body.phone,
+//     email : req.body.email,
+//     jobTitle : req.body.jobTitle,
+//     address : req.body.address,
+//     birthday : req.body.birthday
+//   });
+//
+//   newCustomer.save(function(err) {
+//     if(err) {
+//       next(err);
+//     } else {
+//       //再重新導向之前，我們要讓使用者登入，因此我們需要使用到session
+//       req.session.customer = newCustomer;
+//       res.redirect('/');
+//     }
+//   });
+// });
 
 router.post('/', function(req, res) {
   if(!req.session.customer) {

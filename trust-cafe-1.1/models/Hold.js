@@ -68,8 +68,8 @@ Hold.prototype.save = function (cb) {
         id : this.id
       })
       .then(function() {
-        cb(null);
-      })
+        cb(null,this);
+      }.bind(this))
       .catch(function(err) {
         console.log(err);
         cb(null, new GeneralErrors.Database());
