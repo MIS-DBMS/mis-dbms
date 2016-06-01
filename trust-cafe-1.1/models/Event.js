@@ -44,7 +44,6 @@ Event.getAll = function(cb) {
         name : row.name,
         location : row.location,
         date : row.date,
-        date : row.date,
         startTime : row.startTime,
         endTime : row.endTime,
         description : row.description
@@ -68,7 +67,7 @@ Event.getByName = function(itemName, cb) {
       })
       .then(function(eventList) {
         if(eventList.length) {
-          cb(null, event[0]);
+          cb(null, eventList[0]);
         } else {
           //這邊要產生一個NotFound err給前端，因為error很常用到，我們會獨立出去一個檔案
           cb(new GeneralErrors.NotFound());

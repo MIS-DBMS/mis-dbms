@@ -38,7 +38,7 @@ var customerList = [{
 
 db("customer")
   .insert({
-      name: "Test-name1",
+    name: "Test-name1",
     account: "account1",
     password: "password1",
     phone : "",

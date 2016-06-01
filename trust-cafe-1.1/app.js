@@ -9,7 +9,7 @@ var session = require('express-session');
 var routes = require('./routes/index');
 var register = require('./routes/register');
 var users = require('./routes/users');
-var article = require('./routes/article');
+var event = require('./routes/event');
 var login = require('./routes/login');//Hw fo login check
 
 var app = express();
@@ -29,7 +29,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
-app.use('/article', article);
+app.use('/event', event);
 app.use('/register', register);
 app.use('/login', login);
 

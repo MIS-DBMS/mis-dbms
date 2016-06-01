@@ -9,13 +9,13 @@ router.get('/new', function(req, res) {
     res.redirect('/');
   }
 
-  res.render('postArticle', {
+  res.render('postEvent', {
     customer : req.session.customer || null
   });
 });
 
 // customers test
-router.get('/:articleId', function(req, res, next) {
+router.get('/:eventId', function(req, res, next) {
   Host.get(req.params.hostId, function(err, host) {
     if(err) {
       console.log(err);
@@ -26,7 +26,7 @@ router.get('/:articleId', function(req, res, next) {
           console.log(err);
         } else {
           host.customer = customer;
-          res.render('articleDetail', {
+          res.render('eventDetail', {
             type : type,
             customer : req.session.customer || null
           });
