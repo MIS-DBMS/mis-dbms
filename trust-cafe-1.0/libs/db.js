@@ -1,4 +1,4 @@
-//一樣在連接DB的時候改採用knex來進行連接
+// 連接DB的時候改採用knex來進行連接
 var knex = require('knex')({
   client: 'mysql',
   connection: {

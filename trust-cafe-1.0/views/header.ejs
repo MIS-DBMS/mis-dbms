@@ -42,7 +42,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">Sample Blog</a>
+            <a class="navbar-brand" href="/">Sample db</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -51,9 +51,9 @@
                 <li>
                     <a href="/">Home</a>
                 </li>
-                <% if(true) {%>
+                <% if(customer) {%>
                   <li>
-                      <a href="/">Welcome, <%#= event.name %></a>
+                      <a href="/">Welcome, <%#=customer.name%>><%#= event.name %></a>
                   </li>
                   <li>
                       <a href="/article/new">Post new article</a>
