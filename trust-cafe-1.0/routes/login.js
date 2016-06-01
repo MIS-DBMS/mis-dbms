@@ -3,7 +3,7 @@
  */
 var express = require('express');
 var router = express.Router();
-var Member = require('../models/Customer');
+var customer = require('../models/Customer');
 var async = require('async');
 
 
