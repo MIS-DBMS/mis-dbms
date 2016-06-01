@@ -33,4 +33,4 @@ node_modules
 .node_repl_history
 
 # Database settings as well as certain password
-*/libs/db.js
+*/db.js
