@@ -26,8 +26,8 @@ router.get('/', function(req, res, next) {
         } else {
           res.render('index',
           {
-            customer : req.session.customer || null,
-            customerList: customerList
+            // customer : req.session.customer || null,
+            // customerList: customerList
           });
         }
       });
