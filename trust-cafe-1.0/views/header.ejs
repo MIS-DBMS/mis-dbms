@@ -51,9 +51,9 @@
                 <li>
                     <a href="/">Home</a>
                 </li>
-                <% if(true) {%>
+                <% if(hostList) {%>
                   <li>
-                      <a href="/">Welcome, <%#=customer.name%>><%#= event.name %></a>
+                      <a href="/">Welcome, <%=hostList.id%>><%#= event.name %></a>
                   </li>
                   <li>
                       <a href="/article/new">Post new article</a>
