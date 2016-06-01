@@ -2,7 +2,7 @@
 var db = require('../libs/db'); //引入我們的sql builder
 var GeneralErrors = require('../errors/GeneralErrors');
 
-var Event = function(options) {// Original var Customer is Member
+var Event = function(options) {
   this.id = options.id;
   this.name = options.name;
   this.location = options.location;
@@ -19,7 +19,7 @@ Event.get = function(eventId, cb) {
       id : eventId
     })
     .map(function(row) {
-
+      //將select出來的資料轉換成Event物件
       return new Event(row);
     })
     .then(function(eventList) {
@@ -33,6 +33,29 @@ Event.get = function(eventId, cb) {
     .catch(function(err) {
       cb(err);
     })
+}
+
+Event.getAll = function(cb) {
+  db.select()
+    .from('event')
+    .map(function(row) {
+      return new Event({
+        id : row.id,
+        name : row.name,
+        location : row.location,
+        date : row.date,
+        date : row.date,
+        startTime : row.startTime,
+        endTime : row.endTime,
+        description : row.description
+      });
+    })
+    .then(function(eventList) {
+      cb(null, eventList);
+    })
+    .catch(function(err) {
+      cb(new GeneralErrors.Database());
+    });
 }
 
 // Get by name

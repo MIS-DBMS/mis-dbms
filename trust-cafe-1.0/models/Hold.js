@@ -1,61 +1,49 @@
 var db = require('../libs/db');
 var GeneralErrors = require('../errors/GeneralErrors');
 
-var Item = function(options) {
+var Hold = function(options) {
   this.id = options.id;
-  this.name = options.name;
-  this.date = options.date;
-  this.description = options.description;
-  this.value = options.value;
-  this.customerId = options.customerId;
+  this.type = options.type;
   this.organizationId = options.organizationId;
   this.eventId = options.eventId;
 };
 
-Item.getAll = function(cb) {
+Hold.getAll = function(cb) {
   db.select()
-    .from('item')
+    .from('hold')
     .map(function(row) {
-      return new Article({
+      return new Hold({
         id : row.id,
-        name : row.name,
-        date : row.date,
-        description : row.description,
-        value : row.value,
-        customerId : row.customerId,
+        type : row.type,
         organizationId : row.organizationId,
         eventId : row.eventId
-      });
+        });
     })
-    .then(function(itemList) {
-      cb(null, itemList);
+    .then(function(holdList) {
+      cb(null, holdList);
     })
     .catch(function(err) {
       cb(new GeneralErrors.Database());
     });
 }
 
-Item.get = function(itemId, cb) {
+Hold.get = function(holdId, cb) {
   db.select()
-    .from('item')
+    .from('hold')
     .where({
-      id : itemId
+      id : holdId
     })
     .map(function(row) {
-      return new Item({
+      return new Hold({
         id : row.id,
-        name : row.name,
-        date : row.date,
-        description : row.description,
-        value : row.value,
-        customerId : row.customerId,
+        type : row.type,
         organizationId : row.organizationId,
         eventId : row.eventId
       });
     })
-    .then(function(itemList) {
-      if(itemList.length) {
-        cb(null, itemList[0]);
+    .then(function(holdList) {
+      if(holdList.length) {
+        cb(null, holdList[0]);
       } else {
         cb(null, new GeneralErrors.NotFound());
       }
@@ -68,14 +56,13 @@ Item.get = function(itemId, cb) {
 }
 
 //instance fnuction
-Item.prototype.save = function (cb) {
+Hold.prototype.save = function (cb) {
   if(this.id) {
-    db('item')
+    db('hold')
       .update({
-        name : row.name,
-        date : row.date,
-        description : row.description,
-        value : row.value
+        type : this.type,
+        organizationId : this.organizationId,
+        eventId : this.eventId
       })
       .where({
         id : this.id
@@ -88,15 +75,11 @@ Item.prototype.save = function (cb) {
         cb(null, new GeneralErrors.Database());
       })
   } else {
-    db('article')
+    db('hold')
       .insert({
-        name : row.name,
-        date : row.date,
-        description : row.description,
-        value : row.value,
-        customerId : row.customerId,
-        organizationId : row.organizationId,
-        eventId : row.eventId
+        type : this.type,
+        organizationId : this.organizationId,
+        eventId : this.eventId
       })
       .then(function(result) {
         this.id = result[0];
@@ -110,4 +93,4 @@ Item.prototype.save = function (cb) {
 };
 
 
-module.exports = Item;
+module.exports = Hold;

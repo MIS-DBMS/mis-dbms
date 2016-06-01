@@ -47,7 +47,7 @@ DROP TABLE IF EXISTS `customerInterest`;
 
 CREATE TABLE `customerInterest` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `interest` ENUM('Monday不魯','Think Big','政大創立方講座','創業肥皂箱','創業計畫書撰寫','東協相關議題','創業','品酒','簡報設計'),//「Monday不魯」「Think Big」「政大創立方講座」「創業肥皂箱」「創業計畫書撰寫」「東協相關議題」
+  `interest` ENUM('Monday不魯','Think Big','政大創立方講座','創業肥皂箱','創業計畫書撰寫','東協相關議題','創業','品酒','簡報設計'),
   `customer_id` int(11) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `customer_id` (customer_id),

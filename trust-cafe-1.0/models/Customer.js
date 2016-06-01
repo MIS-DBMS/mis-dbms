@@ -2,16 +2,16 @@
 var db = require('../libs/db'); //引入我們的sql builder
 var GeneralErrors = require('../errors/GeneralErrors');
 
-var Customer = function(options) {// Original var Customer is Member
+var Customer = function(options) {
   this.id = options.id;
   this.name = options.name;
   this.password = options.password;
   this.account = options.account;
-  this.phone = options.phone;
-  this.email = options.email;
-  this.jobTitle = options.jobTitle;
-  this.address = options.address;
-  this.birthday = options.birthday;
+  // this.phone = options.phone;
+  // this.email = options.email;
+  // this.jobTitle = options.jobTitle;
+  // this.address = options.address;
+  // this.birthday = options.birthday;
 };
 
 //Class Function
@@ -71,11 +71,11 @@ Customer.prototype.save = function (cb) {
         name : this.name,
         account : this.account,
         password : this.password,
-        phone : this.phone,
-        email : this.email,
-        jobTitle : this.jobTitle,
-        address : this.address,
-        birthday : this.birthday
+        // phone : this.phone,
+        // email : this.email,
+        // jobTitle : this.jobTitle,
+        // address : this.address,
+        // birthday : this.birthday
       })
       .then(function() {
         cb(null, this);
@@ -90,12 +90,12 @@ Customer.prototype.save = function (cb) {
       .insert({
         name : this.name,
         account : this.account,
-        password : this.password,
-        phone : this.phone,
-        email : this.email,
-        jobTitle : this.jobTitle,
-        address : this.address,
-        birthday : this.birthday
+        // password : this.password,
+        // phone : this.phone,
+        // email : this.email,
+        // jobTitle : this.jobTitle,
+        // address : this.address,
+        // birthday : this.birthday
       })
       .then(function(result) {
         var insertedId = result[0];
