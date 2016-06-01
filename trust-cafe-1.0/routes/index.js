@@ -15,7 +15,7 @@ router.get('/', function(req, res, next) {
           if(err) {
             cb(err);
           } else {
-            host.customer = customer;
+            host.customerId = customer;
             cb(null);
           }
         });
@@ -26,8 +26,8 @@ router.get('/', function(req, res, next) {
         } else {
           res.render('index',
           {
-            hostList : hostList
-            // customer : req.session.customer || null,
+            hostList : hostList,
+            customer : req.session.customer || null
             // customerList: customerList
           });
         }
