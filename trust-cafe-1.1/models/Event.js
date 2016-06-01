@@ -58,9 +58,9 @@ Event.getAll = function(cb) {
 }
 
 // Get by name
-Event.getByName = function(itemName, cb) {
+Event.getByName = function(eventName, cb) {
   db.select().from("Name").where({
-    name : itemName,
+    name : eventName,
   })
       .map(function(row){
         return new Event(row);
