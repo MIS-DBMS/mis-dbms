@@ -31,8 +31,8 @@ CREATE TABLE `customer` (
   `account` varchar(60) NOT NULL DEFAULT '',
   `password` varchar(255) NOT NULL DEFAULT '',
   `phone` varchar(15),
-  `email` varchar(50) ,
-  `jobTitle` varchar(20) ,
+  `email` varchar(50) , # NOT NULL CANCEL
+  `jobTitle` varchar(20) , # NOT NULL CANCEL
   `address` varchar(50),
   `birthday` DATE,
   PRIMARY KEY (`id`)
