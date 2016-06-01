@@ -48,7 +48,7 @@ router.post('/', function(req, res, next) {
 });
 
 router.post('/logout', function(req, res, next) {
-  req.session.member = null;
+  req.session.customer = null;
   res.redirect('/');
 });
 

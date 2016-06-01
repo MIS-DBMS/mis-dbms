@@ -5,9 +5,9 @@
            <div class="row">
                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                    <div class="post-heading">
-                       <h1><%= article.title %></h1>
+                       <h1><%= host.type %></h1>
                        <%# <h2 class="subheading">Problems look mighty small from 150 miles up</h2>%>
-                       <span class="meta">Posted by <a href="#"><%= article.member.name %></a> on <%= article.createdAt %></span>
+                       <span class="meta">Posted by <a href="#"><%= host.event %></a> on <%= host.type %></span>
                    </div>
                </div>
            </div>
@@ -20,7 +20,7 @@
            <div class="row">
                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                   <p>
-                    <%= article.content %>
+                    <%= host.eventId %>
                   </p>
                </div>
            </div>

@@ -1,4 +1,4 @@
-   <% include ./header %>
+    <% include ./header %>
     <!-- Page Header -->
     <!-- Set your background image for this header on the line below. -->
     <header class="intro-header" style="background-image: url('./images/home-bg.jpg')">
@@ -14,28 +14,28 @@
             </div>
         </div>
     </header>
-
     <!-- Main Content -->
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <div class="container">
+          <div class="row">
+              <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
 
-                <% articleList.forEach(function(article) { %>
+                <%# articleList.forEach(function(article) { %>
                       <div class="post-preview">
-                          <a href="/article/<%= article.id %>">
+                          <a href="/article/<%#= article.id %>">
                               <h2 class="post-title">
-                                <%= article.title %>
+                                <%#= article.title %>
                               </h2>
                               <h3 class="post-subtitle">
-                                <%= article.content %>
+                                <%#= article.content %>
                               </h3>
                           </a>
-                          <p class="post-meta">Posted by <a href="#"><%= article.member.name %></a> on
-                            <%= article.createdAt %>
+                          <p class="post-meta">Posted by <a href="#"><%#= article.name %></a> on
+                            <%#= article.createdAt %>
                           </p>
                       </div>
                       <hr>
-                <%  }); %>
+                <%#  }); %>
+
 
                 <!-- Pager -->
                 <ul class="pager">
@@ -48,4 +48,4 @@
     </div>
 
     <hr>
-    <% include ./footer %>
+    <% include ./footer %> -->

@@ -14,12 +14,14 @@ var Organization = function(options) {
 
 //Class Function
 Organization.get = function(organizationId, cb) {
-  //這邊是當傳入一個memberId時，進入資料庫查出相對應的member資料
-  db.select().from('organization').where({
+  //這邊是當傳入一個 organizationId時，進入資料庫查出相對應的 organization資料
+  db.select()
+  .from('organization')
+  .where({
       id : organizationId
     })
     .map(function(row) {
-      //將select出來的資料轉換成Member物件
+      //將select出來的資料轉換成 Member物件
       return new Organization(row);
     })
     .then(function(organizationList) {
