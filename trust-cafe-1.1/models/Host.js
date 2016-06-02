@@ -7,24 +7,6 @@ var Host = function(options) {
   this.eventId = options.eventId;
 };
 
-Host.getAll = function(cb) {
-  db.select()
-    .from('host')
-    .map(function(row) {
-      return new Host({
-        id : row.id,
-        customerId : row.customerId,
-        eventId : row.eventId
-        });
-    })
-    .then(function(hostList) {
-      cb(null, hostList);
-    })
-    .catch(function(err) {
-      cb(new GeneralErrors.Database());
-    });
-}
-
 Host.get = function(hostId, cb) {
   db.select()
     .from('host')
@@ -32,6 +14,7 @@ Host.get = function(hostId, cb) {
       id : hostId
     })
     .map(function(row) {
+      // return new Host(row);
       return new Host({
         id : row.id,
         customerId : row.customerId,
@@ -52,20 +35,39 @@ Host.get = function(hostId, cb) {
     });
 }
 
+
+Host.getAll = function(cb) {
+  db.select()
+    .from('host')
+    .map(function(row) {
+      return new Host({
+        id : row.id,
+        customerId : row.customerId,
+        eventId : row.eventId
+        });
+    })
+    .then(function(hostList) {
+      cb(null, hostList);
+    })
+    .catch(function(err) {
+      cb(new GeneralErrors.Database());
+    });
+}
+
+
 //instance fnuction
 Host.prototype.save = function (cb) {
   if(this.id) {
-    db('host')
+    db('host').where({
+      id : this.id
+      })
       .update({
         customerId : this.customerId,
         eventId : this.eventId
       })
-      .where({
-        id : this.id
-      })
       .then(function() {
-        cb(null);
-      })
+        cb(null,this);
+      }.bind(this))
       .catch(function(err) {
         console.log(err);
         cb(null, new GeneralErrors.Database());

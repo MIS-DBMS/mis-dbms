@@ -48,7 +48,7 @@ Customer.getByAccount = function(customerAccount, customerPassword, cb) {
       })
       .then(function(customerList) {
         if(customerList.length) {
-          cb(null, customer[0]);
+          cb(null, customerList[0]);
         } else {
           //這邊要產生一個NotFound err給前端，因為error很常用到，我們會獨立出去一個檔案
           cb(new GeneralErrors.NotFound());
