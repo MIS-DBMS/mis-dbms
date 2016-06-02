@@ -14,7 +14,7 @@ var Event = function(options) {
 
 //Class Function
 Event.get = function(eventId, cb) {
-  //這邊是當傳入一個customerId時，進入資料庫查出相對應的customer資料
+  //這邊是當傳入一個 eventId時，進入資料庫查出相對應的 event資料
   db.select().from('event').where({
       id : eventId
     })
@@ -35,19 +35,41 @@ Event.get = function(eventId, cb) {
     })
 }
 
+
+
+// Event.getMember = function(eventName, cb) {
+//   db.select('*')
+//   .from('event')
+//   .leftJoin('host', function() {this.on('event.id', '=', 'host.eventId')})
+//   .leftJoin('customer', function() {this.on('host.customerId', '=', 'customer.id')})
+//   .where({
+//     name : eventName,
+//   })
+//       .map(function(row){
+//         return new Event(row);
+//       })
+//       .then(function(eventList) {
+//         if(eventList.length) {
+//           cb(null, eventList[0]);
+//         } else {
+//           //這邊要產生一個NotFound err給前端，因為error很常用到，我們會獨立出去一個檔案
+//           cb(new GeneralErrors.NotFound());
+//         }
+//       })
+// }
+
+
+
+
+
+
 Event.getAll = function(cb) {
   db.select()
     .from('event')
+    .leftJoin('host', function() {this.on('event.id', '=', 'host.eventId')})
+    .leftJoin('customer', function() {this.on('host.customerId', '=', 'customer.id')})
     .map(function(row) {
-      return new Event({
-        id : row.id,
-        name : row.name,
-        location : row.location,
-        date : row.date,
-        startTime : row.startTime,
-        endTime : row.endTime,
-        description : row.description
-      });
+      return new Event(row);
     })
     .then(function(eventList) {
       cb(null, eventList);

@@ -18,16 +18,16 @@
       <div class="container">
           <div class="row">
               <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <%if (customer){%>
+                          <!-- <%#if (eventList){%>
                   <p>有</p>
-                  <%} else {%>
+                  <%#} else {%>
                     <p>NOOO</p>
-                    <%}%>
-                <%# articleList.forEach(function(article) { %>
+                    <%#}%> -->
+                <% eventList.forEach(function(event) { %>
                       <div class="post-preview">
-                          <a href="/article/<%#= article.id %>">
+                          <a href="/event/<%#= event.id %>">
                               <h2 class="post-title">
-                                <%#= article.title %>
+                                <%= event.name %>
                               </h2>
                               <h3 class="post-subtitle">
                                 <%#= article.content %>
@@ -38,7 +38,7 @@
                           </p>
                       </div>
                       <hr>
-                <%#  }); %>
+                <%  }); %>
 
 
                 <!-- Pager -->
