@@ -52,12 +52,43 @@
                     <a href="/">Home</a>
                 </li>
                 <% if(customer) {%>
+                  <% if(customerName=111) {%>
+                    <li>
+                        <a href="/">Welcome, <%=customer.customerName%></a>
+                    </li>
+                    <li>
+                        <a href="/event/new">Post new Event</a>
+                    </li>
+                    <li>
+                        <form action="/register/logout" method="post">
+                          <style media="screen">
+                            #logout {
+                              background: transparent;
+                              color: white;
+                              font-size: 16px;
+                              margin-top: 18px;
+                              border : none;
+                              margin-right: 4px;
+                              text-transform: uppercase;
+                              font-size: 12px;
+                              font-weight: 800;
+                              letter-spacing: 1px;
+                            }
+                            #logout:hover {
+                              color: #ddd;
+                            }
+                          </style>
+                          <input id="logout" type="submit" value="Logout" />
+                        </form>
+                        <%# css 大家在自己調整%>
+                    </li>
+                    <% } else {%>
                   <li>
                       <a href="/">Welcome, <%=customer.customerName%></a>
                   </li>
-                  <li>
+                  <!-- <li>
                       <a href="/event/new">Post new Event</a>
-                  </li>
+                  </li> -->
                   <li>
                       <form action="/register/logout" method="post">
                         <style media="screen">
