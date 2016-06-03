@@ -92,6 +92,7 @@ router.get('/', function(req, res, next) {
     if(err) {
       next();
     } else {
+      console.log(eventList);
       res.render('index',
       {customer : req.session.customer || null,  eventList : eventList });
     }

@@ -4,7 +4,7 @@ var GeneralErrors = require('../errors/GeneralErrors');
 
 var Event = function(options) {
   this.id = options.id;
-  this.name = options.name;
+  this.eventName = options.eventName;
   this.location = options.location;
   this.date = options.date;
   this.startTime = options.startTime;
@@ -66,8 +66,8 @@ Event.get = function(eventId, cb) {
 Event.getAll = function(cb) {
   db.select()
     .from('event')
-    .leftJoin('host', function() {this.on('event.id', '=', 'host.eventId')})
-    .leftJoin('customer', function() {this.on('host.customerId', '=', 'customer.id')})
+    .leftJoin('host', 'event.id', 'host.eventId')
+    .leftJoin('customer', 'host.customerId', 'customer.id')
     .map(function(row) {
       return new Event(row);
     })
@@ -81,7 +81,7 @@ Event.getAll = function(cb) {
 
 // Get by name
 Event.getByName = function(eventName, cb) {
-  db.select().from("Name").where({
+  db.select().from("eventName").where({
     name : eventName,
   })
       .map(function(row){
@@ -105,7 +105,7 @@ Event.prototype.save = function (cb) {
         id : this.id
       })
       .update({
-        name : this.name,
+        eventName : this.eventName,
         location : this.location,
         date : this.date,
         startTime : this.startTime,
@@ -123,7 +123,7 @@ Event.prototype.save = function (cb) {
     //不存在
     db("event")
       .insert({
-        name : this.name,
+        eventName : this.eventName,
         location : this.location,
         date : this.date,
         startTime : this.startTime,

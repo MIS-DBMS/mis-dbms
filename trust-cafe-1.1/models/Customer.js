@@ -4,7 +4,7 @@ var GeneralErrors = require('../errors/GeneralErrors');
 
 var Customer = function(options) {
   this.id = options.id;
-  this.name = options.name;
+  this.customerName = options.customerName;
   this.password = options.password;
   this.account = options.account;
   this.phone = options.phone;

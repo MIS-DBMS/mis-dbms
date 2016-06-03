@@ -57,8 +57,9 @@ router.post('/', function(req, res) {
     res.redirect('/');
   }
 
+// 增加要輸入event資料的位置
   var newEvent = new Event({
-    name : req.body.name,
+    eventName : req.body.eventName,
     // name : req.body.name,
     // eventId : req.body.eventId,
     // customerId : req.session.customer.id
@@ -74,30 +75,6 @@ router.post('/', function(req, res) {
     }
   });
 });
-
-// //trytrysee
-// router.post('/', function(req, res) {
-//   if(!req.session.customer) {
-//     res.redirect('/');
-//   }
-//
-//   var newEvent = new Event({
-//     name : req.body.name,
-//     location : req.body.location,
-//     // customerId : req.session.customer.id
-//   });
-//   console.log('Post success');
-//   newEvent.save(function(err) {
-//     if(err) {
-//       res.status = err.code;
-//       res.json(err);
-//     } else {
-//
-//       res.redirect("/");
-//     }
-//   });
-// });
-
 
 router.get('/',function(req, res) {
   Event.getAll(function(err){
