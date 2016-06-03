@@ -27,7 +27,7 @@ DROP TABLE IF EXISTS `customer`;
 
 CREATE TABLE `customer` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(20) NOT NULL DEFAULT '',
+  `customerName` varchar(20) NOT NULL DEFAULT '',
   `account` varchar(60) NOT NULL DEFAULT '',
   `password` varchar(255) NOT NULL DEFAULT '',
   `phone` varchar(15),
@@ -80,7 +80,7 @@ DROP TABLE IF EXISTS `event`;
 
 CREATE TABLE `event` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(20) NOT NULL DEFAULT '',
+  `eventName` varchar(20) NOT NULL DEFAULT '',
   `location` ENUM('B1包場','會議廳','1F包場'),
   `date` DATE,
   `startTime` TIME,

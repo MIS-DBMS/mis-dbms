@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var Customer = require('../models/Customer');
 var Host = require('../models/Host');
-var Event = require('../models/Event');
 var async = require('async');
 
 router.get('/new', function(req, res) {
@@ -38,34 +37,19 @@ router.get('/:eventId', function(req, res, next) {
   });
 });
 
-router.get('/',function(req, res) {
-  Event.getAll(function(err){
-    if(err) {
-      console.log(err);
-    } else {
-      res.render('/',{
-        eventList : eventList
-      })
-    }
-  });
-});
-
-
 
 router.post('/', function(req, res) {
   if(!req.session.customer) {
     res.redirect('/');
   }
 
-// 增加要輸入event資料的位置
-  var newEvent = new Event({
-    eventName : req.body.eventName,
-    // name : req.body.name,
-    // eventId : req.body.eventId,
-    // customerId : req.session.customer.id
+  var newHost = new Host({
+    type : req.body.type,
+    eventId : req.body.eventId,
+    customerId : req.session.customer.id
   });
 
-  newEvent.save(function(err) {
+  newHost.save(function(err) {
     if(err) {
       res.status = err.code;
       res.json(err);
@@ -75,19 +59,6 @@ router.post('/', function(req, res) {
     }
   });
 });
-
-router.get('/',function(req, res) {
-  Event.getAll(function(err){
-    if(err) {
-      console.log(err);
-    } else {
-      res.render('/',{
-        eventList : eventList
-      })
-    }
-  });
-});
-
 
 
 module.exports = router;
