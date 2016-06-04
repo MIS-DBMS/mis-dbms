@@ -5,9 +5,8 @@
  */
 
 var app = require('../app');
-var debug = require('debug')('trust-cafe:server');
-var http = require('https');
-var fs = require('fs');
+var debug = require('debug')('blog:server');
+var http = require('http');
 
 /**
  * Get port from environment and store in Express.
@@ -17,19 +16,10 @@ var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
 /**
- * Get certificates for HTTPS connection
- */
-
-var options = {
-    key: fs.readFileSync('/etc/httpd/conf/server.key'),
-    cert: fs.readFileSync('/etc/httpd/conf/server.crt')
-};
-
-/**
  * Create HTTP server.
  */
 
-var server = http.createServer(options, app);
+var server = http.createServer(app);
 
 /**
  * Listen on provided port, on all network interfaces.
