@@ -62,10 +62,13 @@ Event.get = function(eventId, cb) {
 Event.getAll = function(cb) {
   db.select()
     .from('event')
-    .leftJoin('host', 'event.id', 'host.eventId')
-    .leftJoin('customer', 'host.customerId', 'customer.id')
+    .leftJoin('participate', 'event.id', 'participate.eventId')
+    .leftJoin('customer', 'participate.customerId', 'customer.id')
     .map(function(row) {
-      return new Event(row);
+      return new Event({
+        eventName : row.eventName,
+        customerName : row.customerName
+      });
     })
     .then(function(eventList) {
       cb(null, eventList);

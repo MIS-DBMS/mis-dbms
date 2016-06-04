@@ -16,27 +16,27 @@ router.get('/new', function(req, res) {
 });
 
 // customers test
-router.get('/:eventId', function(req, res, next) {
-  Host.get(req.params.hostId, function(err, host) {
-    if(err) {
-      console.log(err);
-      next();
-    } else {
-      Customer.get(host.customerId, function(err, customer) {
-        if(err) {
-          console.log(err);
-        } else {
-          host.customer = customer;
-          res.render('eventDetail', {
-            type : type,
-            customer : req.session.customer || null
-          });
-        }
-      })
-
-    }
-  });
-});
+// router.get('/:eventId', function(req, res, next) {
+//   Host.get(req.params.hostId, function(err, host) {
+//     if(err) {
+//       console.log(err);
+//       next();
+//     } else {
+//       Customer.get(host.customerId, function(err, customer) {
+//         if(err) {
+//           console.log(err);
+//         } else {
+//           host.customer = customer;
+//           res.render('eventDetail', {
+//             type : type,
+//             customer : req.session.customer || null
+//           });
+//         }
+//       })
+//
+//     }
+//   });
+// });
 
 router.get('/',function(req, res) {
   Event.getAll(function(err){

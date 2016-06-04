@@ -109,7 +109,5 @@ Customer.prototype.save = function (cb) {
   }
 };
 
-
-
 //這樣基本上就完成了一個DataModel會用到的method, 之後有需要的時候再過來新增
 module.exports = Customer;
