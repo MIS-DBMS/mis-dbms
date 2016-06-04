@@ -50,6 +50,7 @@ Event.getMember = function(eventName, cb) {
       .then(function(eventList) {
         if(eventList.length) {
           cb(null, eventList[0]);
+          console.log(eventList);
         } else {
           //這邊要產生一個NotFound err給前端，因為error很常用到，我們會獨立出去一個檔案
           cb(new GeneralErrors.NotFound());
@@ -64,13 +65,11 @@ Event.getAll = function(cb) {
     .leftJoin('participate', 'event.id', 'participate.eventId')
     .leftJoin('customer', 'participate.customerId', 'customer.id')
     .map(function(row) {
-      return new Event({
-        eventName : row.eventName,
-        customerName : row.customerName
-      });
+      return new Event(row);
     })
     .then(function(eventList) {
       cb(null, eventList);
+
     })
     .catch(function(err) {
       cb(new GeneralErrors.Database());

@@ -60,7 +60,8 @@ router.post('/', function(req, res) {
 // 增加要輸入event資料的位置
   var newEvent = new Event({
     eventName : req.body.eventName,
-    // name : req.body.name,
+    location : req.body.location,
+    description : req.body.description
     // eventId : req.body.eventId,
     // customerId : req.session.customer.id
   });
