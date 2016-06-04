@@ -36,52 +36,12 @@ Event.get = function(eventId, cb) {
 }
 
 
-
-// Event.getMember = function(eventName, cb) {
-//   db.select('*')
-//   .from('event')
-//   .leftJoin('host', function() {this.on('event.id', '=', 'host.eventId')})
-//   .leftJoin('customer', function() {this.on('host.customerId', '=', 'customer.id')})
-//   .where({
-//     name : eventName,
-//   })
-//       .map(function(row){
-//         return new Event(row);
-//       })
-//       .then(function(eventList) {
-//         if(eventList.length) {
-//           cb(null, eventList[0]);
-//         } else {
-//           //這邊要產生一個NotFound err給前端，因為error很常用到，我們會獨立出去一個檔案
-//           cb(new GeneralErrors.NotFound());
-//         }
-//       })
-// }
-
-
-
-
-
-
-Event.getAll = function(cb) {
-  db.select()
-    .from('event')
-    .leftJoin('host', 'event.id', 'host.eventId')
-    .leftJoin('customer', 'host.customerId', 'customer.id')
-    .map(function(row) {
-      return new Event(row);
-    })
-    .then(function(eventList) {
-      cb(null, eventList);
-    })
-    .catch(function(err) {
-      cb(new GeneralErrors.Database());
-    });
-}
-
-// Get by name
-Event.getByName = function(eventName, cb) {
-  db.select().from("eventName").where({
+Event.getMember = function(eventName, cb) {
+  db.select('*')
+  .from('event')
+  .leftJoin('participate', 'event.id', 'participate.eventId')
+  .leftJoin('customer', 'participate.customerId', 'customer.id')
+  .where({
     name : eventName,
   })
       .map(function(row){
@@ -96,6 +56,28 @@ Event.getByName = function(eventName, cb) {
         }
       })
 }
+
+
+Event.getAll = function(cb) {
+  db.select()
+    .from('event')
+    .leftJoin('participate', 'event.id', 'participate.eventId')
+    .leftJoin('customer', 'participate.customerId', 'customer.id')
+    .map(function(row) {
+      return new Event({
+        eventName : row.eventName,
+        customerName : row.customerName
+      });
+    })
+    .then(function(eventList) {
+      cb(null, eventList);
+    })
+    .catch(function(err) {
+      cb(new GeneralErrors.Database());
+    });
+}
+
+
 //Instance Function
 Event.prototype.save = function (cb) {
   //save的概念是當物件不存在時新增，存在時對DB做更新

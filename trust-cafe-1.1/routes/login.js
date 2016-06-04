@@ -15,7 +15,7 @@ router.get('/', function(req, res, next) {
     });
 });
 
-
+// 判斷帳密是否正確
 router.post('/', function(req, res) {
     var inputAccount = req.body.account;
     var inputPassword = req.body.password;
@@ -25,14 +25,15 @@ router.post('/', function(req, res) {
                 customer : null
             });
             console.log("Your account or password is wrong");
-
         } else {
           req.session.customer = customer;
+          console.log(customer);
           res.redirect('/');
         }
     });
 });
 
+// logout
 router.post('/logout', function(req, res) {
     req.session.customer = null;
     res.redirect('/');
