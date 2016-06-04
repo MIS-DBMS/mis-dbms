@@ -59,10 +59,6 @@ Event.get = function(eventId, cb) {
 // }
 
 
-
-
-
-
 Event.getAll = function(cb) {
   db.select()
     .from('event')
@@ -79,23 +75,7 @@ Event.getAll = function(cb) {
     });
 }
 
-// Get by name
-Event.getByName = function(eventName, cb) {
-  db.select().from("eventName").where({
-    name : eventName,
-  })
-      .map(function(row){
-        return new Event(row);
-      })
-      .then(function(eventList) {
-        if(eventList.length) {
-          cb(null, eventList[0]);
-        } else {
-          //這邊要產生一個NotFound err給前端，因為error很常用到，我們會獨立出去一個檔案
-          cb(new GeneralErrors.NotFound());
-        }
-      })
-}
+
 //Instance Function
 Event.prototype.save = function (cb) {
   //save的概念是當物件不存在時新增，存在時對DB做更新

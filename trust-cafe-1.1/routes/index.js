@@ -6,17 +6,17 @@ var Host = require('../models/Host');
 var async = require('async');
 /* GET home page. */
 // router.get('/', function(req, res, next) {
-//   Host.getAll(function(err, hostList) {
+//   Event.getAll(function(err, eventList) {
 //     if(err) {
 //       next();
 //     } else {
 //       //這邊的做法是使用async each這樣的方式幫我們從articleList中一筆筆去找到member，然後新增一個key叫member在article物件中
-//       async.each(hostList, function(host, cb) {
-//         Customer.get(host.customerId, function(err, customer) {
+//       async.each(eventList, function(customer, cb) {
+//         Customer.get(eventId.customerId, function(err, customer) {
 //           if(err) {
 //             cb(err);
 //           } else {
-//             host.customerId = customer;
+//             event.customer = customer;
 //             cb(null);
 //           }
 //         });
@@ -25,22 +25,28 @@ var async = require('async');
 //           res.status = err.code;
 //           next();
 //         } else {
-//           res.render('index',
-//           {
-//             hostList : hostList,
-//             customer : req.session.customer || null
-//             // customerList: customerList
-//           });
+//           console.log(eventList);
+//           res.render('index', { eventList : eventList, customer : req.session.customer || null });
 //         }
 //       });
-//
 //     }
 //   });
 // });
 
+// trytrysee2
+router.get('/', function(req, res, next) {
+  Event.getAll(function(err, eventList) {
+    if(err) {
+      next();
+    } else {
+      console.log(eventList);
+      res.render('index',
+      {customer : req.session.customer || null,  eventList : eventList });
+    }
+  });
+});
+
 //trytrysee
-
-
 // router.get('/', function(req, res, next) {
 //   Event.getAll(function(err, eventList) {
 //     if(err) {
@@ -85,17 +91,5 @@ var async = require('async');
 //   });
 // });
 
-// trytrysee2
 
-router.get('/', function(req, res, next) {
-  Event.getAll(function(err, eventList) {
-    if(err) {
-      next();
-    } else {
-      console.log(eventList);
-      res.render('index',
-      {customer : req.session.customer || null,  eventList : eventList });
-    }
-  });
-});
 module.exports = router;
