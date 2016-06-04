@@ -6,7 +6,6 @@
 
 var app = require('../app');
 var debug = require('debug')('blog:server');
-var http = require('http');
 
 /**
  * Get port from environment and store in Express.
@@ -16,11 +15,42 @@ var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
 /**
- * Create HTTP server.
+ * Create HTTP server
+ * 1. check if certificate exist
+ *  - yes: Start HTTPS server
+ *  - no: Start HTTP server
  */
 
-var server = http.createServer(app);
+var fs = require('fs');
 
+var serverKey = '/etc/httpd/conf/server.key';
+var serverCrt = '/etc/httpd/conf/server.crt';
+function fileExists() {
+    try {
+        var statsKey = fs.statSync(serverKey);
+        var statsCrt = fs.statSync(serverCrt);
+        return true;
+    }
+    catch (err) {
+        return false;
+    }
+}
+
+if (fileExists() == true) {
+    var options = {
+        key: fs.readFileSync(serverKey),
+        cert: fs.readFileSync(serverCrt)
+    };
+    var http = require('https');
+    var server = http.createServer(options, app);
+    console.log('Using HTTPS protocol.');
+}
+
+else {
+    var http = require('http');
+    var server = http.createServer(app);
+    console.log('Using insecure HTTP protocol.');
+}
 /**
  * Listen on provided port, on all network interfaces.
  */
