@@ -26,7 +26,7 @@ router.post('/', function(req, res, next) {
 
   //首先必須先產生出一個 Customer 的物件在進行save
   var newCustomer = new Customer({
-    name : req.body.name,
+    customerName : req.body.customerName,
     account : req.body.account,
     password : req.body.password,
     phone : req.body.phone,

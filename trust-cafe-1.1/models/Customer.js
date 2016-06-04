@@ -68,7 +68,7 @@ Customer.prototype.save = function (cb) {
         id : this.id
       })
       .update({
-        name : this.name,
+        customerName : this.customerName,
         account : this.account,
         password : this.password,
         phone : this.phone,
@@ -88,7 +88,7 @@ Customer.prototype.save = function (cb) {
     //不存在
     db("customer")
       .insert({
-        name : this.name,
+        customerName : this.customerName,
         account : this.account,
         password : this.password,
         phone : this.phone,
