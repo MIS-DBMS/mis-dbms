@@ -52,8 +52,7 @@
                     <a href="/">Home</a>
                 </li>
                 <% if(customer) {%>
-                  <% console.log(customer.inputAccount);%>
-                  <% if(customer.customerAccount == 'test') {%>
+                  <% if(customer.account == 'test') {%>
                     <li>
                         <a href="/">Welcome, <%=customer.customerName%></a>
                     </li>

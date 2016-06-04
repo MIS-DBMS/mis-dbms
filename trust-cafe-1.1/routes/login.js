@@ -26,8 +26,8 @@ router.post('/', function(req, res) {
             });
             console.log("Your account or password is wrong");
         } else {
-          console.log(customer);
           req.session.customer = customer;
+          console.log(customer);
           res.redirect('/');
         }
     });

@@ -36,27 +36,26 @@ Event.get = function(eventId, cb) {
 }
 
 
-
-// Event.getMember = function(eventName, cb) {
-//   db.select('*')
-//   .from('event')
-//   .leftJoin('host', function() {this.on('event.id', '=', 'host.eventId')})
-//   .leftJoin('customer', function() {this.on('host.customerId', '=', 'customer.id')})
-//   .where({
-//     name : eventName,
-//   })
-//       .map(function(row){
-//         return new Event(row);
-//       })
-//       .then(function(eventList) {
-//         if(eventList.length) {
-//           cb(null, eventList[0]);
-//         } else {
-//           //這邊要產生一個NotFound err給前端，因為error很常用到，我們會獨立出去一個檔案
-//           cb(new GeneralErrors.NotFound());
-//         }
-//       })
-// }
+Event.getMember = function(eventName, cb) {
+  db.select('*')
+  .from('event')
+  .leftJoin('participate', 'event.id', 'participate.eventId')
+  .leftJoin('customer', 'participate.customerId', 'customer.id')
+  .where({
+    name : eventName,
+  })
+      .map(function(row){
+        return new Event(row);
+      })
+      .then(function(eventList) {
+        if(eventList.length) {
+          cb(null, eventList[0]);
+        } else {
+          //這邊要產生一個NotFound err給前端，因為error很常用到，我們會獨立出去一個檔案
+          cb(new GeneralErrors.NotFound());
+        }
+      })
+}
 
 
 Event.getAll = function(cb) {
