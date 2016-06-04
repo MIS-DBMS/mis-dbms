@@ -52,7 +52,8 @@
                     <a href="/">Home</a>
                 </li>
                 <% if(customer) {%>
-                  <% if(customerName=111) {%>
+                  <% console.log(customer.customerAccount);%>
+                  <% if(customer.customerName == 'test') {%>
                     <li>
                         <a href="/">Welcome, <%=customer.customerName%></a>
                     </li>
@@ -82,14 +83,11 @@
                         </form>
                         <%# css 大家在自己調整%>
                     </li>
-                    <% } else {%>
-                  <li>
+                  <% } else {%>
+                    <li>
                       <a href="/">Welcome, <%=customer.customerName%></a>
-                  </li>
-                  <!-- <li>
-                      <a href="/event/new">Post new Event</a>
-                  </li> -->
-                  <li>
+                    </li>
+                    <li>
                       <form action="/register/logout" method="post">
                         <style media="screen">
                           #logout {
@@ -111,7 +109,8 @@
                         <input id="logout" type="submit" value="Logout" />
                       </form>
                       <%# css 大家在自己調整%>
-                  </li>
+                    </li>
+                  <% } %>
                 <% } else {%>
                   <li>
                       <a href="/register">Register</a>
@@ -119,7 +118,6 @@
                   <li>
                       <a href="/login">Login</a>
                   </li>
-
                 <% } %>
             </ul>
         </div>
