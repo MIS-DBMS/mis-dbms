@@ -6,19 +6,14 @@ var Customer = function(options) {
   this.id = options.id;
   this.customerName = options.customerName;
   this.password = options.password;
-  this.account = options.account;
-  this.phone = options.phone;
-  this.email = options.email;
-  this.jobTitle = options.jobTitle;
-  this.address = options.address;
-  this.birthday = options.birthday;
+  this.account = options.account
 };
 
 //Class Function
 Customer.get = function(customerId, cb) {
   //這邊是當傳入一個memberId時，進入資料庫查出相對應的member資料
   db.select().from('customer').where({
-      id : customerId
+      ID : customerId
     })
     .map(function(row) {
       //將select出來的資料轉換成Member物件
@@ -64,18 +59,13 @@ Customer.prototype.save = function (cb) {
   //save的概念是當物件不存在時新增，存在時對DB做更新
   if (this.id) {
     //已存在
-    db("customer").where({
-        id : this.id
+    db("wp_users").where({
+        ID : this.id
       })
       .update({
         customerName : this.customerName,
         account : this.account,
-        password : this.password,
-        phone : this.phone,
-        email : this.email,
-        jobTitle : this.jobTitle,
-        address : this.address,
-        birthday : this.birthday
+        password : this.password
       })
       .then(function() {
         cb(null, this);
@@ -86,16 +76,8 @@ Customer.prototype.save = function (cb) {
       });
   } else {
     //不存在
-    db("customer")
+    db("wp_users")
       .insert({
-        customerName : this.customerName,
-        account : this.account,
-        password : this.password,
-        phone : this.phone,
-        email : this.email,
-        jobTitle : this.jobTitle,
-        address : this.address,
-        birthday : this.birthday
       })
       .then(function(result) {
         var insertedId = result[0];
