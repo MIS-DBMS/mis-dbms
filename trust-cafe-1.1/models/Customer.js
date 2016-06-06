@@ -14,6 +14,9 @@ var Customer = function(options) {
   this.birthday = options.birthday;
 };
 
+//trytry
+
+
 //Class Function
 Customer.get = function(customerId, cb) {
   //這邊是當傳入一個memberId時，進入資料庫查出相對應的member資料

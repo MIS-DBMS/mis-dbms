@@ -2,22 +2,25 @@ var express = require('express');
 var router = express.Router();
 var Customer = require('../models/Customer');
 var Event = require('../models/Event');
+var Test = require('../models/Event');
 var async = require('async');
 /* GET home page. */
-// router.get('/', function(req, res, next) {
-//   var name = req.session.event;
-//   console.log(req.session.event);
-//   Event.getMember(name,function(err, eventList) {
-//     if(err) {
-//       next();
-//     } else {
-//       res.render('eventMember',
-//       {
-//         customer : req.session.customer || null,
-//       });
-//     }
-//   });
-// });
+router.get('/', function(req, res, next) {
+  var name = req.session.event;
+  console.log(req.session.event);
+  Event.getMember(name,function(err, test) {
+    if(err) {
+      next();
+    } else {
+      console.log(test);
+      res.render('eventMember',
+      {
+        test : req.session.test || null,
+        customer : req.session.customer || null
+      });
+    }
+  });
+});
 
 router.get('/', function(req, res, next) {
   Event.getAll(function(err, eventList) {
