@@ -8,7 +8,7 @@ var async = require('async');
 router.get('/', function(req, res, next) {
   var name = req.session.event;
   console.log(req.session.event);
-  Event.getMember(name,function(err, test) {
+  Event.getMember(function(err, test) {
     if(err) {
       next();
     } else {

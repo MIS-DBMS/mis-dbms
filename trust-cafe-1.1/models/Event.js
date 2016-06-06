@@ -13,30 +13,31 @@ var Event = function(options) {
 };
 
 var Test = function(options){
-  this.id = options.id;
+  id = options;
 };
-
-
-Event.getMember = function(name, cb) {
-  db.select('participate.customerId')
+Event.getMember = function(cb) {
+  db.select('customer.id')
     .from('event')
     .leftJoin('participate', function(){
       this.on('participate.eventId', '=', 'event.id')
+    })
+    .leftJoin('customer', function(){
+      this.on('participate.customerId', '=', 'customer.id')
     })
     .map(function(row){
         console.log(row);
         return new Test(row); //Event
     })
-    .then(function(testList) {
-        if(testList.length) {
-          cb(null, testList[0]);
-          console.log(testList);
-        } else {
-          //這邊要產生一個NotFound err給前端，因為error很常用到，我們會獨立出去一個檔案
-          cb(new GeneralErrors.NotFound());
-        }
+    .then(function(test) {
+        cb(null, test);
+        console.log(test);
     })
+    .catch(function(err) {
+      cb(new GeneralErrors.Database());
+    });
 }
+
+
 //Class Function
 Event.get = function(eventId, cb) {
   //這邊是當傳入一個 eventId時，進入資料庫查出相對應的 event資料
