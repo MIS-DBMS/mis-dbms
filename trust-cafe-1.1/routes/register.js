@@ -28,12 +28,7 @@ router.post('/', function(req, res, next) {
   var newCustomer = new Customer({
     customerName : req.body.customerName,
     account : req.body.account,
-    password : req.body.password,
-    phone : req.body.phone,
-    email : req.body.email,
-    jobTitle : req.body.jobTitle,
-    address : req.body.address,
-    birthday : req.body.birthday
+    password : req.body.password
   });
 
   newCustomer.save(function(err) {
