@@ -53,8 +53,11 @@
                 <div class="row control-group">
                     <div class="form-group col-xs-12 floating-label-form-group controls">
                         <label>Date</label>
-                        <input type="text" class="form-control" placeholder="2014-09-18" id="datepicker" name="date"  required data-validation-required-message="Please enter the event date.">
-
+                        <h3>Date</h3>
+                        <link rel="stylesheet" href="/stylesheets/jquery-ui.css">
+                        <script src="/javascripts/jquery-ui.js"></script>
+                        <input type="date" name="date" id="date" placeholder="yyyy-mm-dd" >
+                        <script>$('#date').datepicker();</script>
                     </div>
                 </div>
                 <br>

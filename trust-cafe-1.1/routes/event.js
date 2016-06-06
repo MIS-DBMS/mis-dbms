@@ -61,7 +61,8 @@ router.post('/', function(req, res) {
   var newEvent = new Event({
     eventName : req.body.eventName,
     location : req.body.location,
-    description : req.body.description
+    description : req.body.description,
+    date :req.body.date
     // eventId : req.body.eventId,
     // customerId : req.session.customer.id
   });
