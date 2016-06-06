@@ -51,10 +51,10 @@
                 <li>
                     <a href="/">Home</a>
                 </li>
-                <% if(customer) {%>
-                  <% if(customer.account == 'test') {%>
+                <%#if(customer) {%>
+                  <%# if(customer.account == 'test') {%>
                     <li>
-                        <a href="/">Welcome, <%=customer.customerName%></a>
+                        <a href="/">Welcome, <%#=customer.customerName%></a>
                     </li>
                     <li>
                         <a href="/event/new">Post new Event</a>
@@ -82,9 +82,9 @@
                         </form>
                         <%# css 大家在自己調整%>
                     </li>
-                  <% } else {%>
+                  <%# } else {%>
                     <li>
-                      <a href="/">Welcome, <%=customer.customerName%></a>
+                      <a href="/">Welcome, <%#=customer.customerName%></a>
                     </li>
                     <li>
                       <form action="/register/logout" method="post">
@@ -109,15 +109,15 @@
                       </form>
                       <%# css 大家在自己調整%>
                     </li>
-                  <% } %>
-                <% } else {%>
+                  <%# } %>
+                <%# } else {%>
                   <li>
                       <a href="/register">Register</a>
                   </li>
                   <li>
                       <a href="/login">Login</a>
                   </li>
-                <% } %>
+                <%# } %>
             </ul>
         </div>
         <!-- /.navbar-collapse -->

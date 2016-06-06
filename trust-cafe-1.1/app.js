@@ -11,6 +11,8 @@ var register = require('./routes/register');
 var users = require('./routes/users');
 var event = require('./routes/event');
 var login = require('./routes/login');
+var searchEvent = require('./routes/searchEvent');
+var eventMember = require('./routes/eventMember');
 var searchByEventName = require('./routes/searchByEventName');
 
 var app = express();
@@ -34,6 +36,8 @@ app.use('/users', users);
 app.use('/event', event);
 app.use('/register', register);
 app.use('/login', login);
+app.use('/eventMember', eventMember);
+app.use('/searchEvent', searchEvent);
 app.use('/searchByEventName', searchByEventName);
 
 

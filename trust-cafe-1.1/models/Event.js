@@ -12,6 +12,26 @@ var Event = function(options) {
   this.description = options.description;
 };
 
+//trytry
+var Customer = function(options) {
+  this.id = options.id;
+  this.customerName = options.customerName;
+  this.password = options.password;
+  this.account = options.account;
+  this.phone = options.phone;
+  this.email = options.email;
+  this.jobTitle = options.jobTitle;
+  this.address = options.address;
+  this.birthday = options.birthday;
+};
+
+var Participate = function(options) {
+  this.id = options.id;
+  this.customerId = options.customerId;
+  this.eventId = options.eventId;
+};
+
+
 //Class Function
 Event.get = function(eventId, cb) {
   //這邊是當傳入一個 eventId時，進入資料庫查出相對應的 event資料
@@ -36,21 +56,40 @@ Event.get = function(eventId, cb) {
 }
 
 
-Event.getMember = function(eventName, cb) {
+Event.getMember = function(name, cb) {
   db.select('*')
-  .from('event')
-  .leftJoin('participate', 'event.id', 'participate.eventId')
-  .leftJoin('customer', 'participate.customerId', 'customer.id')
-  .where({
-    name : eventName,
+    .from('event')
+    .leftJoin('participate', 'event.id', '=', 'participate.eventId')
+    .leftJoin('customer', 'participate.customerId','=', 'customer.id')
+    .where({
+      eventName : name
+    })
+    .map(function(row){
+        return new Customer(row); //Event
+    })
+    .then(function(customerList) {
+        if(customerList.length) {
+          cb(null, customerList[0]);
+          console.log(customerList);
+        } else {
+          //這邊要產生一個NotFound err給前端，因為error很常用到，我們會獨立出去一個檔案
+          cb(new GeneralErrors.NotFound());
+        }
+    })
+}
+
+//trytrysee
+Event.getName = function(name, cb) {
+  db.select().from("event").where({
+    eventName : name
   })
       .map(function(row){
         return new Event(row);
       })
       .then(function(eventList) {
         if(eventList.length) {
-          cb(null, eventList[0]);
-          console.log(eventList);
+          cb(null, eventList[0]);//customerList[0]=customerList
+          //console.log(customerList[0]);// 確認輸入的資料所對應的資料
         } else {
           //這邊要產生一個NotFound err給前端，因為error很常用到，我們會獨立出去一個檔案
           cb(new GeneralErrors.NotFound());
