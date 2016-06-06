@@ -12,26 +12,6 @@ var Event = function(options) {
   this.description = options.description;
 };
 
-//trytry
-var Customer = function(options) {
-  this.id = options.id;
-  this.customerName = options.customerName;
-  this.password = options.password;
-  this.account = options.account;
-  this.phone = options.phone;
-  this.email = options.email;
-  this.jobTitle = options.jobTitle;
-  this.address = options.address;
-  this.birthday = options.birthday;
-};
-
-var Participate = function(options) {
-  this.id = options.id;
-  this.customerId = options.customerId;
-  this.eventId = options.eventId;
-};
-
-
 //Class Function
 Event.get = function(eventId, cb) {
   //這邊是當傳入一個 eventId時，進入資料庫查出相對應的 event資料
