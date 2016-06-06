@@ -12,6 +12,32 @@ var Event = function(options) {
   this.description = options.description;
 };
 
+var Test = function(options){
+  id = options;
+};
+Event.getMember = function(cb) {
+  db.select('customer.id')
+    .from('event')
+    .leftJoin('participate', function(){
+      this.on('participate.eventId', '=', 'event.id')
+    })
+    .leftJoin('customer', function(){
+      this.on('participate.customerId', '=', 'customer.id')
+    })
+    .map(function(row){
+        console.log(row);
+        return new Test(row); //Event
+    })
+    .then(function(test) {
+        cb(null, test);
+        console.log(test);
+    })
+    .catch(function(err) {
+      cb(new GeneralErrors.Database());
+    });
+}
+
+
 //Class Function
 Event.get = function(eventId, cb) {
   //這邊是當傳入一個 eventId時，進入資料庫查出相對應的 event資料
@@ -35,21 +61,42 @@ Event.get = function(eventId, cb) {
     })
 }
 
+//original
+// Event.getMember = function(name, cb) {
+//   db.select('eventName')
+//     .from('event')
+//     .leftJoin('participate', 'event.id', '=', 'participate.eventId')
+//     .leftJoin('customer', 'participate.customerId','=', 'customer.id')
+//     .where({
+//       eventName : name
+//     })
+//     .map(function(row){
+//         return new Test(row); //Event
+//     })
+//     .then(function(testList) {
+//         if(testList.length) {
+//           cb(null, testListrList[0]);
+//           console.log(testList);
+//         } else {
+//           //這邊要產生一個NotFound err給前端，因為error很常用到，我們會獨立出去一個檔案
+//           cb(new GeneralErrors.NotFound());
+//         }
+//     })
+// }
 
-Event.getMember = function(eventName, cb) {
-  db.select('*')
-  .from('event')
-  .leftJoin('participate', 'event.id', 'participate.eventId')
-  .leftJoin('customer', 'participate.customerId', 'customer.id')
-  .where({
-    name : eventName,
+
+//trytrysee
+Event.getName = function(name, cb) {
+  db.select().from("event").where({
+    eventName : name
   })
       .map(function(row){
         return new Event(row);
       })
       .then(function(eventList) {
         if(eventList.length) {
-          cb(null, eventList[0]);
+          cb(null, eventList[0]);//customerList[0]=customerList
+          //console.log(customerList[0]);// 確認輸入的資料所對應的資料
         } else {
           //這邊要產生一個NotFound err給前端，因為error很常用到，我們會獨立出去一個檔案
           cb(new GeneralErrors.NotFound());
@@ -64,13 +111,11 @@ Event.getAll = function(cb) {
     .leftJoin('participate', 'event.id', 'participate.eventId')
     .leftJoin('customer', 'participate.customerId', 'customer.id')
     .map(function(row) {
-      return new Event({
-        eventName : row.eventName,
-        customerName : row.customerName
-      });
+      return new Event(row);
     })
     .then(function(eventList) {
       cb(null, eventList);
+
     })
     .catch(function(err) {
       cb(new GeneralErrors.Database());
