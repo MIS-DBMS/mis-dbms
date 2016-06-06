@@ -12,7 +12,8 @@ var async = require('async');
 /* GET home page. */
 router.get('/', function(req, res, next) {
     res.render('searchEvent', {
-        event : null
+        event : null,
+        customer : req.session.customer
     });
 });
 

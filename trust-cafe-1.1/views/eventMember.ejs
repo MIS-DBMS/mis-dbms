@@ -18,19 +18,19 @@
       <div class="container">
           <div class="row">
               <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-
-                <% eventList.forEach(function(event) { %>
+                <%console.log(customer)%>
+                <%# eventList.forEach(function(event) { %>
                       <div class="post-preview">
                           <a href="/event/<%#= event.id %>">
                               <h2 class="post-title">
-                                <%= event.eventName %>
-                                <%= event.customerName%>
+                                <%#= event.eventName %>
+                                <%#= event.customerName%>
                               </h2>
                               <h3 class="post-subtitle">
-                                <%= event.description %>
+                                <%#= event.description %>
                               </h3>
                               <h3>
-                                <%= event.location %>
+                                <%#= event.location %>
                               </h3>
                           </a>
                           <p class="post-meta">Posted by <a href="#"><%#= article.name %></a> on
@@ -38,7 +38,7 @@
                           </p>
                       </div>
                       <hr>
-                <%  }); %>
+                <%#  }); %>
 
 
                 <!-- Pager -->

@@ -12,6 +12,31 @@ var Event = function(options) {
   this.description = options.description;
 };
 
+var Test = function(options){
+  this.id = options.id;
+};
+
+
+Event.getMember = function(name, cb) {
+  db.select('participate.customerId')
+    .from('event')
+    .leftJoin('participate', function(){
+      this.on('participate.eventId', '=', 'event.id')
+    })
+    .map(function(row){
+        console.log(row);
+        return new Test(row); //Event
+    })
+    .then(function(testList) {
+        if(testList.length) {
+          cb(null, testList[0]);
+          console.log(testList);
+        } else {
+          //這邊要產生一個NotFound err給前端，因為error很常用到，我們會獨立出去一個檔案
+          cb(new GeneralErrors.NotFound());
+        }
+    })
+}
 //Class Function
 Event.get = function(eventId, cb) {
   //這邊是當傳入一個 eventId時，進入資料庫查出相對應的 event資料
@@ -35,28 +60,29 @@ Event.get = function(eventId, cb) {
     })
 }
 
+//original
+// Event.getMember = function(name, cb) {
+//   db.select('eventName')
+//     .from('event')
+//     .leftJoin('participate', 'event.id', '=', 'participate.eventId')
+//     .leftJoin('customer', 'participate.customerId','=', 'customer.id')
+//     .where({
+//       eventName : name
+//     })
+//     .map(function(row){
+//         return new Test(row); //Event
+//     })
+//     .then(function(testList) {
+//         if(testList.length) {
+//           cb(null, testListrList[0]);
+//           console.log(testList);
+//         } else {
+//           //這邊要產生一個NotFound err給前端，因為error很常用到，我們會獨立出去一個檔案
+//           cb(new GeneralErrors.NotFound());
+//         }
+//     })
+// }
 
-Event.getMember = function(name, cb) {
-  db.select('*')
-    .from('event')
-    .leftJoin('participate', 'event.id', '=', 'participate.eventId')
-    .leftJoin('customer', 'participate.customerId','=', 'customer.id')
-    .where({
-      eventName : name
-    })
-    .map(function(row){
-        return new Customer(row); //Event
-    })
-    .then(function(customerList) {
-        if(customerList.length) {
-          cb(null, customerList[0]);
-          console.log(customerList);
-        } else {
-          //這邊要產生一個NotFound err給前端，因為error很常用到，我們會獨立出去一個檔案
-          cb(new GeneralErrors.NotFound());
-        }
-    })
-}
 
 //trytrysee
 Event.getName = function(name, cb) {
