@@ -34,7 +34,6 @@
                         <p class="help-block text-danger"></p>
                     </div>
                 </div>
-                <br>
                 <!-- location -->
                 <div class="row control-group">
                     <div class="form-group col-xs-12 floating-label-form-group controls">
@@ -48,41 +47,40 @@
                           <br>
                     </div>
                 </div>
-                <br>
                 <!-- date -->
                 <div class="row control-group">
                     <div class="form-group col-xs-12 floating-label-form-group controls">
                         <label>Date</label>
                         <h3>Date</h3>
-                        <link rel="stylesheet" href="/stylesheets/jquery-ui.css">
+                        <!-- <link rel="stylesheet" href="/stylesheets/jquery-ui.css"> -->
                         <script src="/javascripts/jquery-ui.js"></script>
-                        <input type="date" name="date" id="date" placeholder="yyyy-mm-dd" >
-                        <script>$('#date').datepicker();</script>
+                        <input type="date" class="form-control" name="date" id="date" placeholder="yyyy-mm-dd" required data-validation-required-message="Please enter your event date.">
+                        <!-- <script>$('#date').datepicker();</script> -->
                     </div>
                 </div>
-                <br>
                 <!-- starttime -->
-                <!-- <div class="row control-group">
+                <div class="row control-group">
                     <div class="form-group col-xs-12 floating-label-form-group controls">
-                        <label>Description</label>
-                        <input type="text" class="form-control" placeholder="description" id="description" name="description"  required data-validation-required-message="Please enter your content.">
+                        <label>Starttime</label>
+                        <h3>Start Time</h3>
+                        <input type="time" class="form-control" placeholder="hh:nn:ss" id="time" name="startTime"  required data-validation-required-message="Please enter your start time.">
                         <p class="help-block text-danger"></p>
                     </div>
                 </div>
-                <br> -->
                 <!-- endtime -->
-                <!-- <div class="row control-group">
+                <div class="row control-group">
                     <div class="form-group col-xs-12 floating-label-form-group controls">
-                        <label>Description</label>
-                        <input type="text" class="form-control" placeholder="description" id="description" name="description"  required data-validation-required-message="Please enter your content.">
+                        <label>Endtime</label>
+                        <h3>End Time</h3>
+                        <input type="time" class="form-control" placeholder="hh:nn:ss" id="time" name="endTime"  required data-validation-required-message="Please enter your end time.">
                         <p class="help-block text-danger"></p>
                     </div>
                 </div>
-                <br> -->
                 <!-- description -->
                 <div class="row control-group">
                     <div class="form-group col-xs-12 floating-label-form-group controls">
                         <label>Description</label>
+                        <h3>Description</h3>
                         <input type="text" class="form-control" placeholder="description" id="description" name="description"  required data-validation-required-message="Please enter your content.">
                         <p class="help-block text-danger"></p>
                     </div>

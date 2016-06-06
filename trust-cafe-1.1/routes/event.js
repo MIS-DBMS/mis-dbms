@@ -62,9 +62,9 @@ router.post('/', function(req, res) {
     eventName : req.body.eventName,
     location : req.body.location,
     description : req.body.description,
-    date :req.body.date
-    // eventId : req.body.eventId,
-    // customerId : req.session.customer.id
+    date :req.body.date,
+    startTime:req.body.startTime
+    endTime:req.body.endTime
   });
 
   newEvent.save(function(err) {
