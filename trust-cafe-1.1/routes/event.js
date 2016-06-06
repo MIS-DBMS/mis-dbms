@@ -14,29 +14,38 @@ router.get('/new', function(req, res) {
     customer : req.session.customer || null
   });
 });
+//test0606
+router.get('/Byname', function(req, res) {
+  if(!req.session.customer) {
+    res.redirect('/');
+  }
 
-// customers test
-router.get('/:eventId', function(req, res, next) {
-  Host.get(req.params.hostId, function(err, host) {
-    if(err) {
-      console.log(err);
-      next();
-    } else {
-      Customer.get(host.customerId, function(err, customer) {
-        if(err) {
-          console.log(err);
-        } else {
-          host.customer = customer;
-          res.render('eventDetail', {
-            type : type,
-            customer : req.session.customer || null
-          });
-        }
-      })
-
-    }
+  res.render('searchEvent', {
+    customer : req.session.customer || null
   });
 });
+// customers test
+// router.get('/:eventId', function(req, res, next) {
+//   Host.get(req.params.hostId, function(err, host) {
+//     if(err) {
+//       console.log(err);
+//       next();
+//     } else {
+//       Customer.get(host.customerId, function(err, customer) {
+//         if(err) {
+//           console.log(err);
+//         } else {
+//           host.customer = customer;
+//           res.render('eventDetail', {
+//             type : type,
+//             customer : req.session.customer || null
+//           });
+//         }
+//       })
+//
+//     }
+//   });
+// });
 
 router.get('/',function(req, res) {
   Event.getAll(function(err){
@@ -50,20 +59,18 @@ router.get('/',function(req, res) {
   });
 });
 
-
-
+// ejs postEvent
 router.post('/', function(req, res) {
   if(!req.session.customer) {
     res.redirect('/');
   }
-
 // 增加要輸入event資料的位置
   var newEvent = new Event({
     eventName : req.body.eventName,
     location : req.body.location,
     description : req.body.description,
     date :req.body.date,
-    startTime:req.body.startTime
+    startTime:req.body.startTime,
     endTime:req.body.endTime
   });
 
@@ -72,11 +79,12 @@ router.post('/', function(req, res) {
       res.status = err.code;
       res.json(err);
     } else {
-
       res.redirect("/");
     }
   });
 });
+
+
 
 router.get('/',function(req, res) {
   Event.getAll(function(err){

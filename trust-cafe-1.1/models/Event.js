@@ -15,28 +15,53 @@ var Event = function(options) {
 var Test = function(options){
   id = options;
 };
-Event.getMember = function(cb) {
-  db.select('customer.id')
+Event.getMember = function(name,cb) {
+//  db.select('customer.id')
+db.select('*')
     .from('event')
-    .leftJoin('participate', function(){
+    .join('participate', function(){
       this.on('participate.eventId', '=', 'event.id')
     })
-    .leftJoin('customer', function(){
+    .join('customer', function(){
       this.on('participate.customerId', '=', 'customer.id')
     })
+    .where({
+          eventName :name
+    })
     .map(function(row){
-        console.log(row);
-        return new Test(row); //Event
+        return new Event(row);
     })
-    .then(function(test) {
-        cb(null, test);
-        console.log(test);
-    })
-    .catch(function(err) {
-      cb(new GeneralErrors.Database());
-    });
-}
+        .then(function(eventList) {
+            if(eventList.length) {
+              cb(null, eventList[0]);
+              console.log(eventList);
+            } else {
+              cb(new GeneralErrors.NotFound());
+            }
+        })
+    }
 
+
+
+//     .then(function(test) {
+//         cb(null, test);
+//         // console.log(test);
+//     });
+//
+// }
+//     .map(function(row){
+//         return new Test(row); //Event
+//     })
+//     .then(function(testList) {
+//         if(testList.length) {
+//           cb(null, testListrList[0]);
+//           console.log(testList);
+//         } else {
+//           //這邊要產生一個NotFound err給前端，因為error很常用到，我們會獨立出去一個檔案
+//           cb(new GeneralErrors.NotFound());
+//         }
+//     })
+// }
 
 //Class Function
 Event.get = function(eventId, cb) {

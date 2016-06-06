@@ -7,90 +7,38 @@ var async = require('async');
 /* GET home page. */
 router.get('/', function(req, res, next) {
   var name = req.session.event;
-  console.log(req.session.event);
-  Event.getMember(function(err, test) {
+  // console.log(req.session.event);
+  Event.getMember(name,function(err, eventList) {
     if(err) {
       next();
     } else {
-      console.log(test);
+      // res.redirect('/eventMember');
       res.render('eventMember',
       {
-        test : req.session.test || null,
-        customer : req.session.customer || null
+        customer : req.session.customer || null,eventList : eventList
       });
     }
   });
 });
 
-router.get('/', function(req, res, next) {
-  Event.getAll(function(err, eventList) {
-    if(err) {
-      next();
-    } else {
-      console.log(eventList);
-      res.render('eventMember',
-      {customer : req.session.customer || null,  eventList : eventList });
-    }
-  });
+router.post('/', function(req, res) {
+  console.log("Really go in this search ");
+    var inputname = req.body.eventName;
+    Event.getMember(inputname, function(err, event) {
+        if(err || inputname != event.eventName) {
+            res.render('searchEvent',{
+                event : null,
+                customer : req.session.customer
+            });
+            console.log("search event name not exists");
+        } else {
+          // req.session.event = event;
+          customer : req.session.customer;
+          event :event
+          res.redirect('/eventMember');
+        }
+    });
 });
-
-// trytrysee2
-// router.get('/', function(req, res, next) {
-//   Event.getAll(function(err, eventList) {
-//     if(err) {
-//       next();
-//     } else {
-//       console.log(eventList);
-//       res.render('index',
-//       {customer : req.session.customer || null,  eventList : eventList });
-//     }
-//   });
-// });
-
-//trytrysee
-// router.get('/', function(req, res, next) {
-//   Event.getAll(function(err, eventList) {
-//     if(err) {
-//       next();
-//     } else {
-//       // res.json(eventList); //trytrysee
-//         res.render('index',
-//         {
-//           eventList : eventList
-//         });
-//     }
-//   });
-// });
-
-
-// trytrysee
-// router.get('/', function(req, res, next) {
-//   Event.getAll(function(err, eventList) {
-//     if(err) {
-//       next();
-//     } else {
-//       //這邊的做法是使用async each這樣的方式幫我們從articleList中一筆筆去找到member，然後新增一個key叫member在article物件中
-//       async.each(eventList, function(event, cb) {
-//         Event.get(event.customerId, function(err, customer) {
-//           if(err) {
-//             cb(err);
-//           } else {
-//             event.customer = customer;
-//             cb(null);
-//           }
-//         });
-//       }, function(err){
-//         if(err) {
-//           res.status = err.code;
-//           next();
-//         } else {
-//           res.render('index',
-//           {customer : req.session.customer || null,  eventList : eventList });
-//         }
-//       });
-//     }
-//   });
-// });
 
 
 module.exports = router;
