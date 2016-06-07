@@ -5,9 +5,9 @@
            <div class="row">
                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                    <div class="post-heading">
-                       <h1><%= host.type %></h1>
+                       <h1><%= event.eventName %></h1>
                        <%# <h2 class="subheading">Problems look mighty small from 150 miles up</h2>%>
-                       <span class="meta">Posted by <a href="#"><%= host.event %></a> on <%= host.type %></span>
+                       <span class="meta"><a href="#"><%#= host.event %></a><%#= host.type %></span>
                    </div>
                </div>
            </div>
@@ -19,9 +19,10 @@
        <div class="container">
            <div class="row">
                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                  <p>
-                    <%= participate.eventId %>
-                  </p>
+                  <p>活動地點：<%= event.location %></p>
+                  <p>活動日期：<%= event.date %></p>
+                  <p>活動時間：From <%= event.startTime %> to <%= event.endTime %></p>
+                  <p>活動簡介：<%= event.description %></p>
                </div>
            </div>
        </div>

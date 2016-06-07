@@ -18,30 +18,19 @@
       <div class="container">
           <div class="row">
               <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-
                 <% eventList.forEach(function(event) { %>
                       <div class="post-preview">
-                          <a href="/event/<%#= event.id %>">
+                          <a href="/event/<%= event.id %>">
                               <h2 class="post-title">
                                 <%= event.eventName %>
-                                <%= event.customerName%>
                               </h2>
-                              <h3 class="post-subtitle">
-                                <%= event.description %>
-                              </h3>
-                              <h3>
-                                <%= event.location %>
-                                <%=event.date%>
-                              </h3>
                           </a>
-                          <p class="post-meta">Posted by <a href="#"><%#= article.name %></a> on
-                            <%#= article.createdAt %>
-                          </p>
+                          <p>參加成員：<%= event.customerName%></p>
+                          <p><%= event.date%></p>
+                          <!-- <p class="post-meta">Posted by <a href="#"><%#= article.name %></a> on<%#= article.createdAt %></p> -->
                       </div>
                       <hr>
                 <%  }); %>
-
-
                 <!-- Pager -->
                 <ul class="pager">
                     <li class="next">

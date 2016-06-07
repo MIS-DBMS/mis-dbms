@@ -6,7 +6,7 @@ var Host = require('../models/Host');
 var async = require('async');
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  Event.getAll(function(err, eventList) {
+  Event.getAllEvent(function(err, eventList) {
     if(err) {
       next();
     } else {

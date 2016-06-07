@@ -24,28 +24,32 @@ router.get('/Byname', function(req, res) {
     customer : req.session.customer || null
   });
 });
+
+
 // customers test
-// router.get('/:eventId', function(req, res, next) {
-//   Host.get(req.params.hostId, function(err, host) {
-//     if(err) {
-//       console.log(err);
-//       next();
-//     } else {
-//       Customer.get(host.customerId, function(err, customer) {
-//         if(err) {
-//           console.log(err);
-//         } else {
-//           host.customer = customer;
-//           res.render('eventDetail', {
-//             type : type,
-//             customer : req.session.customer || null
-//           });
-//         }
-//       })
-//
-//     }
-//   });
-// });
+router.get('/:eventId', function(req, res, next) {
+  console.log("Enter the eventId Page");
+  Event.get(req.params.eventId, function(err, event) {
+    console.log("Use the get fcn in Event");
+    if(err) {
+      console.log(err);
+      next();
+    } else {
+      // Customer.get(participate.customerId, function(err, customer) {
+        if(err) {
+          console.log(err);
+        } else {
+          // participate.customer = customer;
+          res.render('eventDetail', {
+            event : event,
+            customer : req.session.customer || null
+          });
+        }
+      // })
+
+    }
+  });
+});
 
 router.get('/',function(req, res) {
   Event.getAll(function(err){

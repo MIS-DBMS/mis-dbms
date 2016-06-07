@@ -43,30 +43,12 @@ db.select('*')
 
 
 
-//     .then(function(test) {
-//         cb(null, test);
-//         // console.log(test);
-//     });
-//
-// }
-//     .map(function(row){
-//         return new Test(row); //Event
-//     })
-//     .then(function(testList) {
-//         if(testList.length) {
-//           cb(null, testListrList[0]);
-//           console.log(testList);
-//         } else {
-//           //這邊要產生一個NotFound err給前端，因為error很常用到，我們會獨立出去一個檔案
-//           cb(new GeneralErrors.NotFound());
-//         }
-//     })
-// }
-
 //Class Function
 Event.get = function(eventId, cb) {
   //這邊是當傳入一個 eventId時，進入資料庫查出相對應的 event資料
-  db.select().from('event').where({
+  db.select()
+    .from('event')
+    .where({
       id : eventId
     })
     .map(function(row) {
@@ -146,6 +128,23 @@ Event.getAll = function(cb) {
       cb(new GeneralErrors.Database());
     });
 }
+
+// test 0607
+Event.getAllEvent = function(cb) {
+  db.select()
+    .from('event')
+    .map(function(row) {
+      return new Event(row);
+    })
+    .then(function(eventList) {
+      cb(null, eventList);
+
+    })
+    .catch(function(err) {
+      cb(new GeneralErrors.Database());
+    });
+}
+
 
 
 //Instance Function
