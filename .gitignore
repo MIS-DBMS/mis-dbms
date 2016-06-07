@@ -37,3 +37,6 @@ db.js
 
 # Mac OSX files
 .DS_Store
+
+# IDE specific
+.idea
