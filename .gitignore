@@ -34,3 +34,6 @@ node_modules
 
 # Database settings as well as certain password
 db.js
+
+# Mac OSX files
+.DS_Store
