@@ -31,14 +31,18 @@ db.select('*')
     .map(function(row){
         return new Event(row);
     })
-        .then(function(eventList) {
+    .then(function(eventList) {
             if(eventList.length) {
-              cb(null, eventList[0]);
-              console.log(eventList);
+              cb(null, eventList);
             } else {
               cb(new GeneralErrors.NotFound());
             }
         })
+        .catch(function(err) {
+          console.log(err);
+          cb(err);
+
+        });
     }
 
 

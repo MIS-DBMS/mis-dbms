@@ -30,22 +30,22 @@ var async = require('async');
 
 // 判斷帳密是否正確
 router.post('/eventMember', function(req, res) {
-  console.log("Really go in this search ");// 這裡有被log出來
     var inputname = req.body.eventName;
-    Event.getMember(inputname, function(err, event) {
-        if(err || inputname != event.eventName) {
-            res.render('searchEvent',{
-                event : null,
+    Event.getMember(inputname, function(err, eventList) {
+        if(err ) {
+          console.log("get err in searchEvent.js");// not go into here
+            res.render('eventMember',{
+                eventList : null,
                 customer : req.session.customer
             });
             console.log("search event name not exists");
         } else {
-          // req.session.event = event;
+          console.log("go into else in searchEvent.js");
           customer : req.session.customer;
-          event :event
+          eventList :eventList
           // res.redirect('/eventMember');
           res.render('eventMember',{
-            event : event,
+            eventList : eventList,
             customer : req.session.customer
           })
         }

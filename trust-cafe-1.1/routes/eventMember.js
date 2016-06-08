@@ -7,16 +7,15 @@ var async = require('async');
 /* GET home page. */
 router.get('/', function(req, res, next) {
   var name = req.session.event;
-  // console.log(req.session.event);
+  console.log("we go into the routes/eventMember");
   Event.getMember(name,function(err, eventList) {
     if(err) {
+      // console.log(err);
       next();
     } else {
       // res.redirect('/eventMember');
       res.render('eventMember',
-      {
-        customer : req.session.customer || null,eventList : eventList
-      });
+      {customer : req.session.customer || null,eventList : eventList});
     }
   });
 });
