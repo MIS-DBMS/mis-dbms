@@ -19,6 +19,27 @@ router.get('/', function(req, res, next) {
   });
 });
 
+// customers test
+router.get('/:eventId', function(req, res, next) {
+  console.log("Enter the eventId Page");
+  Event.get(req.params.eventId, function(err, event) {
+    console.log("Use the get fcn in Event");
+    if(err) {
+      console.log(err);
+      next();
+    } else {
+        if(err) {
+          console.log(err);
+        } else {
+          res.render('eventDetail', {
+            event : event,
+            customer : req.session.customer || null
+          });
+        }
+    }
+  });
+});
+
 router.post('/', function(req, res) {
   console.log("Really go in this search ");
     var inputname = req.body.eventName;
