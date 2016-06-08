@@ -1,0 +1,99 @@
+<% include ./header %>
+<!-- Set your background image for this header on the line below. -->
+<header class="intro-header" style="background-image: url('/images/contact-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="page-heading">
+                    <h1>Post Item</h1>
+                    <hr class="small">
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script> <!-- or use local jquery -->
+<script src="/javascripts/jqBootstrapValidation.js"></script>
+<script>
+    $(function () { $("input,select,textarea").not("[type=submit]").jqBootstrapValidation(); } );
+</script>
+<!-- Main Content -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <h2>Post new Item</h2>
+            <!-- Contact Form - Enter your email address on line 19 of the mail/contact_me.php file to make this form work. -->
+            <!-- WARNING: Some web hosts do not allow emails to be sent through forms to common mail hosts like Gmail or Yahoo. It's recommended that you use a private domain email address! -->
+            <!-- NOTE: To use the contact form, your site must be on a live web host with PHP! The form will not work locally! -->
+            <form name="sentMessage" action="/item" method="POST" id="contactForm" novalidate>
+                <!-- name -->
+                <div class="row control-group">
+                    <div class="form-group col-xs-12 floating-label-form-group controls">
+                        <label>Name</label>
+                        <input type="text" class="form-control" placeholder="Name" id="title" name="name" required data-validation-required-message="Please enter your name.">
+                        <p class="help-block text-danger"></p>
+                    </div>
+                </div>
+                <!-- location -->
+                <!-- <div class="row control-group">
+                    <div class="form-group col-xs-12 floating-label-form-group controls">
+                      <h3>location</h3>
+                      <label>location</label>
+                          <input type="radio" name="location" value="B1包場">B1包場
+                          <br>
+                          <input type="radio" name="location" value="會議廳">會議廳
+                          <br>
+                          <input type="radio" name="location" value="B1包場">1F包場
+                          <br>
+                    </div>
+                </div> -->
+                <!-- date -->
+                <!-- <div class="row control-group">
+                    <div class="form-group col-xs-12 floating-label-form-group controls">
+                        <label>Date</label>
+                        <h3>Date</h3>
+                        <script src="/javascripts/jquery-ui.js"></script>
+                        <input type="date" class="form-control" name="date" id="date" placeholder="yyyy-mm-dd" required data-validation-required-message="Please enter your event date.">
+                    </div>
+                </div> -->
+                <!-- starttime -->
+                <!-- <div class="row control-group">
+                    <div class="form-group col-xs-12 floating-label-form-group controls">
+                        <label>Starttime</label>
+                        <h3>Start Time</h3>
+                        <input type="time" class="form-control" placeholder="hh:nn:ss" id="time" name="startTime"  required data-validation-required-message="Please enter your start time.">
+                        <p class="help-block text-danger"></p>
+                    </div>
+                </div> -->
+                <!-- endtime -->
+                <!-- <div class="row control-group">
+                    <div class="form-group col-xs-12 floating-label-form-group controls">
+                        <label>Endtime</label>
+                        <h3>End Time</h3>
+                        <input type="time" class="form-control" placeholder="hh:nn:ss" id="time" name="endTime"  required data-validation-required-message="Please enter your end time.">
+                        <p class="help-block text-danger"></p>
+                    </div>
+                </div> -->
+                <!-- description -->
+                <!-- <div class="row control-group">
+                    <div class="form-group col-xs-12 floating-label-form-group controls">
+                        <label>Description</label>
+                        <h3>Description</h3>
+                        <input type="text" class="form-control" placeholder="description" id="description" name="description"  required data-validation-required-message="Please enter your content.">
+                        <p class="help-block text-danger"></p>
+                    </div>
+                </div>
+                <br> -->
+                <div id="success"></div>
+                <div class="row">
+                    <div class="form-group col-xs-12">
+                        <button type="submit" class="btn btn-default">Send</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<hr>
+<% include ./footer %>

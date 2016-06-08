@@ -4,8 +4,7 @@ var GeneralErrors = require('../errors/GeneralErrors');
 var Organization = function(options) {
   this.id = options.id;
   this.name = options.name;
-  // this.password = options.password;
-  // this.account = options.account;
+
   this.phone = options.phone;
   this.email = options.email;
   this.address = options.address;

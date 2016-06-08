@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var Customer = require('../models/Customer');
 var Event = require('../models/Event');
-var Test = require('../models/Event');
 var async = require('async');
 /* GET home page. */
 router.get('/', function(req, res, next) {

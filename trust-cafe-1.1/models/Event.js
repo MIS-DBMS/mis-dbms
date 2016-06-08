@@ -11,12 +11,11 @@ var Event = function(options) {
   this.endTime = options.endTime;
   this.description = options.description;
 };
-
-var Test = function(options){
-  id = options;
-};
+//
+// var Test = function(options){
+//   id = options;
+// };
 Event.getMember = function(name,cb) {
-//  db.select('customer.id')
 db.select('*')
     .from('event')
     .join('participate', function(){

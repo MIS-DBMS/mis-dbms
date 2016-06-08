@@ -14,7 +14,8 @@ router.get('/new', function(req, res) {
     customer : req.session.customer || null
   });
 });
-//test0606
+
+
 router.get('/Byname', function(req, res) {
   if(!req.session.customer) {
     res.redirect('/');
@@ -35,18 +36,14 @@ router.get('/:eventId', function(req, res, next) {
       console.log(err);
       next();
     } else {
-      // Customer.get(participate.customerId, function(err, customer) {
         if(err) {
           console.log(err);
         } else {
-          // participate.customer = customer;
           res.render('eventDetail', {
             event : event,
             customer : req.session.customer || null
           });
         }
-      // })
-
     }
   });
 });

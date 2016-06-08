@@ -16,7 +16,7 @@ Item.getAll = function(cb) {
   db.select()
     .from('item')
     .map(function(row) {
-      return new Article({
+      return new Item({
         id : row.id,
         name : row.name,
         date : row.date,
@@ -42,16 +42,17 @@ Item.get = function(itemId, cb) {
       id : itemId
     })
     .map(function(row) {
-      return new Item({
-        id : row.id,
-        name : row.name,
-        date : row.date,
-        description : row.description,
-        value : row.value,
-        customerId : row.customerId,
-        organizationId : row.organizationId,
-        eventId : row.eventId
-      });
+      return new Item(row);
+      // {
+      //   id : row.id,
+      //   name : row.name,
+      //   date : row.date,
+      //   description : row.description,
+      //   value : row.value,
+      //   customerId : row.customerId,
+      //   organizationId : row.organizationId,
+      //   eventId : row.eventId
+      // }
     })
     .then(function(itemList) {
       if(itemList.length) {
@@ -72,10 +73,10 @@ Item.prototype.save = function (cb) {
   if(this.id) {
     db('item')
       .update({
-        name : row.name,
-        date : row.date,
-        description : row.description,
-        value : row.value
+        name : this.name,
+        date : this.date,
+        description : this.description,
+        value : this.value
       })
       .where({
         id : this.id
@@ -88,15 +89,16 @@ Item.prototype.save = function (cb) {
         cb(null, new GeneralErrors.Database());
       })
   } else {
-    db('article')
+    console.log("insert item");
+    db('item')
       .insert({
-        name : row.name,
-        date : row.date,
-        description : row.description,
-        value : row.value,
-        customerId : row.customerId,
-        organizationId : row.organizationId,
-        eventId : row.eventId
+        name : this.name,
+        date : this.date,
+        description : this.description,
+        value : this.value,
+        customerId : this.customerId,
+        organizationId : this.organizationId,
+        eventId : this.eventId
       })
       .then(function(result) {
         this.id = result[0];
