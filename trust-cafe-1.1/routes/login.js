@@ -20,15 +20,22 @@ router.post('/', function(req, res) {
     var inputPassword = req.body.password;
     Customer.getByAccount(inputAccount, inputPassword, function(err, customer,message) {
         if(err || inputPassword != customer.password) {
+          // for(time=0; time=3; time++) {
             res.render('login',{
                 customer : null,
                 message:  'Oops! Wrong password.'
             });
             console.log(message);
             console.log("Your account or password is wrong");
+            // }
+            console.log(message);
+            console.log("Too much attempts to login and failed!!");
+            res.redirect('/');
         } else {
           req.session.customer = customer;
-          // console.log(customer);
+          res.cookie('account', req.body.account, { path: '/', signed: true});
+          res.cookie('password', req.body.password, { path: '/', signed: true });
+          console.log(customer);
           res.redirect('/');
         }
     });
@@ -37,6 +44,8 @@ router.post('/', function(req, res) {
 // logout
 router.post('/logout', function(req, res) {
     req.session.customer = null;
+    res.clearCookie('account', { path: '/' });
+    res.clearCookie('password', { path: '/' });
     res.redirect('/');
 });
 
