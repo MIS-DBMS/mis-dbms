@@ -33,7 +33,7 @@ router.post('/', function(req, res) {
           req.session.customer = customer;
           res.cookie('account', req.body.account, { path: '/', signed: true});
           res.cookie('password', req.body.password, { path: '/', signed: true });
-          console.log(customer);
+          // console.log(customer); // check if customer is pulled in correctly
           res.redirect('/');
         }
     });
