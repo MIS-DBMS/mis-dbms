@@ -51,11 +51,13 @@
                 <li>
                     <a href="/">Home</a>
                 </li>
-                <%if(loginStatus) {%>
+
+                <%if(customer) {%>
+                  <li>
+                      <a href="/">Welcome, <%=customer.customerName%></a>
+                  </li>
+
                   <% if(customer.account == 'test') {%>
-                    <li>
-                        <a href="/">Welcome, <%=customer.customerName%></a>
-                    </li>
                     <li>
                         <a href="/event/new">新增活動</a>
                     </li>
@@ -89,9 +91,6 @@
                         <%# css 大家在自己調整%>
                     </li>
                   <% } else {%>
-                    <li>
-                      <a href="/%>">Welcome, <%=customer.customerName%></a>
-                    </li>
                     <li>
                       <a href="/customer/<%= customer.id %>">個人資料</a>
                     </li>
