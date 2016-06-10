@@ -90,7 +90,10 @@
                     </li>
                   <% } else {%>
                     <li>
-                      <a href="/">Welcome, <%=customer.customerName%></a>
+                      <a href="/%>">Welcome, <%=customer.customerName%></a>
+                    </li>
+                    <li>
+                      <a href="/customer/<%= customer.id %>">個人資料</a>
                     </li>
                     <li>
                       <form action="/register/logout" method="post">
@@ -118,7 +121,7 @@
                   <% } %>
                 <% } else {%>
                   <li>
-                      <a href="/register">Register</a>
+                      <a href="/register">Signup</a>
                   </li>
                   <li>
                       <a href="/login">Login</a>

@@ -1,0 +1,36 @@
+<% include ./header %>
+
+<header class="intro-header" style="background-image: url('/images/post-bg.jpg')">
+       <div class="container">
+           <div class="row">
+               <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                   <div class="post-heading">
+                       <h4>您好，<%= customer.customerName %></h1>
+                   </div>
+               </div>
+           </div>
+       </div>
+   </header>
+
+   <!-- Post Content -->
+   <article>
+       <div class="container">
+           <div class="row">
+               <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  <p>Account：<%=customer.customerName%></p>
+                  <p>Email：<%= customer.email %></p>
+                  <%if(customer.phone){%>
+                  <p>Phone：<%= customer.phone %></p><% } else {%><p>Phone：未填寫</p><%}%>
+                  <%if(customer.jobTitle){%>
+                  <p>Job：<%= customer.jobTitle %></p><% } else {%><p>Job：未填寫</p><%}%>
+                  <%if(customer.address){%>
+                  <p>Address：<%= customer.address %></p><% } else {%><p>Address：未填寫</p><%}%>
+                  <%if(customer.birthday){%>
+                  <p>Birthday：<%= customer.birthday %></p><% } else {%><p>Birthday：未填寫</p><%}%>
+               </div>
+           </div>
+       </div>
+   </article>
+
+   <hr>
+<% include ./footer %>

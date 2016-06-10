@@ -6,12 +6,11 @@ var router = express.Router();
 var Customer = require('../models/Customer');
 var async = require('async');
 
-
-
 /* GET home page. */
 router.get('/', function(req, res, next) {
     res.render('login', {
-        customer : null
+        customer : null,
+        message: req.flash('loginMessage')
     });
 });
 
@@ -19,11 +18,13 @@ router.get('/', function(req, res, next) {
 router.post('/', function(req, res) {
     var inputAccount = req.body.account;
     var inputPassword = req.body.password;
-    Customer.getByAccount(inputAccount, inputPassword, function(err, customer) {
+    Customer.getByAccount(inputAccount, inputPassword, function(err, customer,message) {
         if(err || inputPassword != customer.password) {
             res.render('login',{
-                customer : null
+                customer : null,
+                message:  'Oops! Wrong password.'
             });
+            console.log(message);
             console.log("Your account or password is wrong");
         } else {
           req.session.customer = customer;

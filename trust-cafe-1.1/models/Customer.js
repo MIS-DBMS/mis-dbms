@@ -21,23 +21,23 @@ var Customer = function(options) {
 Customer.get = function(customerId, cb) {
   //這邊是當傳入一個memberId時，進入資料庫查出相對應的member資料
   db.select()
-    .from('customer')
-    .where({
-      id : customerId
-    })
-    .map(function(row) {
-      return new Customer(row);
-    })
-    .then(function(customerList) {
-      if(customerList.length) {
-        cb(null, customerList[0]);
-      } else {
-        cb(new GeneralErrors.NotFound());
-      }
-    })
-    .catch(function(err) {
-      cb(err);
-    })
+  .from('customer')
+  .where({
+    id : customerId
+  })
+  .map(function(row) {
+    return new Customer(row);
+  })
+  .then(function(customerList) {
+    if(customerList.length) {
+      cb(null, customerList[0]);
+    } else {
+      cb(new GeneralErrors.NotFound());
+    }
+  })
+  .catch(function(err) {
+    cb(err);
+  })
 }
 
 //Login
@@ -46,18 +46,18 @@ Customer.getByAccount = function(customerAccount, customerPassword, cb) {
     account : customerAccount,
     password : customerPassword
   })
-      .map(function(row){
-        return new Customer(row);
-      })
-      .then(function(customerList) {
-        if(customerList.length) {
-          cb(null, customerList[0]);//customerList[0]=customerList
-          //console.log(customerList[0]);// 確認輸入的資料所對應的資料
-        } else {
-          //這邊要產生一個NotFound err給前端，因為error很常用到，我們會獨立出去一個檔案
-          cb(new GeneralErrors.NotFound());
-        }
-      })
+  .map(function(row){
+    return new Customer(row);
+  })
+  .then(function(customerList) {
+    if(customerList.length) {
+      cb(null, customerList[0]);//customerList[0]=customerList
+      //console.log(customerList[0]);// 確認輸入的資料所對應的資料
+    } else {
+      //這邊要產生一個NotFound err給前端，因為error很常用到，我們會獨立出去一個檔案
+      cb(new GeneralErrors.NotFound());
+    }
+  })
 }
 
 
@@ -69,47 +69,47 @@ Customer.prototype.save = function (cb) {
   if (this.id) {
     //已存在
     db("customer").where({
-        id : this.id
-      })
-      .update({
-        customerName : this.customerName,
-        account : this.account,
-        password : this.password,
-        phone : this.phone,
-        email : this.email,
-        jobTitle : this.jobTitle,
-        address : this.address,
-        birthday : this.birthday
-      })
-      .then(function() {
-        cb(null, this);
-      }.bind(this))
-      .catch(function(err) {
-        console.log("CUSTOMER UPDATED", err);
-        cb(new GeneralErrors.Database());
-      });
+      id : this.id
+    })
+    .update({
+      customerName : this.customerName,
+      account : this.account,
+      password : this.password,
+      phone : this.phone,
+      email : this.email,
+      jobTitle : this.jobTitle,
+      address : this.address,
+      birthday : this.birthday
+    })
+    .then(function() {
+      cb(null, this);
+    }.bind(this))
+    .catch(function(err) {
+      console.log("CUSTOMER UPDATED", err);
+      cb(new GeneralErrors.Database());
+    });
   } else {
     //不存在
     db("customer")
-      .insert({
-        customerName : this.customerName,
-        account : this.account,
-        password : this.password,
-        phone : this.phone,
-        email : this.email,
-        jobTitle : this.jobTitle,
-        address : this.address,
-        birthday : this.birthday
-      })
-      .then(function(result) {
-        var insertedId = result[0];
-        this.id = insertedId;
-        cb(null, this);
-      }.bind(this))
-      .catch(function(err) {
-        console.log("CUSTOMER INSERT", err);
-        cb(new GeneralErrors.Database());
-      });
+    .insert({
+      customerName : this.customerName,
+      account : this.account,
+      password : this.password,
+      phone : this.phone,
+      email : this.email,
+      jobTitle : this.jobTitle,
+      address : this.address,
+      birthday : this.birthday
+    })
+    .then(function(result) {
+      var insertedId = result[0];
+      this.id = insertedId;
+      cb(null, this);
+    }.bind(this))
+    .catch(function(err) {
+      console.log("CUSTOMER INSERT", err);
+      cb(new GeneralErrors.Database());
+    });
   }
 };
 

@@ -26,12 +26,8 @@ router.get('/Byname', function(req, res) {
   });
 });
 
-
-// customers test
 router.get('/:eventId', function(req, res, next) {
-  console.log("Enter the eventId Page");
   Event.get(req.params.eventId, function(err, event) {
-    console.log("Use the get fcn in Event");
     if(err) {
       console.log(err);
       next();
@@ -47,6 +43,49 @@ router.get('/:eventId', function(req, res, next) {
     }
   });
 });
+
+// router.get('/:eventId', function(req, res, next) {
+//   Event.get(req.params.eventId, function(err, event) {
+//     if(err) {
+//       next();
+//     } else {
+//       event.getMembers(function(err, customer) {
+//         if(err) {
+//           console.log(err);
+//           cb(err);
+//         } else {
+//           event.customer = customer;
+//           cb(null);
+//         }
+//       });
+//     //   async.each(eventList,function(event, cb) {
+//     //
+//     //   }, function(err){
+//     //     if(err) {
+//     //       // res.status = err.code;
+//     //       next();
+//     //       console.log(err+"123123123");
+//     //     } else {
+//     //       res.render('eventDetail', {
+//     //         event : event,
+//     //         customer : req.session.customer || null
+//     //       });
+//     //     }
+//     //   }
+//     //
+//     // );
+//     // if(err) {
+//     //   console.log(err);
+//     // } else {
+//     //   console.log(event);
+//     //   res.render('eventDetail', {
+//     //     event : event,
+//     //     customer : req.session.customer || null
+//     //   });
+//     // }
+//   }
+// });
+// });
 
 router.get('/',function(req, res) {
   Event.getAll(function(err){
@@ -65,7 +104,7 @@ router.post('/', function(req, res) {
   if(!req.session.customer) {
     res.redirect('/');
   }
-// 增加要輸入event資料的位置
+  // 增加要輸入event資料的位置
   var newEvent = new Event({
     eventName : req.body.eventName,
     location : req.body.location,

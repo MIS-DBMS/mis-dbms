@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-var Customer = require('../models/Customer');
 var Event = require('../models/Event');
 var async = require('async');
 /* GET home page. */
@@ -21,9 +20,7 @@ router.get('/', function(req, res, next) {
 
 // customers test
 router.get('/:eventId', function(req, res, next) {
-  console.log("Enter the eventId Page");
   Event.get(req.params.eventId, function(err, event) {
-    console.log("Use the get fcn in Event");
     if(err) {
       console.log(err);
       next();
@@ -39,25 +36,5 @@ router.get('/:eventId', function(req, res, next) {
     }
   });
 });
-
-router.post('/', function(req, res) {
-  console.log("Really go in this search ");
-    var inputname = req.body.eventName;
-    Event.getMember(inputname, function(err, event) {
-        if(err || inputname != event.eventName) {
-            res.render('searchEvent',{
-                event : null,
-                customer : req.session.customer
-            });
-            console.log("search event name not exists");
-        } else {
-          // req.session.event = event;
-          customer : req.session.customer;
-          event :event
-          res.redirect('/eventMember');
-        }
-    });
-});
-
 
 module.exports = router;

@@ -5,6 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
+var flash = require('req-flash');
 
 var routes = require('./routes/index');
 var register = require('./routes/register');
@@ -15,6 +16,7 @@ var searchEvent = require('./routes/searchEvent');
 var eventMember = require('./routes/eventMember');
 var participate = require('./routes/event');
 var item = require('./routes/item');
+var customer = require('./routes/customer');
 
 var app = express();
 
@@ -30,6 +32,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(flash());
 
 // use (用在url的哪裡, 哪個已宣告的routes變數)
 app.use('/', routes);
@@ -41,6 +44,7 @@ app.use('/eventMember', eventMember);
 app.use('/searchEvent', searchEvent);
 app.use('/eventDetail', participate);
 app.use('/item', item);
+app.use('/customer', customer);
 
 
 // catch 404 and forward to error handler
