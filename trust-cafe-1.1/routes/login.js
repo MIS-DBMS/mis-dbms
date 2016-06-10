@@ -20,15 +20,16 @@ router.post('/', function(req, res) {
     var inputPassword = req.body.password;
     Customer.getByAccount(inputAccount, inputPassword, function(err, customer,message) {
         if(err || inputPassword != customer.password) {
-           for(time=0; time=3; time++) {
+           if (time<3) {
               res.render('login',{
                   customer : null,
                   message:  'Oops! Wrong password.'
               });
               console.log("Your account or password is wrong");
+              time = time+1;
             }
             console.log("Too much attempts to login and failed!!");
-            res.redirect('/');
+            res.redirect(404);
         } else {
           req.session.customer = customer;
           res.cookie('account', req.body.account, { path: '/', signed: true});
