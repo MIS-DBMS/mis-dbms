@@ -4,7 +4,7 @@ var Customer = require('../models/Customer');
 var async = require('async');
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('register', {
+  res.render('signup', {
     customer : null
   });
 });

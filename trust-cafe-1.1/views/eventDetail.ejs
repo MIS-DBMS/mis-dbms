@@ -1,32 +1,64 @@
 <% include ./header %>
 
 <header class="intro-header" style="background-image: url('/images/post-bg.jpg')">
-       <div class="container">
-           <div class="row">
-               <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                   <div class="post-heading">
-                       <h1><%= event.eventName %></h1>
-                       <%# <h2 class="subheading">Problems look mighty small from 150 miles up</h2>%>
-                       <span class="meta"><a href="#"><%#= host.event %></a><%#= host.type %></span>
-                   </div>
-               </div>
-           </div>
-       </div>
-   </header>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-heading">
+          <h1><%= event.eventName %></h1>
+          <%# <h2 class="subheading">Problems look mighty small from 150 miles up</h2>%>
+          <span class="meta"><a href="#"><%#= host.event %></a><%#= host.type %></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
 
-   <!-- Post Content -->
-   <article>
-       <div class="container">
-           <div class="row">
-               <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                  <p>活動地點：<%= event.location %></p>
-                  <p>活動日期：<%= event.date %></p>
-                  <p>活動時間：From <%= event.startTime %> to <%= event.endTime %></p>
-                  <p>活動簡介：<%= event.description %></p>
-               </div>
-           </div>
-       </div>
-   </article>
+<!-- Post Content -->
+<article>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p>活動地點：<%= event.location %></p>
+        <p>活動日期：<%= event.date %></p>
+        <p>活動時間：From <%= event.startTime %> to <%= event.endTime %></p>
+        <p>活動簡介：<%= event.description %></p>
+        <% if(customer) { %>
+          <% if(customer.account == 'test') { %>
+            <li>
+              <a href="/updateEvent/<%= event.id %>">修改資料</a>
+            </li>
+            <% } else { %>
+              <form name="sentMessage" action="/event/<%=event.id %>/register" method="POST" id="contactForm" novalidate>
+                <input type="hidden"  name="eventId" value="<%=event.id %>">
+                <input type="hidden"  name="customerId" value="<%=customer.id %>">
+                <script>
+                $(document).ready(function() {
+                  $("input,select,textarea").not("[type=submit]").jqBootstrapValidation();
+                });
+                </script>
+                <br>
+                <div id="success"></div>
+                <div class="row">
+                  <div class="form-group col-xs-12">
+                    <script language="javascript">function registerSuccess() {alert("報名成功");}</script>
+                    <button type="submit" class="btn btn-default" onclick="registerSuccess()">報名活動</button>
+                  </div>
+                </div>
+                <%- req.flash('message') %>
+                <% if (message) { %>
+                  <div class="alert alert-danger"><%= message %></div>
 
-   <hr>
-<% include ./footer %>
+                  <% } %>
+                </form>
+                <% } %>
+                <% } else {%>
+                  <p>請登入報名</p>
+                  <% }%>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <hr>
+          <% include ./footer %>

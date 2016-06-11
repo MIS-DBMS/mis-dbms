@@ -6,46 +6,21 @@ var router = express.Router();
 var Customer = require('../models/Customer');
 var Event = require('../models/Event');
 var async = require('async');
-// router.get('/Byname', function(req, res) {
-//   if(!req.session.customer) {
-//     res.redirect('/');
-//   }
-//
-//   res.render('searchEvent', {
-//     customer : req.session.customer || null
-//   });
-// });
 
-
-/* GET home page. */
-// router.get('/', function(req, res, next) {
-//     res.render('searchEvent', {
-//         event : null,
-//         customer : req.session.customer
-//     });
-// });
-
-//trytry
-
-
-// 判斷帳密是否正確
 router.post('/eventMember', function(req, res) {
     var inputname = req.body.eventName;
-    Event.getMember(inputname, function(err, eventList) {
+    Event.getMember(inputname, function(err, participateMemberList, message) {
         if(err ) {
-          console.log("get err in searchEvent.js");// not go into here
-            res.render('eventMember',{
-                eventList : null,
-                customer : req.session.customer
+            res.render('searchEvent',{
+                participateMemberList : null,
+                customer : req.session.customer,
+                message:  '無人參與這個活動'
             });
-            console.log("search event name not exists");
         } else {
-          console.log("go into else in searchEvent.js");
           customer : req.session.customer;
-          eventList :eventList
-          // res.redirect('/eventMember');
+          participateMemberList :participateMemberList
           res.render('eventMember',{
-            eventList : eventList,
+            participateMemberList : participateMemberList,
             customer : req.session.customer
           })
         }

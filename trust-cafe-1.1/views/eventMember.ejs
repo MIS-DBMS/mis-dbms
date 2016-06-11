@@ -1,55 +1,42 @@
-    <% include ./header %>
-    <!-- Page Header -->
-    <!-- Set your background image for this header on the line below. -->
-    <header class="intro-header" style="background-image: url('./images/home-page.jpg')">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                    <div class="site-heading">
-                        <h1>建置中.</h1>
-                        <hr class="small">
-                        <span class="subheading">Just a homework.</span>
-                    </div>
-                </div>
-            </div>
+<% include ./header %>
+<!-- Page Header -->
+<!-- Set your background image for this header on the line below. -->
+<header class="intro-header" style="background-image: url('./images/post-bg.jpg')">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="site-heading">
+          <h1>建置中.</h1>
+          <hr class="small">
+          <span class="subheading">Just a homework.</span>
         </div>
-    </header>
-    <!-- Main Content -->
-      <div class="container">
-          <div class="row">
-              <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <%if(eventList){%>
-                <% eventList.forEach(function(event) { %>
-                      <div class="post-preview">
-                          <a href="/event/<%= event.id %>">
-                              <h2 class="post-title">
-                                <%= event.eventName %>
-                                <%= event.id%>
-                              </h2>
-                              <h3 class="post-subtitle">
-                                <%#= event.description %>
-                              </h3>
-                              <h3>
-                                <%#= event.location %>
-                              </h3>
-                          </a>
-                          <p class="post-meta">Posted by <a href="#"><%#= article.name %></a> on
-                            <%#= article.createdAt %>
-                          </p>
-                      </div>
-                      <hr>
-                <%  });} %>
-
-
-                <!-- Pager -->
-                <ul class="pager">
-                    <li class="next">
-                        <a href="#">Older Posts &rarr;</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
+      </div>
     </div>
+  </div>
+</header>
+<!-- Main Content -->
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <h1><%= participateMemberList[0].eventName%></h1>
+      <%if(participateMemberList){%>
+        <% participateMemberList.forEach(function(list) { %>
+          <h2 class="post-title">
+            <a href="/customer/<%= list.customerId %>">
+              <%= list.id%>
+              <%= list.account%>
+            </a>
+          <h2 class="post-title">
+        <%  });} %>
+              <!-- Pager -->
+              <ul class="pager">
+                <li class="next">
+                  <a href="#">Older Posts &rarr;</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
 
-    <hr>
-    <% include ./footer %>
+        <hr>
+        <% include ./footer %>
