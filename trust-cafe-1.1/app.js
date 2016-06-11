@@ -8,16 +8,17 @@ var session = require('express-session');
 var flash = require('req-flash');
 
 var routes = require('./routes/index');
-var register = require('./routes/register');
+var signup = require('./routes/signup');
 var users = require('./routes/users');
 var event = require('./routes/event');
 var login = require('./routes/login');
 var searchEvent = require('./routes/searchEvent');
 var eventMember = require('./routes/eventMember');
-var participate = require('./routes/event');
+var eventDetail = require('./routes/event');
 var item = require('./routes/item');
 var customer = require('./routes/customer');
 var updateEvent = require('./routes/updateEvent');
+// var register = require('./routes/register');
 
 var app = express();
 
@@ -39,14 +40,15 @@ app.use(flash());
 app.use('/', routes);
 app.use('/users', users);
 app.use('/event', event);
-app.use('/register', register);
+app.use('/signup', signup);
 app.use('/login', login);
 app.use('/eventMember', eventMember);
 app.use('/searchEvent', searchEvent);
-app.use('/eventDetail', participate);
+app.use('/eventDetail', eventDetail);
 app.use('/item', item);
 app.use('/customer', customer);
 app.use('/updateEvent', updateEvent);
+// app.use('/event', register);
 
 
 // catch 404 and forward to error handler

@@ -4,6 +4,7 @@ var Customer = require('../models/Customer');
 var Host = require('../models/Host');
 var Event = require('../models/Event');
 var async = require('async');
+var Participate = require('../models/Participate');
 
 router.get('/new', function(req, res) {
   if(!req.session.customer) {
@@ -27,6 +28,33 @@ router.get('/Byname', function(req, res) {
   });
 });
 
+
+router.post('/:eventId/register', function(req, res) {
+        console.log("有進來");
+  if(!req.session.customer) {
+    res.redirect('/');
+  }
+  // 增加要輸入event資料的位置
+  var newParticipate = new Participate({
+    customerId : req.body.customerId,
+    eventId : req.body.eventId
+  });
+
+  newParticipate.save(function(err) {
+    if(err) {
+      res.status = err.code;
+      res.json(err);
+    } else {
+      req.flash('error', 'Please fill in all required fields (or whatever you want to say)');
+      res.redirect("back");
+      // res.render('event', {
+      //   customer : req.session.customer || null,
+      //   message: "報名成功"
+      // });
+    }
+  });
+});
+
 router.get('/:eventId', function(req, res, next) {
   Event.get(req.params.eventId, function(err, event) {
     if(err) {
@@ -38,55 +66,13 @@ router.get('/:eventId', function(req, res, next) {
         } else {
           res.render('eventDetail', {
             event : event,
-            customer : req.session.customer || null
+            customer : req.session.customer || null,
+            message: req.flash('RegisterMessage')
           });
         }
     }
   });
 });
-
-// router.get('/:eventId', function(req, res, next) {
-//   Event.get(req.params.eventId, function(err, event) {
-//     if(err) {
-//       next();
-//     } else {
-//       event.getMembers(function(err, customer) {
-//         if(err) {
-//           console.log(err);
-//           cb(err);
-//         } else {
-//           event.customer = customer;
-//           cb(null);
-//         }
-//       });
-//     //   async.each(eventList,function(event, cb) {
-//     //
-//     //   }, function(err){
-//     //     if(err) {
-//     //       // res.status = err.code;
-//     //       next();
-//     //       console.log(err+"123123123");
-//     //     } else {
-//     //       res.render('eventDetail', {
-//     //         event : event,
-//     //         customer : req.session.customer || null
-//     //       });
-//     //     }
-//     //   }
-//     //
-//     // );
-//     // if(err) {
-//     //   console.log(err);
-//     // } else {
-//     //   console.log(event);
-//     //   res.render('eventDetail', {
-//     //     event : event,
-//     //     customer : req.session.customer || null
-//     //   });
-//     // }
-//   }
-// });
-// });
 
 router.get('/',function(req, res) {
   Event.getAll(function(err){
