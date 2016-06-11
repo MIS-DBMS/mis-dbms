@@ -18,34 +18,30 @@ var async = require('async');
 
 
 /* GET home page. */
-// router.get('/', function(req, res, next) {
+// router.get('/event/Byname', function(req, res, next) {
+//   console.log("testtest");
 //     res.render('searchEvent', {
 //         event : null,
-//         customer : req.session.customer
+//         customer : req.session.customer,
+//         message: req.flash('loginMessage')
 //     });
 // });
 
-//trytry
-
-
-// 判斷帳密是否正確
 router.post('/eventMember', function(req, res) {
     var inputname = req.body.eventName;
-    Event.getMember(inputname, function(err, eventList) {
+    Event.getMember(inputname, function(err, participateMemberList, message) {
         if(err ) {
-          console.log("get err in searchEvent.js");// not go into here
-            res.render('eventMember',{
-                eventList : null,
-                customer : req.session.customer
+            res.render('searchEvent',{
+                participateMemberList : null,
+                customer : req.session.customer,
+                message:  '無人參與這個活動'
             });
-            console.log("search event name not exists");
         } else {
-          console.log("go into else in searchEvent.js");
           customer : req.session.customer;
-          eventList :eventList
+          participateMemberList :participateMemberList
           // res.redirect('/eventMember');
           res.render('eventMember',{
-            eventList : eventList,
+            participateMemberList : participateMemberList,
             customer : req.session.customer
           })
         }

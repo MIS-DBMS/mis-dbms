@@ -17,6 +17,7 @@ var eventMember = require('./routes/eventMember');
 var participate = require('./routes/event');
 var item = require('./routes/item');
 var customer = require('./routes/customer');
+var updateEvent = require('./routes/updateEvent');
 
 var app = express();
 
@@ -45,6 +46,7 @@ app.use('/searchEvent', searchEvent);
 app.use('/eventDetail', participate);
 app.use('/item', item);
 app.use('/customer', customer);
+app.use('/updateEvent', updateEvent);
 
 
 // catch 404 and forward to error handler

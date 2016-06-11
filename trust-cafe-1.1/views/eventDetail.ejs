@@ -19,10 +19,24 @@
        <div class="container">
            <div class="row">
                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                  <p>test:<%#= event.id %></p>
                   <p>活動地點：<%= event.location %></p>
                   <p>活動日期：<%= event.date %></p>
                   <p>活動時間：From <%= event.startTime %> to <%= event.endTime %></p>
                   <p>活動簡介：<%= event.description %></p>
+                  <% if(customer) { %>
+                  <% if(customer.account == 'test') { %>
+                  <li>
+                      <a href="/updateEvent/<%= event.id %>">修改資料</a>
+                  </li>
+                  <% } else { %>
+                    <li>
+                        <a href="/">報名活動</a>
+                    </li>
+                  <% } %>
+                  <% } else {%>
+                    <p>請登入報名</p>
+                  <% }%>
                </div>
            </div>
        </div>

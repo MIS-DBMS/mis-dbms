@@ -12,10 +12,26 @@ var Event = function(options) {
   this.endTime = options.endTime;
   this.description = options.description;
 };
-//
-// var Test = function(options){
-//   id = options;
-// };
+
+var participateMember =function(options) {
+  this.id = options.id;
+  this.eventName = options.eventName;
+  this.location = options.location;
+  this.date = options.date;
+  this.startTime = options.startTime;
+  this.endTime = options.endTime;
+  this.description = options.description;
+  this.customerId = options.customerId;
+  this.eventId = options.eventId;
+  this.customerName = options.customerName;
+  this.account = options.account;
+  this.password = options.account;
+  this.phone = options.phone;
+  this.email = options.email;
+  this.jobTitle = options.jobTitle;
+  this.address = options.address;
+  this.birthday = options.birthday;
+}
 
 
 Event.get = function(eventId, cb) {
@@ -43,42 +59,6 @@ Event.get = function(eventId, cb) {
     cb(new GeneralErrors.NotFound());
   })
 }
-
-
-// .then(function(eventList) {
-//   if(eventList.length) {
-//     cb(null, eventList);
-//   } else {
-//     cb(new GeneralErrors.NotFound());
-//   }
-// })
-// .catch(function(err) {
-//   console.log(err);
-//   cb(err);
-// })
-//original
-// Event.getMember = function(name, cb) {
-//   db.select('eventName')
-//     .from('event')
-//     .leftJoin('participate', 'event.id', '=', 'participate.eventId')
-//     .leftJoin('customer', 'participate.customerId','=', 'customer.id')
-//     .where({
-//       eventName : name
-//     })
-//     .map(function(row){
-//         return new Test(row); //Event
-//     })
-//     .then(function(testList) {
-//         if(testList.length) {
-//           cb(null, testListrList[0]);
-//           console.log(testList);
-//         } else {
-//           //這邊要產生一個NotFound err給前端，因為error很常用到，我們會獨立出去一個檔案
-//           cb(new GeneralErrors.NotFound());
-//         }
-//     })
-// }
-
 
 //trytrysee
 Event.getName = function(name, cb) {
@@ -132,33 +112,33 @@ Event.getAllEvent = function(cb) {
 }
 
 Event.getMember = function(name,cb) {
-db.select('*')
-    .from('event')
-    .join('participate', function(){
-      this.on('participate.eventId', '=', 'event.id')
-    })
-    .join('customer', function(){
-      this.on('participate.customerId', '=', 'customer.id')
-    })
-    .where({
-          eventName :name
-    })
-    .map(function(row){
-        return new Event(row);
-    })
-    .then(function(eventList) {
-            if(eventList.length) {
-              cb(null, eventList);
-            } else {
-              cb(new GeneralErrors.NotFound());
-            }
-        })
-        .catch(function(err) {
-          console.log(err);
-          cb(err);
-
-        });
+  db.select('*')
+  .from('event')
+  .join('participate', function(){
+    this.on('participate.eventId', '=', 'event.id')
+  })
+  .join('customer', function(){
+    this.on('participate.customerId', '=', 'customer.id')
+  })
+  .where({
+    eventName :name
+  })
+  .map(function(row){
+    return new participateMember(row);
+  })
+  .then(function(participateList) {
+    if(participateList.length) {
+      cb(null, participateList);
+    } else {
+      cb(new GeneralErrors.NotFound());
     }
+  })
+  .catch(function(err) {
+    console.log(err);
+    cb(err);
+
+  });
+}
 
 //Instance Function
 Event.prototype.save = function (cb) {
@@ -208,73 +188,37 @@ Event.prototype.save = function (cb) {
 
 
 Event.prototype.getMembers = function(cb) {
-    db('event').select('*')
-    .from('event')
-    .join('participate', function(){
-      this.on('participate.eventId', '=', 'event.id')
-    })
-    .join('customer', function(){
-      this.on('participate.customerId', '=', 'customer.id')
-    })
-     .map(function(row){
-      return new Customer({
-        id : row.customerId,
-        customerName : row.customerName,
-        account : row.account,
-        password : row.password,
-        phone : row.phone,
-        email : row.email,
-        jobTitle : row.jobTitle,
-        address : row.address,
-        birthday : row.birthday
-      });
-     })
-     .then(function(customerList) {
-       this.customerList = customerList;
-       cb();
+  db('event').select('*')
+  .from('event')
+  .join('participate', function(){
+    this.on('participate.eventId', '=', 'event.id')
+  })
+  .join('customer', function(){
+    this.on('participate.customerId', '=', 'customer.id')
+  })
+  .map(function(row){
+    return new Customer({
+      id : row.customerId,
+      customerName : row.customerName,
+      account : row.account,
+      password : row.password,
+      phone : row.phone,
+      email : row.email,
+      jobTitle : row.jobTitle,
+      address : row.address,
+      birthday : row.birthday
+    });
+  })
+  .then(function(customerList) {
+    this.customerList = customerList;
+    cb();
 
-     }.bind(this))
-     .catch(function(err) {
-       console.log(err+" here is err in getMembers");
-       cb(err);
-     });
-  // console.log("At first"+eventName);  // 這裡有進來
-  // db.select('*')
-  // .from('event')
-  // .join('participate', function(){
-  //   this.on('participate.eventId', '=', 'event.id')
-  // })
-  // .join('customer', function(){
-  //   this.on('participate.customerId', '=', 'customer.id')
-  // })
-  //  .where({
-  //    eventName : eventName
-  //  })
-  // .map(function(row){
-  //   console.log("here is row "+row);
-  //   return new Event({
-  //     id : row.id,
-  //     eventName :row.eventName,
-  //     location : row.location,
-  //     date : row.date,
-  //     startTime : row.startTime,
-  //     endTime : row.endTime,
-  //     description : row.description
-  //   });
-  // })
-  // .then(function(eventList) {
-  //   if(eventList.length) {
-  //     console.log(eventList);//目前結果是　　沒有來這邊
-  //     cb(null, eventList);
-  //
-  //   } else {
-  //     cb(new GeneralErrors.NotFound());
-  //   }
-  // })
-  // .catch(function(err) {
-  //   console.log(err+" here is err in getMember");
-  //   cb(err);
-  // });
+  }.bind(this))
+  .catch(function(err) {
+    console.log(err+" here is err in getMembers");
+    cb(err);
+  });
+
 }
 
 

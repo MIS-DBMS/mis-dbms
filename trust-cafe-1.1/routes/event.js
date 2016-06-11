@@ -22,7 +22,8 @@ router.get('/Byname', function(req, res) {
   }
 
   res.render('searchEvent', {
-    customer : req.session.customer || null
+    customer : req.session.customer || null,
+    message: req.flash('SearchMessage')
   });
 });
 
