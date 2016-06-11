@@ -111,5 +111,86 @@ Item.prototype.save = function (cb) {
   }
 };
 
+//trytry getCustomerID
+Item.getCustomerID = function(customername,cb) {
+  db.select('customer.id')
+  .from('customer')
+  .where({
+    customerName : customername,
+  })
+  .map(function(row){
+    console.log(row);
+    return new Item({
+      customerId : row.id
+    });
+  })
+  .then(function(itemList) {
+    if(itemList.length) {
+      cb(null, itemList);
+    } else {
+      cb(new GeneralErrors.NotFound());
+    }
+  })
+  .catch(function(err) {
+    console.log(err);
+    cb(err);
+
+  });
+}
+
+//trytry getEventID
+Item.getEventID = function(eventname,cb) {
+  db.select('event.id')
+  .from('event')
+  .where({
+    eventName : eventname
+  })
+  .map(function(row){
+    console.log(row);
+    return new Item({
+      eventId : row.id
+    });
+  })
+  .then(function(itemList) {
+    if(itemList.length) {
+      cb(null, itemList);
+    } else {
+      cb(new GeneralErrors.NotFound());
+    }
+  })
+  .catch(function(err) {
+    console.log(err);
+    cb(err);
+
+  });
+}
+
+//trytry getEventID
+Item.getOrganizationID = function(organizationname,cb) {
+  db.select('organization.id')
+  .from('organization')
+  .where({
+    organizationName : organizationname
+  })
+  .map(function(row){
+    console.log(row);
+    return new Item({
+      eventId : row.id
+    });
+  })
+  .then(function(itemList) {
+    if(itemList.length) {
+      cb(null, itemList);
+    } else {
+      cb(new GeneralErrors.NotFound());
+    }
+  })
+  .catch(function(err) {
+    console.log(err);
+    cb(err);
+
+  });
+}
+
 
 module.exports = Item;

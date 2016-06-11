@@ -3,8 +3,7 @@ var GeneralErrors = require('../errors/GeneralErrors');
 
 var Organization = function(options) {
   this.id = options.id;
-  this.name = options.name;
-
+  this.organizationName = options.organizationName;
   this.phone = options.phone;
   this.email = options.email;
   this.address = options.address;

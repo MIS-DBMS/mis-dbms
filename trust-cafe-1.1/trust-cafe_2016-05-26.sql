@@ -63,7 +63,7 @@ DROP TABLE IF EXISTS `organization`;
 
 CREATE TABLE `organization` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(20) NOT NULL,
+  `organizationName` varchar(20) NOT NULL,
   `phone` varchar(15),
   `email` varchar(50) NOT NULL,
   `address` varchar(50),
