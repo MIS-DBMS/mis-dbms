@@ -23,7 +23,9 @@
     "morgan": "~1.6.1",
     "mysql": "^2.10.2",
     "serve-favicon": "~2.3.0",
-    "req-flash" : "0.0.3"
+    "req-flash" : "0.0.3",
+    "passport": "^0.2.2",
+    "passport-local": "^1.0.0"
   },
   "main": "app.js",
   "devDependencies": {},
