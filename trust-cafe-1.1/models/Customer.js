@@ -23,7 +23,8 @@ Customer.get = function(customerId, cb) {
     id : customerId
   })
   .map(function(row) {
-    return new Customer(row);
+    var a=  new Customer(row);
+    return a;
   })
   .then(function(customerList) {
     if(customerList.length) {
@@ -38,10 +39,9 @@ Customer.get = function(customerId, cb) {
 }
 
 //Login
-Customer.getByAccount = function(customerAccount, customerPassword, cb) {
+Customer.getByAccount = function(customerAccount, cb) {
   db.select().from("customer").where({
     account : customerAccount,
-    password : customerPassword
   })
   .map(function(row){
     return new Customer(row);

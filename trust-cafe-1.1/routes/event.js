@@ -29,7 +29,7 @@ router.get('/Byname', function(req, res) {
 });
 
 
-router.post('/:eventId/register', function(req, res) {
+router.post('/:eventId', function(req, res) {
         console.log("有進來");
   if(!req.session.customer) {
     res.redirect('/');
@@ -46,11 +46,11 @@ router.post('/:eventId/register', function(req, res) {
       res.json(err);
     } else {
       req.flash('error', 'Please fill in all required fields (or whatever you want to say)');
-      res.redirect("back");
-      // res.render('event', {
-      //   customer : req.session.customer || null,
-      //   message: "報名成功"
-      // });
+      // res.redirect("back");
+      res.render('event/'+req.body.eventId, {
+        customer : req.session.customer || null,
+        message: "報名成功"
+      });
     }
   });
 });
