@@ -24,8 +24,6 @@ router.post('/', function(req, res) {
         customer : null,
         message:  'There do not exist this account'
       });
-      // console.log("Your account or password is wrong");
-      // res.redirect('/');
     } else {
       if(inputPassword != customer.password) {
         res.render('login',{
@@ -36,7 +34,6 @@ router.post('/', function(req, res) {
         req.session.customer = customer;
         res.cookie('account', req.body.account, { path: '/', signed: true});
         res.cookie('password', req.body.password, { path: '/', signed: true });
-        // console.log(customer); // check if customer is pulled in correctly
         res.redirect('/');
       }
     }
