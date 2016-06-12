@@ -73,23 +73,27 @@ $(function () { $("input,select,textarea").not("[type=submit]").jqBootstrapValid
               if (document.getElementById('Cus').checked) {
                 document.getElementById('ifCus').style.display = 'block';
                 document.getElementById('ifOrg').style.display = 'none';
+                document.getElementById('organizationName').value = NULL;
               }
               else{
                 document.getElementById('ifOrg').style.display = 'block';
                 document.getElementById('ifCus').style.display = 'none';
+                document.getElementById('customerName').value = NULL;
               }
             }
             </script>
 
-            <input type="checkbox" onclick="CusOrg();" id="Cus">Customer
+            <input type="radio" onclick="CusOrg();" id="Cus" name="sponserTag" value="CUS">Customer
             <p id="ifCus" style="display:none">
-              Customer Name: <input type='text' placeholder="Customer Name" id='customerName' name='customerName' required data-validation-required-message="Please enter Customer Name." value="">
+              Customer Name: <input type='text' placeholder="Customer Name" id='customerName' name='customerName' required data-validation-required-message="Please enter Customer Name.">
             </p>
+            <!-- <p class="help-block text-danger"></p> -->
             <br>
-            <input type="checkbox" onclick="CusOrg();" id="Org">Organization
+            <input type="radio" onclick="CusOrg();" id="Org" name="sponserTag" value="ORG">Organization
             <p id="ifOrg" style="display:none">
-              Organization Name: <input type='text' placeholder="Organization Name" id='organizationName' name='organizationName' required data-validation-required-message="Please enter Organization Name." value="">
+              Organization Name: <input type='text' placeholder="Organization Name" id='organizationName' name='organizationName' required data-validation-required-message="Please enter Organization Name.">
             </p>
+            <!-- <p class="help-block text-danger"></p> -->
             <br>
           </div>
         </div>

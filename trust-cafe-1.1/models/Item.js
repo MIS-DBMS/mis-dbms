@@ -7,6 +7,7 @@ var Item = function(options) {
   this.date = options.date;
   this.description = options.description;
   this.value = options.value;
+  this.sponserTag = options.sponserTag;
   this.customerId = options.customerId;
   this.organizationId = options.organizationId;
   this.eventId = options.eventId;
@@ -22,6 +23,7 @@ Item.getAll = function(cb) {
       date : row.date,
       description : row.description,
       value : row.value,
+      sponserTag : row.sponserTag,
       customerId : row.customerId,
       organizationId : row.organizationId,
       eventId : row.eventId
@@ -76,7 +78,11 @@ Item.prototype.save = function (cb) {
       name : this.name,
       date : this.date,
       description : this.description,
-      value : this.value
+      value : this.value,
+      sponserTag : this.sponserTag,
+      customerId : this.customerId,
+      organizationId : this.organizationId,
+      eventId : this.eventId
     })
     .where({
       id : this.id
@@ -96,6 +102,7 @@ Item.prototype.save = function (cb) {
       date : this.date,
       description : this.description,
       value : this.value,
+      sponserTag : this.sponserTag,
       customerId : this.customerId,
       organizationId : this.organizationId,
       eventId : this.eventId
@@ -116,7 +123,7 @@ Item.getCustomerID = function(customername,cb) {
   db.select('customer.id')
   .from('customer')
   .where({
-    customerName : customername,
+    customerName : customername
   })
   .map(function(row){
     console.log(row);
@@ -175,7 +182,7 @@ Item.getOrganizationID = function(organizationname,cb) {
   .map(function(row){
     console.log(row);
     return new Item({
-      eventId : row.id
+      organizationId : row.id
     });
   })
   .then(function(itemList) {
@@ -191,6 +198,7 @@ Item.getOrganizationID = function(organizationname,cb) {
 
   });
 }
+
 
 
 module.exports = Item;
