@@ -38,10 +38,9 @@ Customer.get = function(customerId, cb) {
 }
 
 //Login
-Customer.getByAccount = function(customerAccount, customerPassword, cb) {
+Customer.getByAccount = function(customerAccount, cb) {
   db.select().from("customer").where({
     account : customerAccount,
-    password : customerPassword
   })
   .map(function(row){
     return new Customer(row);

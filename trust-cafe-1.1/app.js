@@ -5,7 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
-// var passport = require('passport');
+
 var flash = require('req-flash');
 
 var routes = require('./routes/index');
@@ -19,7 +19,7 @@ var eventDetail = require('./routes/event');
 var item = require('./routes/item');
 var customer = require('./routes/customer');
 var updateEvent = require('./routes/updateEvent');
-// var register = require('./routes/register');
+
 
 var app = express();
 
@@ -27,14 +27,13 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(session({secret : 'HelloExpressSESSION'}));
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser('123456789'));
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(flash()); // use connect-flash for flash messages stored in session
+app.use(flash());
 
 // use (用在url的哪裡, 哪個已宣告的routes變數)
 app.use('/', routes);
@@ -48,17 +47,7 @@ app.use('/eventDetail', eventDetail);
 app.use('/item', item);
 app.use('/customer', customer);
 app.use('/updateEvent', updateEvent);
-// app.use('/event', register);
 
-// required for passport
-// app.use(session({
-// 	secret: 'vidyapathaisalwaysrunning',
-// 	resave: true,
-// 	saveUninitialized: false,
-//   cookie: { secure: true }
-//  } )); // session secret
-// app.use(passport.initialize());
-// app.use(passport.session()); // persistent login sessions
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -18,24 +18,27 @@ router.get('/', function(req, res, next) {
 router.post('/', function(req, res) {
   var inputAccount = req.body.account;
   var inputPassword = req.body.password;
-  Customer.getByAccount(inputAccount, inputPassword, function(err, customer,message) {
-    if(err || inputPassword != customer.password) {
+  Customer.getByAccount(inputAccount,  function(err, customer,message) {
+    if(err ) {
       res.render('login',{
         customer : null,
-        message:  'Oops! Wrong password.'
+        message:  'There do not exist this account'
       });
-      console.log("Your account or password is wrong");
-      // res.redirect('/');
-  } else {
-    req.session.customer = customer;
-    res.cookie('account', req.body.account, { path: '/', signed: true});
-    res.cookie('password', req.body.password, { path: '/', signed: true });
-    // console.log(customer); // check if customer is pulled in correctly
-    res.redirect('/');
-  }
+    } else {
+      if(inputPassword != customer.password) {
+        res.render('login',{
+          customer : null,
+          message:  'Oops! Wrong password.'
+        });
+      } else {
+        req.session.customer = customer;
+        res.cookie('account', req.body.account, { path: '/', signed: true});
+        res.cookie('password', req.body.password, { path: '/', signed: true });
+        res.redirect('/');
+      }
+    }
+  });
 });
-});
-
 // logout
 router.post('/logout', function(req, res) {
   req.session.customer = null;
@@ -43,7 +46,5 @@ router.post('/logout', function(req, res) {
   res.clearCookie('password', { path: '/' });
   res.redirect('/');
 });
-
-
 
 module.exports = router;
