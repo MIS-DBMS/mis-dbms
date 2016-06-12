@@ -73,12 +73,12 @@ $(function () { $("input,select,textarea").not("[type=submit]").jqBootstrapValid
               if (document.getElementById('Cus').checked) {
                 document.getElementById('ifCus').style.display = 'block';
                 document.getElementById('ifOrg').style.display = 'none';
-                document.getElementById('organizationName').value = NULL;
+                document.getElementById('organizationName').value = "Empty";
               }
               else{
                 document.getElementById('ifOrg').style.display = 'block';
                 document.getElementById('ifCus').style.display = 'none';
-                document.getElementById('customerName').value = NULL;
+                document.getElementById('customerName').value = "Empty";
               }
             }
             </script>
