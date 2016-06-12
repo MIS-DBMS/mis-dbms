@@ -17,17 +17,7 @@ Item.getAll = function(cb) {
   db.select()
   .from('item')
   .map(function(row) {
-    return new Item({
-      id : row.id,
-      name : row.name,
-      date : row.date,
-      description : row.description,
-      value : row.value,
-      sponserTag : row.sponserTag,
-      customerId : row.customerId,
-      organizationId : row.organizationId,
-      eventId : row.eventId
-    });
+    return new Item(row);
   })
   .then(function(itemList) {
     cb(null, itemList);

@@ -35,13 +35,12 @@ Organization.get = function(organizationId, cb) {
 //Instance Function
 Organization.prototype.save = function (cb) {
   if (this.id) {
-    db("organization").where({
+    db("organization")
+    .where({
         id : this.id
       })
       .update({
-        name : this.name,
-        // account : this.account,
-        // password : this.password,
+        organizationName : this.organizationName,
         phone : this.phone,
         email : this.email,
         address : this.address,
@@ -57,9 +56,7 @@ Organization.prototype.save = function (cb) {
   } else {
     db("organization")
       .insert({
-        name : this.name,
-        // account : this.account,
-        // password : this.password,
+        organizationName : this.organizationName,
         phone : this.phone,
         email : this.email,
         address : this.address,
@@ -76,6 +73,20 @@ Organization.prototype.save = function (cb) {
       });
   }
 };
+
+Organization.getAll = function(cb) {
+  db.select()
+  .from('organization')
+  .map(function(row) {
+    return new Organization(row);
+  })
+  .then(function(organizationList) {
+    cb(null, organizationList);
+  })
+  .catch(function(err) {
+    cb(new GeneralErrors.Database());
+  });
+}
 
 
 module.exports = Organization;

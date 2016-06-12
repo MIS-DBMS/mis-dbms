@@ -49,7 +49,7 @@ $(function () { $("input,select,textarea").not("[type=submit]").jqBootstrapValid
           <div class="form-group col-xs-12 floating-label-form-group controls">
             <label>Value</label>
             <h3>Value</h3>
-            <input type="number" class="form-control" placeholder="Value" id="value" name="value"  required data-validation-required-message="Please enter value.">
+            <input type="number" class="form-control" placeholder="Value" id="value" name="value" min="1" required data-validation-required-message="Please enter value.">
             <p class="help-block text-danger"></p>
           </div>
         </div>
@@ -87,13 +87,11 @@ $(function () { $("input,select,textarea").not("[type=submit]").jqBootstrapValid
             <p id="ifCus" style="display:none">
               Customer Name: <input type='text' placeholder="Customer Name" id='customerName' name='customerName' required data-validation-required-message="Please enter Customer Name.">
             </p>
-            <!-- <p class="help-block text-danger"></p> -->
             <br>
             <input type="radio" onclick="CusOrg();" id="Org" name="sponserTag" value="ORG">Organization
             <p id="ifOrg" style="display:none">
               Organization Name: <input type='text' placeholder="Organization Name" id='organizationName' name='organizationName' required data-validation-required-message="Please enter Organization Name.">
             </p>
-            <!-- <p class="help-block text-danger"></p> -->
             <br>
           </div>
         </div>
