@@ -1,4 +1,4 @@
-// 這是一個 Event Model
+
 var db = require('../libs/db'); //引入我們的sql builder
 var GeneralErrors = require('../errors/GeneralErrors');
 var Customer = require('../models/Customer');

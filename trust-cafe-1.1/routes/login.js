@@ -39,7 +39,6 @@ router.post('/', function(req, res) {
     }
   });
 });
-
 // logout
 router.post('/logout', function(req, res) {
   req.session.customer = null;
@@ -47,7 +46,5 @@ router.post('/logout', function(req, res) {
   res.clearCookie('password', { path: '/' });
   res.redirect('/');
 });
-
-
 
 module.exports = router;

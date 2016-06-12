@@ -23,8 +23,7 @@ Customer.get = function(customerId, cb) {
     id : customerId
   })
   .map(function(row) {
-    var a=  new Customer(row);
-    return a;
+    return new Customer(row);
   })
   .then(function(customerList) {
     if(customerList.length) {
