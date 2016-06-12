@@ -1,114 +1,106 @@
-//這是一個Customer Model
-var db = require('../libs/db'); //引入我們的sql builder
-var GeneralErrors = require('../errors/GeneralErrors');
+// load all the things we need
+var LocalStrategy   = require('passport-local').Strategy;
 
-var Customer = function(options) {
-  this.id = options.id;
-  this.customerName = options.customerName;
-  this.password = options.password;
-  this.account = options.account;
-  this.phone = options.phone;
-  this.email = options.email;
-  this.jobTitle = options.jobTitle;
-  this.address = options.address;
-  this.birthday = options.birthday;
-};
+// load up the user model
+var mysql = require('mysql');
+var bcrypt = require('bcryptjs');
+var db = require('../libs/db');
+var connection = mysql.createPool(db.knex);
 
-//Class Function
-Customer.get = function(customerId, cb) {
-  //這邊是當傳入一個memberId時，進入資料庫查出相對應的member資料
-  db.select()
-  .from('customer')
-  .where({
-    id : customerId
-  })
-  .map(function(row) {
-    return new Customer(row);
-  })
-  .then(function(customerList) {
-    if(customerList.length) {
-      cb(null, customerList[0]);
-    } else {
-      cb(new GeneralErrors.NotFound());
-    }
-  })
-  .catch(function(err) {
-    cb(err);
-  })
-}
+connection.query('USE ' + db.database);
+// expose this function to our app using module.exports
+var passport = function(passport) {
 
-//Login
-Customer.getByAccount = function(customerAccount, customerPassword, cb) {
-  db.select().from("customer").where({
-    account : customerAccount,
-    password : customerPassword
-  })
-  .map(function(row){
-    return new Customer(row);
-  })
-  .then(function(customerList) {
-    if(customerList.length) {
-      cb(null, customerList[0]);//customerList[0]=customerList
-      //console.log(customerList[0]);// 確認輸入的資料所對應的資料
-    } else {
-      //這邊要產生一個NotFound err給前端，因為error很常用到，我們會獨立出去一個檔案
-      cb(new GeneralErrors.NotFound());
-    }
-  })
-}
+    // =========================================================================
+    // passport session setup ==================================================
+    // =========================================================================
+    // required for persistent login sessions
+    // passport needs ability to serialize and unserialize users out of session
 
-
-//我們接下來嘗試是否可以正確取得資料
-//接下來完成其他會用到的function
-//Instance Function
-Customer.prototype.save = function (cb) {
-  //save的概念是當物件不存在時新增，存在時對DB做更新
-  if (this.id) {
-    //已存在
-    db("customer").where({
-      id : this.id
-    })
-    .update({
-      customerName : this.customerName,
-      account : this.account,
-      password : this.password,
-      phone : this.phone,
-      email : this.email,
-      jobTitle : this.jobTitle,
-      address : this.address,
-      birthday : this.birthday
-    })
-    .then(function() {
-      cb(null, this);
-    }.bind(this))
-    .catch(function(err) {
-      console.log("CUSTOMER UPDATED", err);
-      cb(new GeneralErrors.Database());
+    // used to serialize the user for the session
+    passport.serializeUser(function(user, done) {
+        done(null, user.id);
     });
-  } else {
-    //不存在
-    db("customer")
-    .insert({
-      customerName : this.customerName,
-      account : this.account,
-      password : this.password,
-      phone : this.phone,
-      email : this.email,
-      jobTitle : this.jobTitle,
-      address : this.address,
-      birthday : this.birthday
-    })
-    .then(function(result) {
-      var insertedId = result[0];
-      this.id = insertedId;
-      cb(null, this);
-    }.bind(this))
-    .catch(function(err) {
-      console.log("CUSTOMER INSERT", err);
-      cb(new GeneralErrors.Database());
-    });
-  }
-};
 
-//這樣基本上就完成了一個DataModel會用到的method, 之後有需要的時候再過來新增
-module.exports = Customer;
+    // used to deserialize the user
+    passport.deserializeUser(function(id, done) {
+        connection.query("SELECT * FROM users WHERE id = ? ",[id], function(err, rows){
+            done(err, rows[0]);
+        });
+    });
+
+    // =========================================================================
+    // LOCAL SIGNUP ============================================================
+    // =========================================================================
+    // we are using named strategies since we have one for login and one for signup
+    // by default, if there was no name, it would just be called 'local'
+
+    passport.use(
+        'local-signup',
+        new LocalStrategy({
+            // by default, local strategy uses username and password, we will override with email
+            usernameField : 'account',
+            passwordField : 'password',
+            passReqToCallback : true // allows us to pass back the entire request to the callback
+        },
+        function(req, username, password, done) {
+            // find a user whose email is the same as the forms email
+            // we are checking to see if the user trying to login already exists
+            connection.query("SELECT * FROM users WHERE username = ?",[username], function(err, rows) {
+                if (err)
+                    return done(err);
+                if (rows.length) {
+                    return done(null, false, req.flash('signupMessage', 'That username is already taken.'));
+                } else {
+                    // if there is no user with that username
+                    // create the user
+                    var newUserMysql = {
+                        username: username,
+                        password: bcrypt.hashSync(password, null, null)  // use the generateHash function in our user model
+                    };
+
+                    var insertQuery = "INSERT INTO users ( username, password ) values (?,?)";
+
+                    connection.query(insertQuery,[newUserMysql.username, newUserMysql.password],function(err, rows) {
+                        newUserMysql.id = rows.insertId;
+
+                        return done(null, newUserMysql);
+                    });
+                }
+            });
+        })
+    );
+
+    // =========================================================================
+    // LOCAL LOGIN =============================================================
+    // =========================================================================
+    // we are using named strategies since we have one for login and one for signup
+    // by default, if there was no name, it would just be called 'local'
+
+    passport.use(
+        'local-login',
+        new LocalStrategy({
+            // by default, local strategy uses username and password, we will override with email
+            usernameField : 'account',
+            passwordField : 'password',
+            passReqToCallback : true // allows us to pass back the entire request to the callback
+        },
+        function(req, username, password, done) { // callback with email and password from our form
+            connection.query("SELECT * FROM users WHERE username = ?",[username], function(err, rows){
+                if (err)
+                    return done(err);
+                if (!rows.length) {
+                    return done(null, false, req.flash('loginMessage', 'No user found.')); // req.flash is the way to set flashdata using connect-flash
+                }
+
+                // if the user is found but the password is wrong
+                if (!bcrypt.compareSync(password, rows[0].password))
+                    return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.')); // create the loginMessage and save it to session as flashdata
+
+                // all is well, return successful user
+                return done(null, rows[0]);
+            });
+        })
+    );
+};
+module.exports = passport;
