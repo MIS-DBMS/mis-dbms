@@ -22,9 +22,6 @@ var options = {
 
 router.get('/profile', function (req, res) {
   res.header("Access-Control-Allow-Origin", "*"); // Configuration for Cross-Domain-Policy
-  res.send('Our Sample API is up...');
-
 });
 
-router.post('')
 module.exports = router;
