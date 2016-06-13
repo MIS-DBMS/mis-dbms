@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var Customer = require('../models/Customer');
+var CustomerInterest = require('../models/CustomerInterest');
 var Host = require('../models/Host');
 var Event = require('../models/Event');
 var async = require('async');
@@ -39,7 +40,7 @@ router.get('/:customerId/new', function(req, res, next) {
 });
 
 
-router.post('/', function(req, res) {
+router.post('/', function(req, res, next) {
   if(!req.session.customer) {
     res.redirect('/');
   }
@@ -61,17 +62,21 @@ router.post('/', function(req, res) {
       res.status = err.code;
       res.json(err);
     } else {
-      console.log(newCustomer.id);
-      // CustomerInterest.getInterest(newCustomer.id,function(err,customerInterest){
-      //   if(err){
-      //     console.log("123123"+err);
-      //     next();
-      //   }
-      //   else{
-      //     console.log("555"+customerInterest);
-      //     console.log(customerInterest.length);
-      //   }
-      // });
+      CustomerInterest.getInterest(newCustomer.id,function(err,customerinterestList){
+        if(err){
+          next();
+        }
+        else{
+          console.log(customerinterestList[0].id);
+          for(i = 0; i < customerinterestList.length; i++){
+            CustomerInterest.delInterest(customerinterestList[i].id,function(err){
+              if(err){
+                next();
+              }
+            });
+          }
+        }
+      });
       // if(req.body.interest1){
       //   var newCustomerInterest1 = new CustomerInterest({
       //     id : req.session.customer.id,
