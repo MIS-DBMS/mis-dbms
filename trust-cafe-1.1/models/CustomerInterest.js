@@ -18,7 +18,7 @@ CustomerInterest.get = function(customerinterestId, cb) {
       return new CustomerInterest(row);
     })
     .then(function(customerinterestList) {
-      if(customerinterest.length) {
+      if(customerinterestList.length) {
         cb(null, customerinterestList[0]);
       } else {
         cb(new GeneralErrors.NotFound());
@@ -29,6 +29,26 @@ CustomerInterest.get = function(customerinterestId, cb) {
     })
 }
 
+CustomerInterest.getInterest = function(customerId, cb) {
+  db.select()
+  .from('customerInterest')
+  .where({
+      customer_id : customerId
+    })
+    .map(function(row) {
+      return new CustomerInterest(row);
+    })
+    .then(function(customerinterestList) {
+      if(customerinterestList.length) {
+        cb(null, customerinterestList[0]);
+      } else {
+        cb(new GeneralErrors.NotFound());
+      }
+    })
+    .catch(function(err) {
+      cb(err);
+    })
+}
 //Instance Function
 CustomerInterest.prototype.save = function (cb) {
   if (this.id) {

@@ -6,13 +6,14 @@ var Event = require('../models/Event');
 var async = require('async');
 
 router.get('/:customerId', function(req, res, next) {
-  Customer.get(req.params.customerId, function(err, customer) {
+  
+  Customer.get(req.session.customer.id, function(err, customer) {
     if(err) {
-      console.log(err);
+      console.log("++"+err);
       next();
     } else {
         if(err) {
-          console.log(err);
+          console.log("--"+err);
         } else {
           res.render('customer', {
             customer : customer
@@ -49,11 +50,34 @@ router.post('/', function(req, res) {
     birthday : req.body.birthday
   });
 
-  newCustomer.save(function(err) {
+  newCustomer.save(function(err,cb) {
     if(err) {
       res.status = err.code;
       res.json(err);
     } else {
+      console.log(newCustomer.id);
+      // CustomerInterest.getInterest(newCustomer.id,function(err,customerInterest){
+      //   if(err){
+      //     console.log("123123"+err);
+      //     next();
+      //   }
+      //   else{
+      //     console.log("555"+customerInterest);
+      //     console.log(customerInterest.length);
+      //   }
+      // });
+      // if(req.body.interest1){
+      //   var newCustomerInterest1 = new CustomerInterest({
+      //     id : req.session.customer.id,
+      //     interest : req.body.interest1,
+      //     customer_id : newCustomer.id,
+      //   });
+      //   newCustomerInterest1.save(function(err){
+      //     if(err){
+      //       next(err);
+      //     }
+      //   })
+      // }
       res.redirect("/");
     }
   });

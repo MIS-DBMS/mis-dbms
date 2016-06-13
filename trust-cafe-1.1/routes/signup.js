@@ -148,8 +148,6 @@ router.post('/', function(req, res, next) {
               }
             })
           }
-
-          console.log(newCustomer.id);
           req.session.customer = newCustomer;
           res.redirect('/');
         }
