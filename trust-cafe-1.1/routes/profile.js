@@ -7,7 +7,7 @@ var customer = require("../models/Customer");
 
 // Routes things
 var express = require("express");
-var router  = express.Router;
+var router  = express.Router();
 
 var options = {
     chart: {
@@ -23,6 +23,8 @@ var options = {
 router.get('/profile', function (req, res) {
   res.header("Access-Control-Allow-Origin", "*"); // Configuration for Cross-Domain-Policy
   res.send('Our Sample API is up...');
+
 });
 
+router.post('')
 module.exports = router;
