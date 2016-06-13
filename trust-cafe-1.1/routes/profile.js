@@ -1,3 +1,4 @@
+// Routes things
 var express = require('express');
 var router = express.Router();
 // Load db settings
@@ -6,8 +7,6 @@ var db = require("../libs/db.js");
 // Load things we'd like to chart
 var event = require("../models/Event");
 var customer = require("../models/Customer");
-
-// Routes things
 
 
 var options = {
@@ -28,6 +27,7 @@ router.get('/', function (req, res, next) {
     message: req.flash('testMessage')
   });
 });
+<<<<<<< HEAD
 /* GET home page. */
 // router.get('/', function(req, res, next) {
 //   res.render('login', {
@@ -36,3 +36,7 @@ router.get('/', function (req, res, next) {
 //   });
 // });
 module.exports = router;
+=======
+
+module.exports = router;
+>>>>>>> e1556866356de902f15413e811cf49476946d1d2
