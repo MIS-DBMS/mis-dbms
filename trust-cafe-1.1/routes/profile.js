@@ -1,3 +1,6 @@
+// Routes things
+var express = require('express');
+var router = express.Router();
 // Load db settings
 var db = require("../libs/db.js");
 
@@ -5,9 +8,6 @@ var db = require("../libs/db.js");
 var event = require("../models/Event");
 var customer = require("../models/Customer");
 
-// Routes things
-var express = require("express");
-var router  = express.Router;
 
 var options = {
     chart: {
@@ -20,9 +20,13 @@ var options = {
     }]
 };
 
-router.get('/profile', function (req, res) {
-  res.header("Access-Control-Allow-Origin", "*"); // Configuration for Cross-Domain-Policy
-  res.send('Our Sample API is up...');
+router.get('/', function (req, res, next) {
+  req.header("Access-Control-Allow-Origin", "*"); // Configuration for Cross-Domain-Policy
+  res.render('profile', {
+    customer : null,
+    message: req.flash('testMessage')
+  });
 });
+
 
 module.exports = router;
