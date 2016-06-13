@@ -6,14 +6,13 @@ var Event = require('../models/Event');
 var async = require('async');
 
 router.get('/:customerId', function(req, res, next) {
-  
-  Customer.get(req.session.customer.id, function(err, customer) {
+  Customer.get(req.params.customerId, function(err, customer) {
     if(err) {
-      console.log("++"+err);
+      console.log(err);
       next();
     } else {
         if(err) {
-          console.log("--"+err);
+          console.log(err);
         } else {
           res.render('customer', {
             customer : customer
@@ -22,16 +21,23 @@ router.get('/:customerId', function(req, res, next) {
     }
   });
 });
-
-router.get('/new', function(req, res) {
-  if(!req.session.customer) {
-    res.redirect('/');
-  }
-
-  res.render('updateCustomer', {
-    customer : req.session.customer || null
+router.get('/:customerId/new', function(req, res, next) {
+  Customer.get(req.session.customer.id, function(err, customer) {
+    if(err) {
+      console.log(err);
+      next();
+    } else {
+        if(err) {
+          console.log(err);
+        } else {
+          res.render('updateCustomer', {
+            customer : customer
+          });
+        }
+    }
   });
 });
+
 
 router.post('/', function(req, res) {
   if(!req.session.customer) {

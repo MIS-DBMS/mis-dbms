@@ -28,7 +28,7 @@
                   <%if(customer.birthday){%>
                   <p>Birthday：<%= customer.birthday %></p><% } else {%><p>Birthday：未填寫</p><%}%>
                   <li>
-                      <a href="/customer/new">修改資料</a>
+                      <a href="/customer/<%=customer.id%>/new">修改資料</a>
                   </li>
                </div>
            </div>
