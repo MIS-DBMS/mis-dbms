@@ -85,7 +85,7 @@ CREATE TABLE `event` (
   `date` DATE,
   `startTime` TIME,
   `endTime` TIME,
-  `eventTag` ENUM('Monday不魯','Think Big','政大創立方講座','創業肥皂箱','創業計畫書撰寫','東協相關議題'),
+  `eventTag` ENUM('Monday不魯','Think Big','政大創立方講座','創業肥皂箱','創業計畫書撰寫','東協相關議題','其他'),
   `description` TEXT,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

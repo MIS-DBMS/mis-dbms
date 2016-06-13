@@ -34,9 +34,10 @@ router.post('/', function(req, res) {
     eventName : req.body.eventName,
     location : req.body.location,
     description : req.body.description,
-    date :req.body.date,
-    startTime:req.body.startTime,
-    endTime:req.body.endTime
+    date : req.body.date,
+    startTime : req.body.startTime,
+    endTime : req.body.endTime,
+    eventTag : req.body.eventTag
   });
 
   newEvent.save(function(err) {

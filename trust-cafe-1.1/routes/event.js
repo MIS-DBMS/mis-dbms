@@ -109,9 +109,10 @@ router.get('/:eventId/success', function (req, res) {
       description : req.body.description,
       date :req.body.date,
       startTime:req.body.startTime,
+      eventTag : req.body.eventTag,
       endTime:req.body.endTime
     });
-
+console.log(req.body.eventTag);
     newEvent.save(function(err) {
       if(err) {
         res.status = err.code;

@@ -49,6 +49,54 @@
                         <p class="help-block text-danger"></p>
                     </div>
                 </div>
+                <!-- phone -->
+                <div class="row control-group">
+                    <div class="form-group col-xs-12 floating-label-form-group controls">
+                      <h3>Phone</h3>
+                      <label>Phone</label>
+                          <input type="tel" class="form-control" placeholder="Phone" id="phone" name="phone" required data-validation-required-message="Please enter your phone.">
+                          <p class="help-block text-danger"></p>
+                    </div>
+                </div>
+                <!-- email -->
+                <div class="row control-group">
+                    <div class="form-group col-xs-12 floating-label-form-group controls">
+                        <label>Email</label>
+                        <h3>Email</h3>
+                        <input type="email" class="form-control" placeholder="Email" id="email" name="email" required data-validation-required-message="Please enter your email.">
+                        <p class="help-block text-danger"></p>
+                    </div>
+                </div>
+                <!-- jobTitle -->
+                <div class="row control-group">
+                    <div class="form-group col-xs-12 floating-label-form-group controls">
+                        <label>JobTitle</label>
+                        <h3>JobTitle</h3>
+                        <input type="text" class="form-control" placeholder="jobTitle" id="jobTitle" name="jobTitle"  required data-validation-required-message="Please enter your jobTitle.">
+                        <p class="help-block text-danger"></p>
+                    </div>
+                </div>
+                <!-- address -->
+                <div class="row control-group">
+                    <div class="form-group col-xs-12 floating-label-form-group controls">
+                        <label>Address</label>
+                        <h3>Address</h3>
+                        <input type="text" class="form-control" placeholder="address" id="address" name="address"  required data-validation-required-message="Please enter your address.">
+                        <p class="help-block text-danger"></p>
+                    </div>
+                </div>
+                <!-- date -->
+                <div class="row control-group">
+                    <div class="form-group col-xs-12 floating-label-form-group controls">
+                        <label>Birthday</label>
+                        <h3>Birthday</h3>
+                        <!-- <link rel="stylesheet" href="/stylesheets/jquery-ui.css"> -->
+                        <script src="/javascripts/jquery-ui.js"></script>
+                        <input type="date" class="form-control" name="birthday" id="birthday" placeholder="yyyy-mm-dd" required data-validation-required-message="Please enter your birthday.">
+                        <!-- <script>$('#date').datepicker();</script> -->
+                    </div>
+                </div>
+
                 <script>
                     $(document).ready(function() {
                         $("input,select,textarea").not("[type=submit]").jqBootstrapValidation();

@@ -77,6 +77,21 @@
                     </div>
                 </div>
                 <!-- eventTag -->
+                <!-- <script>
+                function other() {
+                  console.log("hahahaha");
+                  if (document.getElementById('oth').checked) {
+                    document.getElementById('ifoth').style.display = 'block';
+                    document.getElementById('oth').value = document.getElementById('other').value;
+                  }
+                  else{
+                    document.getElementById('ifoth').style.display = 'none';
+                    document.getElementById('oth').value = "Empty";
+                  }
+                }
+                </script> -->
+
+
                 <div class="row control-group">
                     <div class="form-group col-xs-12 floating-label-form-group controls">
                       <h3>Tag</h3>
@@ -93,6 +108,16 @@
                           <br>
                           <input type="radio" name="eventTag" value="東協相關議題">東協相關議題
                           <br>
+                          <input type="radio" name="eventTag" value="其他">其他
+                          <!-- <p>
+                          其他: <input type='text' placeholder="Others" id='other' required data-validation-required-message="Please enter other type.">
+                          </p> -->
+                          <br>
+                          <!-- <input type="radio" onclick="other();" id="oth" name="eventTag">其他
+                          <p id="ifoth" style="display:none">
+                            其他: <input type='text' placeholder="Others" id='other' required data-validation-required-message="Please enter other type.">
+                          </p>
+                          <br> -->
                     </div>
                 </div>
                 <!-- description -->

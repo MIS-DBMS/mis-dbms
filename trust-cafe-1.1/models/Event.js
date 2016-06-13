@@ -10,6 +10,7 @@ var Event = function(options) {
   this.date = options.date;
   this.startTime = options.startTime;
   this.endTime = options.endTime;
+  this.eventTag = options.eventTag;
   this.description = options.description;
 };
 
@@ -20,6 +21,7 @@ var participateMember =function(options) {
   this.date = options.date;
   this.startTime = options.startTime;
   this.endTime = options.endTime;
+  this.eventTag = option.eventTag;
   this.description = options.description;
   this.customerId = options.customerId;
   this.eventId = options.eventId;
@@ -48,6 +50,7 @@ Event.get = function(eventId, cb) {
       date : row.date,
       startTime : row.startTime,
       endTime : row.endTime,
+      eventTag : row.eventTag,
       description : row.description
     });
   })
@@ -154,6 +157,7 @@ Event.prototype.save = function (cb) {
       date : this.date,
       startTime : this.startTime,
       endTime : this.endTime,
+      eventTag : this.eventTag,
       description : this.description
     })
     .then(function() {
@@ -172,6 +176,7 @@ Event.prototype.save = function (cb) {
       date : this.date,
       startTime : this.startTime,
       endTime : this.endTime,
+      eventTag : this.eventTag,
       description : this.description
     })
     .then(function(result) {
