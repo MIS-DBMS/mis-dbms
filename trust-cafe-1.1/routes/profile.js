@@ -27,16 +27,6 @@ router.get('/', function (req, res, next) {
     message: req.flash('testMessage')
   });
 });
-<<<<<<< HEAD
-/* GET home page. */
-// router.get('/', function(req, res, next) {
-//   res.render('login', {
-//     customer : null,
-//     message: req.flash('loginMessage')
-//   });
-// });
-module.exports = router;
-=======
+
 
 module.exports = router;
->>>>>>> e1556866356de902f15413e811cf49476946d1d2
