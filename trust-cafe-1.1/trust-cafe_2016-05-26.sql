@@ -85,22 +85,9 @@ CREATE TABLE `event` (
   `date` DATE,
   `startTime` TIME,
   `endTime` TIME,
+  `eventTag` ENUM('Monday不魯','Think Big','政大創立方講座','創業肥皂箱','創業計畫書撰寫','東協相關議題'),
   `description` TEXT,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-
-# Dump of table eventTag
-# ------------------------------------------------------------
-
-DROP TABLE IF EXISTS `eventTag`;
-
-CREATE TABLE `eventTag` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `eventId` int(11) unsigned NOT NULL,
-  `tag` ENUM('Monday不魯','Think Big','政大創立方講座','創業肥皂箱','創業計畫書撰寫','東協相關議題'),
-  PRIMARY KEY (`id`),
-  CONSTRAINT `tag_fk1` FOREIGN KEY (`eventId`) REFERENCES `event` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 

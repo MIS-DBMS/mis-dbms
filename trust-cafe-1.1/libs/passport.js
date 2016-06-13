@@ -7,7 +7,7 @@ var LocalStrategy   = require('passport-local').Strategy;
 var mysql = require('mysql');
 var bcrypt = require('bcryptjs');
 var db = require('./db');
-var connection = mysql.createConnection(db.knex.connection);
+var connection = mysql.createConnection(db.connection);
 
 // expose this function to our app using module.exports
 var passport = function(passport) {
