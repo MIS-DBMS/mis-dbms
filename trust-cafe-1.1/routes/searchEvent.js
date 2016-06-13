@@ -17,6 +17,7 @@ router.post('/eventMember', function(req, res) {
                 message:  '無人參與這個活動'
             });
         } else {
+          console.log(participateMemberList.length);
           customer : req.session.customer;
           participateMemberList :participateMemberList
           res.render('eventMember',{
@@ -27,6 +28,24 @@ router.post('/eventMember', function(req, res) {
     });
 });
 
+// var options = {
+//     chart: {
+//         renderTo: 'container',
+//         type: 'bar'
+//     },
+//     series: [{
+//         name: customer.customerName,
+//         data: event.eventTag
+//     }]
+// };
+//
+// router.get('/', function (req, res, next) {
+//   req.header("Access-Control-Allow-Origin", "*"); // Configuration for Cross-Domain-Policy
+//   res.render('profile', {
+//     customer : null,
+//     message: req.flash('testMessage')
+//   });
+// });
 
 
 
