@@ -91,6 +91,7 @@ CREATE TABLE `event` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
+
 # Dump of table item
 # ------------------------------------------------------------
 

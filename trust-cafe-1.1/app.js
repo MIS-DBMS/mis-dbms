@@ -19,7 +19,6 @@ var eventDetail = require('./routes/event');
 var item = require('./routes/item');
 var customer = require('./routes/customer');
 var updateEvent = require('./routes/updateEvent');
-var organization = require('./routes/organization');
 
 
 var app = express();
@@ -48,7 +47,6 @@ app.use('/eventDetail', eventDetail);
 app.use('/item', item);
 app.use('/customer', customer);
 app.use('/updateEvent', updateEvent);
-app.use('/organization', organization);
 
 
 // catch 404 and forward to error handler
