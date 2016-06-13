@@ -43,7 +43,15 @@ router.post('/', function(req, res, next) {
         address : req.body.address,
         birthday : req.body.birthday
       });
-
+      console.log(req.body.interest1);
+      console.log(req.body.interest2);
+      console.log(req.body.interest3);
+      console.log(req.body.interest4);
+      console.log(req.body.interest5);
+      console.log(req.body.interest6);
+      console.log(req.body.interest7);
+      console.log(req.body.interest8);
+      console.log(req.body.interest9);
       newCustomer.save(function(err) {
         if(err) {
           next(err);
