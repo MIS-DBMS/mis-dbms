@@ -80,4 +80,4 @@ CustomerInterest.getAll = function(cb) {
 }
 
 
-module.exports = Organization;
+module.exports = CustomerInterest;
