@@ -19,6 +19,7 @@ var item = require('./routes/item');
 var customer = require('./routes/customer');
 var updateEvent = require('./routes/updateEvent');
 var organization = require('./routes/organization');
+var organizationList = require('./routes/organizationList');
 var profile = require('./routes/profile');
 
 var app = express();
@@ -48,6 +49,7 @@ app.use('/item', item);
 app.use('/customer', customer);
 app.use('/updateEvent', updateEvent);
 app.use('/organization', organization);
+app.use('/organizationList', organizationList);
 app.use('/profile', profile);
 
 // catch 404 and forward to error handler

@@ -48,4 +48,22 @@ router.get('/',function(req, res) {
   });
 });
 
+router.get('/:organizationId', function(req, res, next) {
+  Organization.get(req.params.organizationId, function(err, organization) {
+    if(err) {
+      console.log(err);
+      next();
+    } else {
+      if(err) {
+        console.log(err);
+      } else {
+        res.render('organizationDetail', {
+          organization : organization,
+          customer : req.session.customer || null,
+        });
+      }
+    }
+  });
+});
+
 module.exports = router;
