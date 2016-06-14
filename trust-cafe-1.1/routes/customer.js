@@ -75,20 +75,107 @@ router.post('/', function(req, res, next) {
               }
             });
           }
+          if(req.body.interest1){
+            var newCustomerInterest1 = new CustomerInterest({
+              interest : req.body.interest1,
+              customer_id : newCustomer.id,
+            });
+            newCustomerInterest1.save(function(err){
+              if(err){
+                next(err);
+              }
+            })
+          }
+          if(req.body.interest2){
+            var newCustomerInterest2 = new CustomerInterest({
+              interest : req.body.interest2,
+              customer_id : newCustomer.id,
+            });
+            newCustomerInterest2.save(function(err){
+              if(err){
+                next(err);
+              }
+            })
+          }
+          if(req.body.interest3){
+            var newCustomerInterest3 = new CustomerInterest({
+              interest : req.body.interest3,
+              customer_id : newCustomer.id,
+            });
+            newCustomerInterest3.save(function(err){
+              if(err){
+                next(err);
+              }
+            })
+          }
+          if(req.body.interest4){
+            var newCustomerInterest4 = new CustomerInterest({
+              interest : req.body.interest4,
+              customer_id : newCustomer.id,
+            });
+            newCustomerInterest4.save(function(err){
+              if(err){
+                next(err);
+              }
+            })
+          }
+          if(req.body.interest5){
+            var newCustomerInterest5 = new CustomerInterest({
+              interest : req.body.interest5,
+              customer_id : newCustomer.id,
+            });
+            newCustomerInterest5.save(function(err){
+              if(err){
+                next(err);
+              }
+            })
+          }
+          if(req.body.interest6){
+            var newCustomerInterest6 = new CustomerInterest({
+              interest : req.body.interest6,
+              customer_id : newCustomer.id,
+            });
+            newCustomerInterest6.save(function(err){
+              if(err){
+                next(err);
+              }
+            })
+          }
+          if(req.body.interest7){
+            var newCustomerInterest7 = new CustomerInterest({
+              interest : req.body.interest7,
+              customer_id : newCustomer.id,
+            });
+            newCustomerInterest7.save(function(err){
+              if(err){
+                next(err);
+              }
+            })
+          }
+          if(req.body.interest8){
+            var newCustomerInterest8 = new CustomerInterest({
+              interest : req.body.interest8,
+              customer_id : newCustomer.id,
+            });
+            newCustomerInterest8.save(function(err){
+              if(err){
+                next(err);
+              }
+            })
+          }
+          if(req.body.interest9){
+            var newCustomerInterest9 = new CustomerInterest({
+              interest : req.body.interest9,
+              customer_id : newCustomer.id,
+            });
+            newCustomerInterest9.save(function(err){
+              if(err){
+                next(err);
+              }
+            })
+          }
         }
       });
-      // if(req.body.interest1){
-      //   var newCustomerInterest1 = new CustomerInterest({
-      //     id : req.session.customer.id,
-      //     interest : req.body.interest1,
-      //     customer_id : newCustomer.id,
-      //   });
-      //   newCustomerInterest1.save(function(err){
-      //     if(err){
-      //       next(err);
-      //     }
-      //   })
-      // }
       res.redirect("/");
     }
   });
