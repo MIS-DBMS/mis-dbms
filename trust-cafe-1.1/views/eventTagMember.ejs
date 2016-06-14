@@ -1,0 +1,65 @@
+<% include ./header %>
+<!-- views/profile.ejs -->
+    <header class="intro-header" style="background-image: url('../images/home-page.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="site-heading">
+                        <h1>建置中.</h1>
+                        <hr class="small">
+                        <span class="subheading">Just a homework.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script
+			  src="https://code.jquery.com/jquery-3.0.0.js"
+			  integrity="sha256-jrPLZ+8vDxt2FnE1zvZXCkCcebI/C8Dt5xyaQBjxQIo="
+			  crossorigin="anonymous"></script>
+        <script src="http://code.highcharts.com/highcharts.js"></script>
+    </header>
+    <!-- Use piechart -->
+    <!-- you need to include the shieldui css and js assets in order for the charts to work -->
+    <link rel="stylesheet" type="text/css" href="/stylesheets/all.min.css" />
+    <link id="gridcss" rel="stylesheet" type="text/css" href="http://www.shieldui.com/shared/components/latest/css/dark-bootstrap/all.min.css" />
+    <script type="text/javascript" src="/javascripts/shieldui-all.min.js"></script>
+    <script type="text/javascript" src="http://www.prepbootstrap.com/Content/js/gridData.js"></script>
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><i class="fa fa-bar-chart-o"></i> Test pie chart</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div id="shieldui-chart2"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /#wrapper -->
+
+    <script type="text/javascript">
+        jQuery(function ($) {
+            var visits = [<%=eventListOne.length%>,<%=eventListTwo.length%>, <%=eventListThree.length%>, <%=eventListFour.length%>, <%=eventListFive.length%>, <%=eventListSix.length%>];
+            $("#shieldui-chart2").shieldChart({
+                theme: "dark",
+                primaryHeader: {
+                    text: "不同性質活動人數"
+                },
+                exportOptions: {
+                    image: false,
+                    print: true
+                },
+                dataSeries: [{
+                    seriesType: "pie",
+                    collectionAlias: "人數",
+                    data: visits
+                }]
+            });
+        });
+    </script>
+    <!-- The end of use piechart -->
+<% include ./footer %>
