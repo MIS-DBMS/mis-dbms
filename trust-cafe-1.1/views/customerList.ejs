@@ -21,14 +21,12 @@
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <% customerList.forEach(function(customer) { %>
         <div class="post-preview">
-            <%if(customer.account == 'test') {%>
-
-
-              <h2 class="post-title">客戶姓名：
-                <%}else{%>
-                  <a href="/customer/<%= customer.id %>">
+          <%if(customer.account == 'test') {%>
+            <h2 class="post-title">客戶姓名：
+              <%}else{%>
+                <a href="/customer/<%= customer.id %>">
                   <h2 class="post-title">
-                        <%= customer.customerName %>
+                    <%= customer.customerName %>
                     <%}%>
                   </h2>
                 </a>
