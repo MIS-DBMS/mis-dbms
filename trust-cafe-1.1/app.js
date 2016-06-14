@@ -20,6 +20,7 @@ var customer = require('./routes/customer');
 var updateEvent = require('./routes/updateEvent');
 var organization = require('./routes/organization');
 var organizationList = require('./routes/organizationList');
+var customerList = require('./routes/customerList');
 var profile = require('./routes/profile');
 var eventTagMember = require('./routes/eventTagMember');
 
@@ -51,6 +52,7 @@ app.use('/customer', customer);
 app.use('/updateEvent', updateEvent);
 app.use('/organization', organization);
 app.use('/organizationList', organizationList);
+app.use('/customerList', customerList);
 app.use('/profile', profile);
 app.use('/eventTagMember',eventTagMember);
 
