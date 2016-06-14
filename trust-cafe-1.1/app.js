@@ -25,6 +25,8 @@ var organizationList = require('./routes/organizationList');
 var customerList = require('./routes/customerList');
 var profile = require('./routes/profile');
 var eventTagMember = require('./routes/eventTagMember');
+// var eventTagMemberList = require('./routes/eventTagMemberList');
+
 
 var app = express();
 
@@ -59,6 +61,7 @@ app.use('/organizationList', organizationList);
 app.use('/customerList', customerList);
 app.use('/profile', profile);
 app.use('/eventTagMember',eventTagMember);
+// app.use('/eventTagMemberList',eventTagMemberList);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -7,7 +7,7 @@ var Customer = require('../models/Customer');
 var Event = require('../models/Event');
 var async = require('async');
 
-router.post('/eventTagMember', function(req, res) {
+router.post('/eventTagMemberList', function(req, res) {
     var inputtag = req.body.eventTag;
     Event.getTag(inputtag, function(err, participateMemberList, message) {
         if(err ) {
@@ -17,7 +17,7 @@ router.post('/eventTagMember', function(req, res) {
                 message:  '無人參與這個活動'
             });
         } else {
-          res.render('eventTagMember',{
+          res.render('eventTagMemberList',{
             participateMemberList : participateMemberList,
             customer : req.session.customer
           })
