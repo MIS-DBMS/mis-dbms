@@ -51,21 +51,20 @@
                 <li>
                     <a href="/">Home</a>
                 </li>
-
                 <%if(customer) {%>
                   <li>
                       <a href="/">Welcome, <%=customer.customerName%></a>
                   </li>
 
                   <% if(customer.account == 'test') {%>
+                    <li class="dropdown">
+                      <a class="dropdown-toggle" data-toggle="dropdown" href="#">其他功能 <span class="caret"></span></a>
+                      <ul class="dropdown-menu">
                     <li>
                         <a href="/event/new">新增活動</a>
                     </li>
                     <li>
                         <a href="/event/Byname">查詢活動</a>
-                    </li>
-                    <li>
-                        <a href="/event/ByTag">查詢活動類別</a>
                     </li>
                     <li>
                         <a href="/item/new">新增贊助</a>
@@ -77,11 +76,13 @@
                         <a href="/eventTagMember/list">各類別活動人數</a>
                     </li>
                     <li>
-                        <a href="/organizationList">廠商清單</a>
+                        <a href="/organizationList">查詢廠商</a>
                     </li>
                     <li>
                         <a href="/customerList">客戶清單</a>
                     </li>
+                  </ul>
+                </li>
                     <li>
                         <form action="/signup/logout" method="post">
                           <style media="screen">
