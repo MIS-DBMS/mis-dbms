@@ -21,7 +21,7 @@ Organization.get = function(organizationId, cb) {
       return new Organization(row);
     })
     .then(function(organizationList) {
-      if(organization.length) {
+      if(organizationList.length) {
         cb(null, organizationList[0]);
       } else {
         cb(new GeneralErrors.NotFound());
