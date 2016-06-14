@@ -1,0 +1,93 @@
+<% include ./header %>
+<!-- Set your background image for this header on the line below. -->
+<header class="intro-header" style="background-image: url('../images/contact-bg.jpg')">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-heading">
+          <h1>Here</h1>
+          <hr class="large">
+          <span class="subheading">Give it a try.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script> <!-- or use local jquery -->
+<script src="/javascripts/jqBootstrapValidation.js"></script>
+<!-- Main Content -->
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <h2>修改廠商資料</h2>
+      <!-- Contact Form - Enter your email address on line 19 of the mail/contact_me.php file to make this form work. -->
+      <!-- WARNING: Some web hosts do not allow emails to be sent through forms to common mail hosts like Gmail or Yahoo. It's recommended that you use a private domain email address! -->
+      <!-- NOTE: To use the contact form, your site must be on a live web host with PHP! The form will not work locally! -->
+      <form name="sentMessage" action="/updateOrganization" method="POST" id="contactForm" novalidate>
+        <input type="hidden"  name="id" value="<%=organization.id %>">
+        <div class="row control-group">
+          <div class="form-group col-xs-12 floating-label-form-group controls">
+            <label>Name</label>
+            <input type="text" class="form-control" placeholder="Name" id="organizationName" name="organizationName" required data-validation-required-message="Please enter your name." value="<%=organization.organizationName%>">
+            <p class="help-block text-danger"></p>
+          </div>
+        </div>
+        <!-- phone -->
+        <div class="row control-group">
+            <div class="form-group col-xs-12 floating-label-form-group controls" >
+                <label>Phone</label>
+                <h3>Phone</h3>
+                <!-- <link rel="stylesheet" href="/stylesheets/jquery-ui.css"> -->
+                <script src="/javascripts/jquery-ui.js"></script>
+                <input type="phone" class="form-control" name="phone" id="phone" placeholder="yyyy-mm-dd" required data-validation-required-message="Please enter your organization phone." value="<%=organization.phone%>">
+                <!-- <script>$('#date').datepicker();</script> -->
+            </div>
+        </div>
+        <!-- Email -->
+        <div class="row control-group">
+            <div class="form-group col-xs-12 floating-label-form-group controls">
+                <label>Email</label>
+                <h3>Email</h3>
+                <input type="email" class="form-control"  id="email" name="email"  required data-validation-required-message="Please enter your email." value="<%=organization.email%>">
+                <p class="help-block text-danger"></p>
+            </div>
+        </div>
+        <!-- address -->
+        <div class="row control-group">
+            <div class="form-group col-xs-12 floating-label-form-group controls">
+                <label>Address</label>
+                <h3>Address</h3>
+                <input type="test" class="form-control"  id="address" name="address"  required data-validation-required-message="Please enter your address." value="<%=organization.address%>">
+                <p class="help-block text-danger"></p>
+            </div>
+        </div>
+
+        <!-- miscellaneous -->
+        <div class="row control-group">
+            <div class="form-group col-xs-12 floating-label-form-group controls">
+                <label>Miscellaneous</label>
+                <h3>Miscellaneous</h3>
+                <input type="text" class="form-control" placeholder="miscellaneous" id="miscellaneous" name="miscellaneous"  required data-validation-required-message="Please enter your content." value="<%=organization.miscellaneous%>">
+                <p class="help-block text-danger"></p>
+            </div>
+        </div>
+
+        <script>
+        $(document).ready(function() {
+          $("input,select,textarea").not("[type=submit]").jqBootstrapValidation();
+        });
+        </script>
+        <br>
+        <div id="success"></div>
+        <div class="row">
+          <div class="form-group col-xs-12">
+            <button type="submit" class="btn btn-default">Send</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<hr>
+<% include ./footer %>

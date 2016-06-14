@@ -24,7 +24,6 @@ router.get('/:eventId', function(req, res, next) {
 });
 
 router.post('/', function(req, res) {
-  console.log("use post in updateEvent");
   if(!req.session.customer) {
     res.redirect('/');
   }

@@ -23,6 +23,11 @@
         <p>廠商信箱：<%= organization.email %></p>
         <p>廠商地址：<%= organization.address %></p>
         <p>廠商備註：<%= organization.miscellaneous %></p>
+        <% if(customer.account == 'test') { %>
+          <li>
+            <a href="/updateOrganization/<%= organization.id %>">修改資料</a>
+          </li>
+          <% }  %>
       </div>
     </div>
   </div>
