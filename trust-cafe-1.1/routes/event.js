@@ -28,6 +28,17 @@ router.get('/Byname', function(req, res) {
   });
 });
 
+router.get('/ByTag', function(req, res) {
+  if(!req.session.customer) {
+    res.redirect('/');
+  }
+
+  res.render('searchEventTag', {
+    customer : req.session.customer || null,
+    message: req.flash('SearchTagMessage')
+  });
+});
+
 router.post('/:eventId', function(req, res) {
   if(!req.session.customer) {
     res.redirect('/');

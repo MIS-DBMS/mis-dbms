@@ -259,6 +259,37 @@ Event.getMember = function(name,cb) {
   });
 }
 
+Event.getTag = function(name,cb) {
+  db.select('*')
+  .from('event')
+  .join('participate', function(){
+    this.on('participate.eventId', '=', 'event.id')
+  })
+  .join('customer', function(){
+    this.on('participate.customerId', '=', 'customer.id')
+  })
+  .where({
+    eventTag :name
+  })
+  .map(function(row){
+    console.log(name+"Here!!");
+    console.log(row+"ROWWWWWWW");
+    return new participateMember(row);
+  })
+  .then(function(participateList) {
+    if(participateList.length) {
+      cb(null, participateList);
+    } else {
+      cb(new GeneralErrors.NotFound());
+    }
+  })
+  .catch(function(err) {
+    console.log(err);
+    cb(err);
+
+  });
+}
+
 //Instance Function
 Event.prototype.save = function (cb) {
   //save的概念是當物件不存在時新增，存在時對DB做更新
