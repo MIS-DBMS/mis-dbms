@@ -98,6 +98,122 @@ Event.getAll = function(cb) {
     cb(new GeneralErrors.Database());
   });
 }
+// pie
+// one
+Event.getAllOne = function(cb) {
+  db.select()
+  .from('event')
+  .join('participate', 'event.id', 'participate.eventId')
+  .join('customer', 'participate.customerId', 'customer.id')
+  .where({
+    eventTag: 'Monday不魯'
+  })
+  .map(function(row) {
+    return new Event(row);
+  })
+  .then(function(eventList) {
+    cb(null, eventList);
+  })
+  .catch(function(err) {
+    cb(new GeneralErrors.Database());
+  });
+}
+// Two
+Event.getAllTwo = function(cb) {
+  db.select()
+  .from('event')
+  .join('participate', 'event.id', 'participate.eventId')
+  .join('customer', 'participate.customerId', 'customer.id')
+  .where({
+    eventTag: 'Think Big'
+  })
+  .map(function(row) {
+    return new Event(row);
+  })
+  .then(function(eventList) {
+    cb(null, eventList);
+  })
+  .catch(function(err) {
+    cb(new GeneralErrors.Database());
+  });
+}
+// Three
+Event.getAllThree = function(cb) {
+  db.select()
+  .from('event')
+  .join('participate', 'event.id', 'participate.eventId')
+  .join('customer', 'participate.customerId', 'customer.id')
+  .where({
+    eventTag: '政大創立方講座 '
+  })
+  .map(function(row) {
+    return new Event(row);
+  })
+  .then(function(eventList) {
+    cb(null, eventList);
+  })
+  .catch(function(err) {
+    cb(new GeneralErrors.Database());
+  });
+}
+// Four
+Event.getAllFour = function(cb) {
+  db.select()
+  .from('event')
+  .join('participate', 'event.id', 'participate.eventId')
+  .join('customer', 'participate.customerId', 'customer.id')
+  .where({
+    eventTag: '創業肥皂箱'
+  })
+  .map(function(row) {
+    return new Event(row);
+  })
+  .then(function(eventList) {
+    cb(null, eventList);
+  })
+  .catch(function(err) {
+    cb(new GeneralErrors.Database());
+  });
+}
+// Five
+Event.getAllFive = function(cb) {
+  db.select()
+  .from('event')
+  .join('participate', 'event.id', 'participate.eventId')
+  .join('customer', 'participate.customerId', 'customer.id')
+  .where({
+    eventTag: '創業計畫書撰寫'
+  })
+  .map(function(row) {
+    return new Event(row);
+  })
+  .then(function(eventList) {
+    cb(null, eventList);
+  })
+  .catch(function(err) {
+    cb(new GeneralErrors.Database());
+  });
+}
+// Six
+Event.getAllSix = function(cb) {
+  db.select()
+  .from('event')
+  .join('participate', 'event.id', 'participate.eventId')
+  .join('customer', 'participate.customerId', 'customer.id')
+  .where({
+    eventTag: '東協相關議題'
+  })
+  .map(function(row) {
+    return new Event(row);
+  })
+  .then(function(eventList) {
+    cb(null, eventList);
+  })
+  .catch(function(err) {
+    cb(new GeneralErrors.Database());
+  });
+}
+
 
 // test 0607
 Event.getAllEvent = function(cb) {
