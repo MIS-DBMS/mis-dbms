@@ -25,11 +25,11 @@
         <% participateMemberList.forEach(function(list) { %>
           <h2 class="post-title">
             <a href="/customer/<%= list.customerId %>">
-              <%= list.id%>
-              <%= list.account%>
+              姓名 : <%= list.customerName%>
             </a>
-          <h2 class="post-title">
-        <%  });} %>
+            帳號 : <%= list.account%>
+            <h2 class="post-title">
+              <%  });} %>
               <!-- Pager -->
               <ul class="pager">
                 <li class="next">

@@ -17,9 +17,6 @@ router.post('/eventMember', function(req, res) {
                 message:  '無人參與這個活動'
             });
         } else {
-          console.log(participateMemberList.length);
-          customer : req.session.customer;
-          participateMemberList :participateMemberList
           res.render('eventMember',{
             participateMemberList : participateMemberList,
             customer : req.session.customer
