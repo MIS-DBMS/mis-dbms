@@ -5,9 +5,9 @@
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <div class="site-heading">
-          <h1>建置中.</h1>
+          <h1>同類別客戶清單</h1>
           <hr class="small">
-          <span class="subheading">Just a homework.</span>
+          <span class="subheading">點選活動可編輯資料</span>
         </div>
       </div>
     </div>
@@ -18,29 +18,34 @@
   crossorigin="anonymous"></script>
   <script src="http://code.highcharts.com/highcharts.js"></script>
 </header>
+<script>function GetUnique(inputArray) {
+  var outputArray = [];
+  for (var i = 0; i < inputArray.length; i++) {
+    if ((jQuery.inArray(inputArray[i], outputArray)) == -1) {
+      outputArray.push(inputArray[i]);
+    }
+  }
+  return outputArray;
+}
+</script>
 <!-- Main Content -->
 <div class="container">
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-      <h1><%= participateMemberList[0].eventName%></h1>
+      <h1><%= participateMemberList[0].eventTag%></h1>
       <%if(participateMemberList){%>
         <% participateMemberList.forEach(function(list) { %>
           <h2 class="post-title">
-            <a href="/customer/<%= list.customerId %>">
-              姓名 : <%= list.customerName%>
+            <a href="/event/<%= list.eventId %>">
+              活動 : <%= list.eventName%>
             </a>
-            帳號 : <%= list.account%>
+            參與人 : <%= list.customerName%>
             <h2 class="post-title">
               <%  });} %>
-              <!-- Pager -->
-              <!-- <ul class="pager">
-                <li class="next">
-                  <a href="#">Older Posts &rarr;</a>
-                </li>
-              </ul> -->
-            </div>
-          </div>
-        </div>
 
-        <hr>
-        <% include ./footer %>
+        </div>
+      </div>
+    </div>
+
+    <hr>
+    <% include ./footer %>
