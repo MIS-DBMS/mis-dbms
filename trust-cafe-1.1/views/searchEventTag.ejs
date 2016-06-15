@@ -5,9 +5,9 @@
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <div class="page-heading">
-          <h1>查詢活動</h1>
+          <h1>查詢活動類別</h1>
           <hr class="small">
-          <span class="subheading">請輸入活動名稱.</span>
+          <span class="subheading">請輸入活動類別名稱.</span>
         </div>
       </div>
     </div>
@@ -26,11 +26,11 @@
       <% if (message) { %>
         <div class="alert alert-danger"><%= message %></div>
         <% } %>
-        <form name="sentMessage" action="/searchEvent/eventMember" method="POST" id="contactForm" novalidate>
+        <form name="sentMessage" action="/searchEventTag/eventTagMemberList" method="POST" id="contactForm" novalidate>
           <div class="row control-group">
             <div class="form-group col-xs-12 floating-label-form-group controls">
-              <label>Name</label>
-              <input type="text" class="form-control" placeholder="name" id="name" name="eventName"  required data-validation-required-message="Please enter your name.">
+              <label>類別名稱</label>
+              <input type="text" class="form-control" placeholder="name" id="name" name="eventTag"  required data-validation-required-message="Please enter your name.">
               <p class="help-block text-danger"></p>
             </div>
           </div>

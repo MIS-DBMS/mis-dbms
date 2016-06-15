@@ -37,6 +37,22 @@ Customer.get = function(customerId, cb) {
   })
 }
 
+
+Customer.getAll = function(cb) {
+  db.select()
+  .from('customer')
+  .map(function(row) {
+    return new Customer(row);
+  })
+  .then(function(customerList) {
+    cb(null, customerList);
+  })
+  .catch(function(err) {
+    cb(new GeneralErrors.Database());
+  });
+}
+
+
 //Login
 Customer.getByAccount = function(customerAccount, cb) {
   db.select().from("customer").where({

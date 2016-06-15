@@ -6,6 +6,7 @@ var Event = require('../models/Event');
 var async = require('async');
 var Participate = require('../models/Participate');
 router.get('/list', function(req, res) {
+  console.log("hi");
   if(!req.session.customer) {
     res.redirect('/');
   }

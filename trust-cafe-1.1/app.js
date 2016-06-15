@@ -13,15 +13,20 @@ var users = require('./routes/users');
 var event = require('./routes/event');
 var login = require('./routes/login');
 var searchEvent = require('./routes/searchEvent');
+var searchEventTag = require('./routes/searchEventTag');
 var eventMember = require('./routes/eventMember');
 var eventDetail = require('./routes/event');
 var item = require('./routes/item');
 var customer = require('./routes/customer');
 var updateEvent = require('./routes/updateEvent');
+var updateOrganization = require('./routes/updateOrganization');
 var organization = require('./routes/organization');
 var organizationList = require('./routes/organizationList');
+var customerList = require('./routes/customerList');
 var profile = require('./routes/profile');
 var eventTagMember = require('./routes/eventTagMember');
+// var eventTagMemberList = require('./routes/eventTagMemberList');
+
 
 var app = express();
 
@@ -45,14 +50,18 @@ app.use('/signup', signup);
 app.use('/login', login);
 app.use('/eventMember', eventMember);
 app.use('/searchEvent', searchEvent);
+app.use('/searchEventTag', searchEventTag);
 app.use('/eventDetail', eventDetail);
 app.use('/item', item);
 app.use('/customer', customer);
 app.use('/updateEvent', updateEvent);
+app.use('/updateOrganization', updateOrganization);
 app.use('/organization', organization);
 app.use('/organizationList', organizationList);
+app.use('/customerList', customerList);
 app.use('/profile', profile);
 app.use('/eventTagMember',eventTagMember);
+// app.use('/eventTagMemberList',eventTagMemberList);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

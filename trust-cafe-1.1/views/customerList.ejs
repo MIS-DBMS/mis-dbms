@@ -6,7 +6,7 @@
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <div class="page-heading">
-          <h1>廠商清單</h1>
+          <h1>客戶清單</h1>
           <hr class="small">
         </div>
       </div>
@@ -19,25 +19,23 @@
 <div class="container">
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-      <% organizationList.forEach(function(organization) { %>
+      <% customerList.forEach(function(customer) { %>
         <div class="post-preview">
-          <a href="/organization/<%= organization.id %>">
-          <h2 class="post-title">
-            <%= organization.organizationName %>
-          </h2>
-        </a>
-      </div>
-      <hr>
-      <%  }); %>
-      <!-- Pager -->
-      <!-- <ul class="pager">
-      <li class="next">
-      <a href="#">Older Posts &rarr;</a>
-    </li>
-  </ul> -->
-</div>
-</div>
-</div>
+          <%if(customer.account == 'test') {%>
+            <h2 class="post-title">客戶姓名：
+              <%}else{%>
+                <a href="/customer/<%= customer.id %>">
+                  <h2 class="post-title">
+                    <%= customer.customerName %>
+                    <%}%>
+                  </h2>
+                </a>
+              </div>
+              <hr>
+              <%  }); %>
+            </div>
+          </div>
+        </div>
 
-<hr>
-<% include ./footer %>
+        <hr>
+        <% include ./footer %>

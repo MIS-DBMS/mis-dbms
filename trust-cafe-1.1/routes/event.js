@@ -28,6 +28,17 @@ router.get('/Byname', function(req, res) {
   });
 });
 
+router.get('/ByTag', function(req, res) {
+  if(!req.session.customer) {
+    res.redirect('/');
+  }
+
+  res.render('searchEventTag', {
+    customer : req.session.customer || null,
+    message: req.flash('SearchTagMessage')
+  });
+});
+
 router.post('/:eventId', function(req, res) {
   if(!req.session.customer) {
     res.redirect('/');
@@ -84,6 +95,24 @@ router.get('/:eventId/success', function (req, res) {
     });
   });
 
+  router.post('/:eventId/host', function(req, res) {
+    if(!req.session.customer) {
+      res.redirect('/');
+    }
+    var newHost = new Host({
+      organizationId : req.body.organizationId,
+      eventId : req.body.eventId
+    });
+
+    newHost.save(function(err) {
+      if(err) {
+        res.status = err.code;
+        res.json(err);
+      } else {
+        res.redirect('back');
+      }
+    });
+  });
 
   router.get('/',function(req, res) {
     Event.getAll(function(err){

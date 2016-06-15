@@ -1,0 +1,51 @@
+<% include ./header %>
+<!-- views/profile.ejs -->
+<header class="intro-header" style="background-image: url('../images/home-page.jpg')">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="site-heading">
+          <h1>同類別客戶清單</h1>
+          <hr class="small">
+          <span class="subheading">點選活動可編輯資料</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script
+  src="https://code.jquery.com/jquery-3.0.0.js"
+  integrity="sha256-jrPLZ+8vDxt2FnE1zvZXCkCcebI/C8Dt5xyaQBjxQIo="
+  crossorigin="anonymous"></script>
+  <script src="http://code.highcharts.com/highcharts.js"></script>
+</header>
+<script>function GetUnique(inputArray) {
+  var outputArray = [];
+  for (var i = 0; i < inputArray.length; i++) {
+    if ((jQuery.inArray(inputArray[i], outputArray)) == -1) {
+      outputArray.push(inputArray[i]);
+    }
+  }
+  return outputArray;
+}
+</script>
+<!-- Main Content -->
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <h1><%= participateMemberList[0].eventTag%></h1>
+      <%if(participateMemberList){%>
+        <% participateMemberList.forEach(function(list) { %>
+          <h2 class="post-title">
+            <a href="/event/<%= list.eventId %>">
+              活動 : <%= list.eventName%>
+            </a>
+            參與人 : <%= list.customerName%>
+            <h2 class="post-title">
+              <%  });} %>
+
+        </div>
+      </div>
+    </div>
+
+    <hr>
+    <% include ./footer %>

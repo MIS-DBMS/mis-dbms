@@ -1,4 +1,3 @@
-
 var db = require('../libs/db'); //引入我們的sql builder
 var GeneralErrors = require('../errors/GeneralErrors');
 var Customer = require('../models/Customer');
@@ -73,11 +72,9 @@ Event.getName = function(name, cb) {
   })
   .then(function(eventList) {
     if(eventList.length) {
-      cb(null, eventList[0]);//customerList[0]=customerList
-      //console.log(customerList[0]);// 確認輸入的資料所對應的資料
+      cb(null, eventList[0]);
     } else {
-      //這邊要產生一個NotFound err給前端，因為error很常用到，我們會獨立出去一個檔案
-      cb(new GeneralErrors.NotFound());
+    cb(new GeneralErrors.NotFound());
     }
   })
 }
@@ -214,8 +211,6 @@ Event.getAllSix = function(cb) {
   });
 }
 
-
-// test 0607
 Event.getAllEvent = function(cb) {
   db.select()
   .from('event')
@@ -241,6 +236,35 @@ Event.getMember = function(name,cb) {
   })
   .where({
     eventName :name
+  })
+  .map(function(row){
+    return new participateMember(row);
+  })
+  .then(function(participateList) {
+    if(participateList.length) {
+      cb(null, participateList);
+    } else {
+      cb(new GeneralErrors.NotFound());
+    }
+  })
+  .catch(function(err) {
+    console.log(err);
+    cb(err);
+
+  });
+}
+
+Event.getTag = function(name,cb) {
+  db.select('*')
+  .from('event')
+  .join('participate', function(){
+    this.on('participate.eventId', '=', 'event.id')
+  })
+  .join('customer', function(){
+    this.on('participate.customerId', '=', 'customer.id')
+  })
+  .where({
+    eventTag :name
   })
   .map(function(row){
     return new participateMember(row);
