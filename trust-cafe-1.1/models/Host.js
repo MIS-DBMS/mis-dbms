@@ -5,8 +5,26 @@ var Host = function(options) {
   this.id = options.id;
   this.customerId = options.customerId;
   this.eventId = options.eventId;
+  options.type = options.type;
 };
-
+var hostOrganization =function(options) {
+  this.id = options.id;
+  this.eventId = options.eventId;
+  this.eventName = options.eventName;
+  this.location = options.location;
+  this.date = options.date;
+  this.startTime = options.startTime;
+  this.endTime = options.endTime;
+  this.eventTag = options.eventTag;
+  this.description = options.description;
+  this.organizationId = options.organizationId;
+  this.eventId = options.eventId;
+  this.organizationName = options.organizationName;
+  this.phone = options.phone;
+  this.email = options.email;
+  this.address = options.address;
+  this.miscellaneous = options.miscellaneous;
+}
 Host.get = function(hostId, cb) {
   db.select()
     .from('host')
@@ -14,7 +32,6 @@ Host.get = function(hostId, cb) {
       id : hostId
     })
     .map(function(row) {
-      // return new Host(row);
       return new Host({
         id : row.id,
         customerId : row.customerId,
@@ -42,8 +59,9 @@ Host.getAll = function(cb) {
     .map(function(row) {
       return new Host({
         id : row.id,
-        customerId : row.customerId,
-        eventId : row.eventId
+        organizationId : row.organizationId,
+        eventId : row.eventId,
+        type : this.type
         });
     })
     .then(function(hostList) {
@@ -55,6 +73,8 @@ Host.getAll = function(cb) {
 }
 
 
+
+
 //instance fnuction
 Host.prototype.save = function (cb) {
   if(this.id) {
@@ -62,8 +82,9 @@ Host.prototype.save = function (cb) {
       id : this.id
       })
       .update({
-        customerId : this.customerId,
-        eventId : this.eventId
+        organizationId : this.organizationId,
+        eventId : this.eventId,
+        type : this.type
       })
       .then(function() {
         cb(null,this);
@@ -75,8 +96,9 @@ Host.prototype.save = function (cb) {
   } else {
     db('host')
       .insert({
-        customerId : this.customerId,
-        eventId : this.eventId
+        organizationId : this.organizationId,
+        eventId : this.eventId,
+        type : this.type
       })
       .then(function(result) {
         this.id = result[0];

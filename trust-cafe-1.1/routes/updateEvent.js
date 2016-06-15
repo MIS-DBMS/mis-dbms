@@ -49,5 +49,22 @@ router.post('/', function(req, res) {
   });
 });
 
+router.get('/host', function(req, res, next) {
+  Event.get(req.params.eventId, function(err, event) {
+    if(err) {
+      console.log(err);
+      next();
+    } else {
+        if(err) {
+          console.log(err);
+        } else {
+          res.render('updateEvent', {
+            event :  event,
+            customer : req.session.customer || null
+          });
+        }
+    }
+  });
+});
 
 module.exports = router;
