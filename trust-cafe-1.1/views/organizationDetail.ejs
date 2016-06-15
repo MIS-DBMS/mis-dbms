@@ -27,7 +27,29 @@
           <li>
             <a href="/updateOrganization/<%= organization.id %>">修改資料</a>
           </li>
-          <% }  %>
+          <!-- <form name="sentMessage" action="/organization/<%=organization.id %>" method="POST" id="contactForm" novalidate>
+            活動：<input type="test"  name="eventId" value="2">
+            <input type="hidden"  name="organizationId" value="<%=organization.id %>">
+            <script>
+            $(document).ready(function() {
+              $("input,select,textarea").not("[type=submit]").jqBootstrapValidation();
+            });
+            </script>
+            <br>
+            <div id="success"></div>
+            <div class="row">
+              <div class="form-group col-xs-12">
+                <script language="javascript">function registerSuccess() {alert("新增成功");}</script>
+                <button type="submit" class="btn btn-default" onclick="registerSuccess()">送出</button>
+              </div>
+            </div>
+
+            <% if (message) { %>
+              <div class="alert alert-danger"><%= message %></div>
+
+              <% } %>
+            </form> -->
+            <% } %>
       </div>
     </div>
   </div>

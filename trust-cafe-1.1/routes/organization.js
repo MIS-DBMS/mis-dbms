@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var Organization = require('../models/Organization');
+var Host = require('../models/Host');
+var Event = require('../models/Event');
 var async = require('async');
 
 router.get('/new', function(req, res) {
@@ -57,11 +59,33 @@ router.get('/:organizationId', function(req, res, next) {
       if(err) {
         console.log(err);
       } else {
-        res.render('organizationDetail', {
-          organization : organization,
-          customer : req.session.customer || null,
+        Event.getAll(function(err, event){
+          res.render('organizationDetail', {
+            event : event,
+            organization : organization,
+            customer : req.session.customer || null,
+            message: req.flash('RegisterMessage')
+          });
         });
       }
+    }
+  });
+});
+router.get('host/:organizationId', function(req, res, next) {
+  Organization.get(req.params.organizationId, function(err, organization) {
+    if(err) {
+      console.log(err);
+      next();
+    } else {
+        if(err) {
+          console.log(err);
+        } else {
+          res.redirect('back');
+          // res.render('updateOrganization', {
+          //   organization :  organization,
+          //   customer : req.session.customer || null
+          // });
+        }
     }
   });
 });

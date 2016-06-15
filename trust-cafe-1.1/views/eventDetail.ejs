@@ -29,9 +29,9 @@
               <a href="/updateEvent/<%= event.id %>">修改資料</a>
             </li>
             <hr>
-            <li>
+            <!-- <li>
               <a href="/updateEvent/host">新增廠商資料</a>
-            </li>
+            </li> -->
             <% } else { %>
               <form name="sentMessage" action="/event/<%=event.id %>" method="POST" id="contactForm" novalidate>
                 <input type="hidden"  name="eventId" value="<%=event.id %>">
