@@ -25,7 +25,7 @@ var organizationList = require('./routes/organizationList');
 var customerList = require('./routes/customerList');
 var profile = require('./routes/profile');
 var eventTagMember = require('./routes/eventTagMember');
-// var eventTagMemberList = require('./routes/eventTagMemberList');test ignore
+// var eventTagMemberList = require('./routes/eventTagMemberList');test ssh key
 
 
 var app = express();
