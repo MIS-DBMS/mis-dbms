@@ -11,8 +11,7 @@ var debug = require('debug')('blog:server');
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3000');
-app.set('port', port);
+
 
 /**
  * Create HTTP server
@@ -44,12 +43,16 @@ if (fileExists() == true) {
     var http = require('https');
     var server = http.createServer(options, app);
     console.log('Using HTTPS protocol.');
+    var port = normalizePort(process.env.PORT || '443');
+    app.set('port', port);
 }
 
 else {
     var http = require('http');
     var server = http.createServer(app);
     console.log('Using insecure HTTP protocol.');
+    var port = normalizePort(process.env.PORT || '80');
+    app.set('port', port);
 }
 /**
  * Listen on provided port, on all network interfaces.
